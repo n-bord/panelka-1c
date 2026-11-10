@@ -1,0 +1,31 @@
+---
+import menu from '../assets/media/settings/menu-icons-reference.png';
+// Native menu glyphs are displayed from the supplied reference at their original size.
+// Coordinates exclude the annotation borders and command labels.
+const rows = [
+  { icons: [[22,14],[22,45]], command: 'Поднять выше / Опустить ниже', description: 'Меняет порядок элемента в текущем списке.' },
+  { icons: [[22,78]], command: 'Изменить название / свойства', description: 'Открывает редактирование названия, подсказки и других доступных свойств.' },
+  { icons: [[22,109]], command: 'Вернуть общее название и подсказку', description: 'Отменяет индивидуальное оформление выбранного размещения и возвращает общие значения ссылки.' },
+  { icons: [[22,173]], command: 'Скопировать в колонку…', description: 'Добавляет ещё одно размещение ссылки в выбранной колонке, сохраняя текущее.' },
+  { icons: [[22,203]], command: 'Перенести в колонку…', description: 'Перемещает ссылку из текущей колонки в другую.' },
+  { icons: [[22,142]], command: 'Перенести в «Не распределено»', description: 'Перемещает ссылку из текущей колонки в раздел нераспределённых ссылок.' },
+  { icons: [[22,237]], command: 'Добавить страницу', description: 'Создаёт новую страницу панели; команда доступна в соответствующем контексте.' },
+  { icons: [[22,271]], command: 'Удалить из колонки', description: 'Удаляет только выбранное размещение ссылки.' },
+  { icons: [[22,301]], command: 'Удалить ссылку везде…', description: 'Удаляет ссылку из всех колонок панели.' },
+  { icons: [[352,427]], command: 'Развернуть / Свернуть', description: 'Раскрывает или сворачивает страницы, колонки, типы объектов либо все уровни дерева.' },
+];
+---
+<table class="settings-menu-table">
+  <thead><tr><th scope="col" class="icon-column">Значок</th><th scope="col">Команда</th><th scope="col">Что делает</th></tr></thead>
+  <tbody>
+    {rows.map(row => <tr>
+      <td class="icon-column"><span class="menu-icons" aria-hidden="true">{row.icons.map(([x,y]) => <span class="menu-icon" style={{backgroundImage:`url(${menu.src})`,backgroundPosition:`-${x}px -${y}px`}} />)}</span></td>
+      <td>{row.command}</td><td>{row.description}</td>
+    </tr>)}
+  </tbody>
+</table>
+<style>
+  .icon-column { width: 56px; min-width: 56px; text-align: center; vertical-align: middle; }
+  .menu-icons { display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; width: 36px; vertical-align: middle; }
+  .menu-icon { display: inline-block; width: 16px; height: 16px; flex: 0 0 16px; background-repeat: no-repeat; background-size: 610px 468px; border-radius: 2px; }
+</style>

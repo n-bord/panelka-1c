@@ -1,0 +1,22 @@
+---
+// Сворачиваемый блок для статей.
+// Использование в MDX: <Details summary="Показать детали">текст</Details>
+import { ChevronRight } from 'lucide-react';
+
+interface Props {
+  summary: string;
+  open?: boolean;
+}
+
+const { summary, open = false } = Astro.props;
+---
+
+<details class="prose-details" open={open}>
+  <summary>
+    <ChevronRight size={14} class="chevron" aria-hidden />
+    {summary}
+  </summary>
+  <div class="prose-details__body">
+    <slot />
+  </div>
+</details>

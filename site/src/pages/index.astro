@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { ArrowRight, BookOpen, ChevronRight, CircleHelp, Github, PanelsTopLeft, SlidersHorizontal } from 'lucide-react';
+import { docsNav } from '../lib/docs-nav';
+import { GITHUB_URL } from '../lib/site';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const entries = await getCollection('docs', ({ data }) => !data.draft);
+const articleBySlug = new Map(entries.map(entry => [entry.id, entry.data]));
+const presentation: Record<string, { icon: typeof BookOpen; description: string; note?: string }> = {
+  'Начало работы': { icon: BookOpen, description: 'Знакомство и первая настройка' },
+  'Интерфейс': { icon: PanelsTopLeft, description: 'Команды и повседневная работа' },
+  'Настройки': { icon: SlidersHorizontal, description: 'Структура, ссылки и личные панели' },
+  'Справка': {
+    icon: CircleHelp,
+    description: 'Ответы на вопросы о работе панели',
+    note: 'Доступ, ссылки, сохранение и перенос',
+  },
+};
+const sections = docsNav.map(group => {
+  const title = group.label ?? '';
+  const articles = (group.children ?? [])
+    .filter(item => item.slug && articleBySlug.has(item.slug))
+    .map(item => ({ title: item.label ?? articleBySlug.get(item.slug!)!.title, href: `${base}docs/${item.slug}/` }));
+  const appearance = presentation[title] ?? { icon: BookOpen, description: 'Инструкции раздела' };
+  return {
+    title, ...appearance, articles,
+    visible: articles.slice(0, 3), remaining: articles.slice(3),
+    moreLabel: title === 'Настройки' ? 'Все настройки' : 'Все статьи',
+  };
+}).filter(section => section.articles.length > 0);
+---
+
+<Base title="Документация" description="Панелька — настраиваемая панель для 1С:Предприятие. Инструкции по установке, настройке и работе.">
+  <main class="home">
+    <div class="home__hero">
+      <h1>Панелька</h1>
+      <img class="home__logo pixel" src={`${base}media/panelka.gif`} alt="Панелька — анимированный логотип" width="168" height="168" />
+      <p class="home__subtitle">Настраиваемая панель для 1С</p>
+      <p class="home__tagline">
+        Соберите удобное рабочее место для себя и своей команды:
+        документы, отчёты, обработки и ссылки в одном месте.
+      </p>
+      <div class="home__actions">
+        <a class="btn btn--primary" href={`${base}docs/introduction/`}>
+          <BookOpen size={16} aria-hidden />
+          Открыть документацию
+        </a>
+        <a class="btn btn--ghost" href={`${base}docs/getting-started/`}>
+          Быстрый старт
+          <ArrowRight size={15} aria-hidden />
+        </a>
+        <a class="btn btn--text" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+          <Github size={16} aria-hidden />
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <section class="home__overview" aria-labelledby="overview">
+      <h2 id="overview">
+        <span class="window-mark" aria-hidden="true"><i></i><i class="lit"></i><i></i><i></i></span>
+        Краткий обзор
+      </h2>
+      <ul class="home__facts">
+        <li>
+          <span class="k">Что это</span>
+          <span>Внешняя обработка (.epf) для платформы 1С:Предприятие.</span>
+        </li>
+        <li>
+          <span class="k">Зачем</span>
+          <span>Собирает инструменты по рабочим задачам без доработки конфигурации.</span>
+        </li>
+        <li>
+          <span class="k">Общая панель</span>
+          <span>Раскладка для команды, которую настраивает администратор.</span>
+        </li>
+        <li>
+          <span class="k">Моя панель</span>
+          <span>Личная подборка: можно начать с пустой панели или взять за основу общую.</span>
+        </li>
+        <li>
+          <span class="k">Два интерфейса</span>
+          <span>Обычная форма 1С и встроенный веб-режим — при переключении сохраняется одна и та же раскладка.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="home__sections" aria-labelledby="sections">
+      <h2 id="sections">
+        Разделы документации
+      </h2>
+      <p class="home__sections-intro">Выберите раздел, чтобы перейти к инструкциям</p>
+      <div class="home__section-grid">
+        {sections.map(({ title, description, note, visible, remaining, articles, moreLabel, icon: Icon }) => (
+          <article class="home__section-card" aria-label={title}>
+            <header>
+              <Icon size={38} strokeWidth={1.55} className="home__section-icon" aria-hidden />
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </header>
+            <ul class="home__section-links">
+              {visible.map(article => (
+                <li><a href={article.href}><span>{article.title}</span><ChevronRight size={16} aria-hidden /></a></li>
+              ))}
+            </ul>
+            {remaining.length > 0 && (
+              <details class="home__section-more">
+                <summary>
+                  <span class="home__more-closed">{moreLabel}</span>
+                  <span class="home__more-open">Свернуть</span>
+                  <ArrowRight size={16} aria-hidden />
+                </summary>
+                <ul class="home__section-links">
+                  {remaining.map(article => (
+                    <li><a href={article.href}><span>{article.title}</span><ChevronRight size={16} aria-hidden /></a></li>
+                  ))}
+                </ul>
+              </details>
+            )}
+            {note && <p class="home__section-note">{note}</p>}
+            <a class="home__section-open" href={articles[0].href} aria-label={`Открыть раздел «${title}»`}>
+              Открыть раздел <ArrowRight size={18} aria-hidden />
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Base>

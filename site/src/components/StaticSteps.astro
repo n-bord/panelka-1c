@@ -1,0 +1,30 @@
+---
+// Статичное отображение шагов инструкции в обычной статье.
+// Использует те же данные, что и интерактивный TutorialSteps, —
+// два режима чтения из одного источника.
+import type { TutorialStep } from '../lib/tutorials/tutorial';
+
+interface Props {
+  steps: TutorialStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="static-steps">
+  {steps.map((step, i) => (
+    <li>
+      <h4>{step.title}</h4>
+      {step.description && <p>{step.description}</p>}
+      {step.media?.src && (
+        <img
+          src={step.media.src}
+          alt={step.media.alt ?? step.title}
+          loading="lazy"
+          width="960"
+          height="540"
+        />
+      )}
+    </li>
+  ))}
+</ol>

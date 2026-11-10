@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+  <title><key>ru</key><value>Загрузка панели</value></title>
+  <items xsi:type="form:FormField">
+    <name>ИндикаторЗагрузкиПанелька</name><id>3</id>
+    <contextMenu><name>ИндикаторЗагрузкиПанелькаКонтекстноеМеню</name><id>9</id><autoFill>false</autoFill></contextMenu>
+    <enabled>true</enabled><visible>true</visible><userVisible><common>true</common></userVisible>
+    <dataPath xsi:type="form:DataPath"><segments>ПроцентЗагрузкиПанелька</segments></dataPath>
+    <titleLocation>None</titleLocation><defaultItem>true</defaultItem><type>ProgressBarField</type>
+    <extInfo xsi:type="form:ProgressBarFieldExtInfo">
+      <width>48</width><autoMaxWidth>false</autoMaxWidth><height>1</height><autoMaxHeight>false</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch><verticalStretch>false</verticalStretch>
+      <minValue>0</minValue><maxValue>100</maxValue><showPercent>true</showPercent>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
+    <name>ГруппаСостоянияЗагрузкиПанелька</name><id>4</id>
+    <visible>true</visible><enabled>true</enabled><userVisible><common>true</common></userVisible>
+    <items xsi:type="form:FormField">
+      <name>ПолеЗагрузки</name><id>1</id>
+      <enabled>true</enabled><visible>true</visible><userVisible><common>true</common></userVisible>
+      <dataPath xsi:type="form:DataPath"><segments>HTMLЗагрузки</segments></dataPath>
+      <titleLocation>None</titleLocation>
+      <contextMenu><name>ПолеЗагрузкиКонтекстноеМеню</name><id>2</id><autoFill>false</autoFill></contextMenu>
+      <type>HTMLDocumentField</type><readOnly>true</readOnly><skipOnInput>true</skipOnInput><editMode>Enter</editMode>
+      <extInfo xsi:type="form:HtmlFieldExtInfo">
+        <width>12</width><autoMaxWidth>false</autoMaxWidth><height>4</height><autoMaxHeight>false</autoMaxHeight>
+        <horizontalStretch>false</horizontalStretch><verticalStretch>false</verticalStretch>
+        <output>Disable</output>
+        <border xsi:type="core:BorderDef"><style>WithoutBorder</style><width>0</width></border>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormGroup">
+      <name>ГруппаТекстаЗагрузкиПанелька</name><id>5</id>
+      <visible>true</visible><enabled>true</enabled><userVisible><common>true</common></userVisible>
+      <items xsi:type="form:Decoration">
+        <name>ПрогрессЗагрузкиПанелька</name><id>6</id>
+    <contextMenu><name>ПрогрессЗагрузкиПанелькаКонтекстноеМеню</name><id>10</id><autoFill>false</autoFill></contextMenu>
+        <title><key>ru</key><value>Подготовка панели…</value></title>
+        <visible>true</visible><enabled>true</enabled><userVisible><common>true</common></userVisible>
+        <type>Label</type><width>34</width><height>1</height><autoMaxWidth>false</autoMaxWidth><autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch><verticalStretch>false</verticalStretch>
+        <extInfo xsi:type="form:LabelDecorationExtInfo"><horizontalAlign>Left</horizontalAlign></extInfo>
+      </items>
+      <items xsi:type="form:Decoration">
+        <name>ЭтапЗагрузкиПанелька</name><id>7</id>
+    <contextMenu><name>ЭтапЗагрузкиПанелькаКонтекстноеМеню</name><id>11</id><autoFill>false</autoFill></contextMenu>
+        <title><key>ru</key><value>Читаем настройки и готовим страницы</value></title>
+        <visible>true</visible><enabled>true</enabled><userVisible><common>true</common></userVisible>
+        <type>Label</type><width>34</width><height>2</height><autoMaxWidth>false</autoMaxWidth><autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch><verticalStretch>false</verticalStretch>
+        <extInfo xsi:type="form:LabelDecorationExtInfo"><horizontalAlign>Left</horizontalAlign></extInfo>
+      </items>
+      <items xsi:type="form:Decoration">
+        <name>ПодсказкаЗагрузкиПанелька</name><id>8</id>
+    <contextMenu><name>ПодсказкаЗагрузкиПанелькаКонтекстноеМеню</name><id>12</id><autoFill>false</autoFill></contextMenu>
+        <title><key>ru</key><value>Пожалуйста, подождите</value></title>
+        <visible>true</visible><enabled>true</enabled><userVisible><common>true</common></userVisible>
+        <type>Label</type><width>34</width><height>1</height><autoMaxWidth>false</autoMaxWidth><autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch><verticalStretch>false</verticalStretch>
+        <extInfo xsi:type="form:LabelDecorationExtInfo"><horizontalAlign>Left</horizontalAlign></extInfo>
+      </items>
+      <type>UsualGroup</type><extInfo xsi:type="form:UsualGroupExtInfo"><group>Vertical</group><showTitle>false</showTitle><united>true</united></extInfo>
+    </items>
+    <type>UsualGroup</type><extInfo xsi:type="form:UsualGroupExtInfo"><group>AlwaysHorizontal</group><showTitle>false</showTitle><united>true</united></extInfo>
+  </items>
+  <autoCommandBar><name>ФормаКоманднаяПанель</name><id>-1</id><autoFill>false</autoFill></autoCommandBar>
+  <handlers><event>OnCreateAtServer</event><name>ПриСозданииНаСервере</name></handlers>
+  <handlers><event>OnOpen</event><name>ПриОткрытии</name></handlers>
+  <handlers><event>OnClose</event><name>ПриЗакрытии</name></handlers>
+  <handlers><event>BeforeClose</event><name>ПередЗакрытием</name></handlers>
+  <width>50</width><height>0</height><windowOpeningMode>LockOwnerWindow</windowOpeningMode>
+  <commandBarLocation>None</commandBarLocation><showCommandBar>false</showCommandBar>
+  <verticalScroll>UseIfNecessary</verticalScroll>
+  <saveWindowSettings>false</saveWindowSettings><autoTitle>false</autoTitle><autoUrl>false</autoUrl>
+  <group>Vertical</group><allowFormCustomize>false</allowFormCustomize><enabled>true</enabled>
+  <showTitle>true</showTitle><showCloseButton>false</showCloseButton>
+  <attributes><name>Объект</name><id>1</id><valueType><types>ExternalDataProcessor.Панелька</types></valueType><view><common>true</common></view><edit><common>true</common></edit><main>true</main></attributes>
+  <attributes><name>HTMLЗагрузки</name><id>2</id><valueType><types>String</types><stringQualifiers/></valueType><view><common>true</common></view><edit><common>true</common></edit></attributes>
+  <attributes><name>ПроцентЗагрузкиПанелька</name><id>3</id><valueType><types>Number</types><numberQualifiers><precision>3</precision></numberQualifiers></valueType><view><common>true</common></view><edit><common>true</common></edit></attributes>
+</form:Form>

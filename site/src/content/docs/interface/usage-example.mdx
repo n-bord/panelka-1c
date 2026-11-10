@@ -1,0 +1,103 @@
+---
+title: Пример использования
+description: Поиск ссылок, открытие объектов в новом окне, избранное и копирование данных ссылки.
+order: 2
+---
+
+import Note from '../../../components/Note.astro';
+import InterfaceTabs from '../../../components/InterfaceTabs.astro';
+import InterfaceTab from '../../../components/InterfaceTab.astro';
+import search1c from '../../../assets/media/usage/search-1c.png';
+import openwindow1c from '../../../assets/media/usage/open-window-1c.png';
+import favorite1c from '../../../assets/media/usage/favorite-1c.png';
+import copy1c from '../../../assets/media/usage/copy-1c.png';
+import searchweb from '../../../assets/media/usage/search-web.png';
+import openwindowweb from '../../../assets/media/usage/open-window-web.png';
+import favoriteweb from '../../../assets/media/usage/favorite-web.png';
+import copyweb from '../../../assets/media/usage/copy-web.png';
+
+Откройте готовую общую или личную панель. Нажмите ссылку, чтобы открыть связанный
+с ней список, документ, отчёт или обработку. Дополнительные действия доступны в меню ссылки.
+
+Ниже показаны отдельные возможности панели. Выберите интерфейс, который используете в 1С.
+В примерах используется ссылка «Пользователи»; на своей панели можно работать с другими объектами.
+
+<InterfaceTabs>
+<InterfaceTab mode="1c">
+
+## Найти ссылку
+
+Введите часть названия в строку поиска — например, «Польз». На панели останутся
+подходящие ссылки. Нажмите нужную, чтобы открыть объект. Очистите строку поиска,
+чтобы вернуться к полной раскладке.
+
+<img src={search1c.src} width={search1c.width} height={search1c.height} alt="Поиск по части названия Польз на готовой панели" loading="lazy" style="max-width:100%;height:auto;" />
+
+Поиск работает со ссылками панели. Если нужный объект ещё не добавлен,
+найдите его в источниках редактора и разместите в колонке.
+
+## Открыть объект в новом окне
+
+Нажмите правой кнопкой мыши по ссылке и выберите **«Открыть в новом окне»**.
+Объект откроется отдельно, и вы сможете продолжить работу с панелью.
+
+<img src={openwindow1c.src} width={openwindow1c.width} height={openwindow1c.height} alt="Команда Открыть в новом окне в меню ссылки" loading="lazy" style="max-width:100%;height:auto;" />
+
+## Добавить ссылку в избранное
+
+В контекстном меню ссылки выберите **«Добавить в избранное»**.
+Чтобы отменить добавление, откройте меню этой ссылки и выберите **«Удалить из избранного»**.
+
+<img src={favorite1c.src} width={favorite1c.width} height={favorite1c.height} alt="Команда Добавить в избранное в меню ссылки" loading="lazy" style="max-width:100%;height:auto;" />
+
+## Скопировать данные ссылки
+
+Откройте контекстное меню ссылки и подменю **«Скопировать»**. Выберите название,
+внутреннюю ссылку, внешнюю ссылку или текст подсказки.
+Выбранное значение попадёт в буфер обмена — его можно вставить в нужное поле или сообщение.
+
+<img src={copy1c.src} width={copy1c.width} height={copy1c.height} alt="Копирование внутренней ссылки e1cib из меню" loading="lazy" style="max-width:100%;height:auto;" />
+
+</InterfaceTab>
+<InterfaceTab mode="web">
+
+## Найти ссылку
+
+Введите часть названия в строку поиска — например, «Польз». На панели останутся
+подходящие ссылки. Нажмите нужную, чтобы открыть объект. Очистите строку поиска,
+чтобы вернуться к полной раскладке.
+
+<img src={searchweb.src} width={searchweb.width} height={searchweb.height} alt="Поиск по части названия Польз на готовой панели" loading="lazy" style="max-width:100%;height:auto;" />
+
+Поиск работает со ссылками панели. Если нужный объект ещё не добавлен,
+найдите его в источниках редактора и разместите в колонке.
+
+## Открыть объект в новом окне
+
+Откройте меню кнопкой **«⋮»** справа от ссылки и выберите **«Открыть в новом окне»**.
+Объект откроется отдельно, и вы сможете продолжить работу с панелью.
+
+<img src={openwindowweb.src} width={openwindowweb.width} height={openwindowweb.height} alt="Команда Открыть в новом окне в меню ссылки" loading="lazy" style="max-width:100%;height:auto;" />
+
+## Добавить ссылку в избранное
+
+В меню **«⋮»** выберите **«Добавить в избранное»**.
+Чтобы отменить добавление, откройте меню этой ссылки и выберите **«Удалить из избранного»**.
+
+<img src={favoriteweb.src} width={favoriteweb.width} height={favoriteweb.height} alt="Команда Добавить в избранное в меню ссылки" loading="lazy" style="max-width:100%;height:auto;" />
+
+## Скопировать данные ссылки
+
+В меню **«⋮»** выберите нужную команду копирования: название, внутреннюю ссылку,
+внешнюю ссылку или текст подсказки.
+Выбранное значение попадёт в буфер обмена — его можно вставить в нужное поле или сообщение.
+
+<img src={copyweb.src} width={copyweb.width} height={copyweb.height} alt="Копирование внутренней ссылки e1cib из меню" loading="lazy" style="max-width:100%;height:auto;" />
+
+</InterfaceTab>
+</InterfaceTabs>
+
+<Note title="Тема оформления">
+В веб-интерфейсе можно переключать светлую и тёмную темы самой панели.
+В интерфейсе 1С оформление определяется темой платформы.
+</Note>

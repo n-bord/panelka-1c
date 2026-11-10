@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        :root {
+            --brand-cyan: #08C4A9; --brand-purple: #6550D9; --brand-dark: #37383F;
+            --bg-body: #f4f6f9; --bg-card: #ffffff; --bg-input: #ffffff; --bg-btn: #ffffff;
+            --bg-btn-hover: #f0fdfb; --bg-hover-row: #F1F5FF; --bg-tooltip: #ffffff;
+            --bg-context-menu: #ffffff; --bg-context-hover: #F1F5FF; --bg-settings-btn: #F1F5FF;
+            --text-main: var(--brand-dark); --text-muted: #666B73; --text-error: #C51E27; --text-link: var(--brand-dark);
+            --text-link-hover: var(--brand-purple); --border-main: #EAEAEB; --border-card: #ffffff;
+            --border-title: #EAEAEB; --border-active-tab: var(--brand-cyan);
+            --shadow-card: rgba(55, 71, 79, 0.05); --shadow-card-hover: rgba(8, 196, 169, 0.15);
+            --shadow-menu: rgba(55, 71, 79, 0.15); --icon-filter: none;
+        }
+        body.dark-mode {
+            --bg-body: #25262B; --bg-card: var(--brand-dark); --bg-input: #2D2E34; --bg-btn: #2D2E34;
+            --bg-btn-hover: #464851; --bg-hover-row: #464851; --bg-tooltip: #2D2E34;
+            --bg-context-menu: var(--brand-dark); --bg-context-hover: #464851; --bg-settings-btn: #464851;
+            --text-main: #FFFFFF; --text-muted: #A5A5AA; --text-error: #FF8C91; --text-link: #EAEAEB;
+            --text-link-hover: var(--brand-cyan); --border-main: #464851; --border-card: #464851;
+            --border-title: #464851; --border-active-tab: var(--brand-cyan);
+            --shadow-card: rgba(0, 0, 0, 0.2); --shadow-card-hover: rgba(8, 196, 169, 0.25);
+            --shadow-menu: rgba(0, 0, 0, 0.4);
+        }
+        body { font-family: 'TT Fors', 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-body); margin: 0; padding: 0; color: var(--text-main); transition: background-color 0.3s, color 0.3s; overflow-y: auto; overflow-x: hidden;}
+        
+        .sticky-header { position: -webkit-sticky; position: sticky; top: 0; background-color: var(--bg-body); z-index: 100; padding: 10px 15px 0 15px; transition: background-color 0.3s; }
+        .header-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .search-wrapper { position: relative; flex-grow: 1; margin-right: 15px; }
+        .search-bar { width: 100%; padding: 8px 35px 8px 15px; box-sizing: border-box; font-size: 14px; border: 2px solid var(--border-main); border-radius: 20px; transition: 0.3s; color: var(--text-main); background: var(--bg-input); font-family: inherit; }
+        .search-bar:focus { outline: none; border-color: var(--border-active-tab); box-shadow: 0 0 0 4px rgba(8, 196, 169, 0.1); }
+        .search-clear { position: absolute; right: 12px; top: 6px; font-size: 20px; font-weight: bold; color: var(--text-muted); cursor: pointer; display: none; user-select: none; transition: 0.2s; line-height: 1; }
+        .search-clear:hover { color: var(--text-error); }
+        
+        .controls-wrapper { display: flex; white-space: nowrap; align-items: center; }
+        @media (max-width: 1100px) {
+            .header-container { flex-wrap: wrap; }
+            .search-wrapper { flex-basis: 100%; margin-right: 0; margin-bottom: 8px; }
+            .controls-wrapper { flex-wrap: wrap; }
+            .controls-wrapper .btn { margin: 0 8px 6px 0; }
+        }
+        .btn { text-decoration: none; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; transition: 0.2s; margin-left: 10px; display: inline-flex; align-items: center; box-sizing: border-box; user-select: none; }
+        .btn-theme { background-color: var(--bg-btn); color: var(--text-main); border: 1px solid var(--border-main); width: 35px; height: 35px; padding: 0; justify-content: center; border-radius: 50%; }
+        .btn-theme:hover { background-color: var(--bg-btn-hover); color: var(--brand-purple); }
+        .btn-settings { background-color: var(--bg-settings-btn); color: var(--brand-purple); border: 1px solid var(--border-main); }
+        .btn-settings:hover { background-color: var(--brand-purple); color: #fff; border-color: var(--brand-purple); }
+        body.dark-mode .btn-settings { color: var(--text-main); }
+        body.dark-mode .btn-settings:hover { background-color: var(--brand-purple); color: #fff; border-color: var(--brand-purple); }
+        .btn-mode { background-color: var(--bg-btn); color: var(--text-main); border: 1px solid var(--border-main); }
+        .btn-mode:hover { background-color: var(--bg-btn-hover); color: var(--brand-purple); }
+        body.dark-mode .btn-theme:hover, body.dark-mode .btn-mode:hover { color: var(--brand-cyan); }
+
+        .tabs { display: flex; border-bottom: 2px solid var(--border-main); margin-bottom: 0; flex-wrap: wrap; }
+        .tab { text-decoration: none; display: flex; align-items: center; padding: 8px 16px; cursor: pointer; border-bottom: 2px solid transparent; font-family: inherit; background: transparent; border-top: 0; border-left: 0; border-right: 0; font-weight: 600; color: var(--text-muted); font-size: 13px; transition: 0.3s; border-radius: 8px 8px 0 0; margin-bottom: -2px; user-select: none; }
+        .tab:hover { background-color: var(--bg-hover-row); color: var(--brand-purple); }
+        body.dark-mode .tab:hover { color: var(--brand-cyan); }
+        .tab.active { border-bottom-color: var(--border-active-tab); color: var(--brand-purple); background-color: var(--bg-card); box-shadow: 0 -4px 10px var(--shadow-card); }
+        body.dark-mode .tab.active { color: var(--brand-cyan); }
+        .tab-icon { width: 16px; height: 16px; margin-right: 6px; filter: var(--icon-filter); transition: 0.3s; }
+        
+        #dashboard { padding: 15px 15px 40px 15px; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); grid-auto-flow: dense; gap: 25px; grid-gap: 25px; align-items: start; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card { background: var(--bg-card); border-radius: 16px; box-shadow: 0 4px 15px var(--shadow-card); border: 1px solid var(--border-card); padding: 20px; box-sizing: border-box; transition: box-shadow 0.3s, border-color 0.3s; height: fit-content; }
+        .card:hover { box-shadow: 0 8px 25px var(--shadow-card-hover); border-color: var(--border-active-tab); }
+        
+        .card-span-1 { grid-column: span 1; } .card-span-2 { grid-column: span 2; } .card-span-3 { grid-column: span 3; } .card-span-4 { grid-column: span 4; } .card-span-5 { grid-column: span 5; } .card-span-6 { grid-column: span 6; } .card-span-7 { grid-column: span 7; } .card-span-8 { grid-column: span 8; }
+
+        .card-body { column-gap: 30px; -webkit-column-gap: 30px; column-rule: 1px solid var(--border-main); -webkit-column-rule: 1px solid var(--border-main); column-fill: balance; transition: all 0.3s;}
+        .card-span-1 .card-body { column-count: 1; -webkit-column-count: 1; column-rule: none; -webkit-column-rule: none; }
+        .card-span-2 .card-body { column-count: 2; -webkit-column-count: 2; }
+        .card-span-3 .card-body { column-count: 3; -webkit-column-count: 3; }
+        .card-span-4 .card-body { column-count: 4; -webkit-column-count: 4; }
+        .card-span-5 .card-body { column-count: 5; -webkit-column-count: 5; }
+        .card-span-6 .card-body { column-count: 6; -webkit-column-count: 6; }
+        .card-span-7 .card-body { column-count: 7; -webkit-column-count: 7; }
+        .card-span-8 .card-body { column-count: 8; -webkit-column-count: 8; }
+
+        .card-title { width: 100%; background: transparent; border-top: 0; border-left: 0; border-right: 0; font-family: inherit; text-align: left; display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 800; margin-bottom: 15px; color: var(--text-main); border-bottom: 2px solid var(--border-title); padding-bottom: 8px; text-transform: none; letter-spacing: 0.5px; cursor: pointer; user-select: none; transition: color 0.3s, border-color 0.3s;}
+        .col-icon { width: 18px; height: 18px; margin-right: 10px; filter: var(--icon-filter);}
+        .collapse-icon { width: 18px; height: 18px; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+        
+        .card.collapsed .collapse-icon { transform: rotate(180deg); }
+        .card.collapsed .card-body { display: none; }
+        .card.collapsed { margin-bottom: 0 !important; }
+        
+        .type-group { display: block; margin-bottom: 16px; }
+        .type-header { display: flex; align-items: center; font-size: 11px; margin-bottom: 8px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; color: var(--brand-purple); break-after: avoid; page-break-after: avoid; -webkit-column-break-after: avoid; break-inside: avoid; }
+        body.dark-mode .type-header { color: var(--brand-cyan); }
+        .type-header img { width: 14px; height: 14px; margin-right: 8px; filter: var(--icon-filter); opacity: 0.8;}
+        
+        .link-row { display: flex; width: 100%; box-sizing: border-box; justify-content: space-between; align-items: flex-start; padding: 5px 6px; border-radius: 8px; margin-bottom: 2px; transition: 0.2s; border-left: 3px solid transparent; break-inside: avoid; page-break-inside: avoid; -webkit-column-break-inside: avoid; }
+        .link-row:hover { background-color: var(--bg-hover-row); border-left-color: var(--border-active-tab); }
+        .link-container { display: flex; flex-direction: column; flex-grow: 1; align-items: flex-start; min-width: 0; }
+        .link-header { display: flex; align-items: center; width: 100%; min-width: 0; }
+        
+        .link-item { color: var(--text-link); font-size: 13px; font-weight: 500; line-height: 1.3; transition: color 0.2s, outline 0.1s; cursor: pointer; flex: 1; min-width: 0; word-wrap: break-word; user-select: none; text-decoration: none; outline: none;}
+        .link-row:hover .link-item { color: var(--text-link-hover); text-decoration: underline; }
+        .link-item:focus { outline: 2px solid var(--brand-purple); outline-offset: 3px; border-radius: 2px; color: var(--brand-purple); text-decoration: underline;}
+        body.dark-mode .link-item:focus { outline-color: var(--brand-cyan); color: var(--brand-cyan); }
+        
+        .link-error { color: var(--text-error) !important; text-decoration: none !important; cursor: not-allowed !important; }
+        .link-error:hover { color: var(--text-error) !important; text-decoration: none !important; }
+        .error-text { font-size: 11px; color: var(--text-error); margin-top: 3px; line-height: 1.2; word-wrap: break-word; }
+
+        .highlight { background-color: var(--brand-purple); color: #fff !important; font-weight: bold; border-radius: 4px; padding: 0 4px; }
+        body.dark-mode .highlight { background-color: var(--brand-cyan); color: var(--brand-dark) !important; }
+        
+        .help-btn { padding: 0; border: 0; font-family: inherit; display: inline-block; margin-left: 6px; background: var(--bg-settings-btn); border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 11px; cursor: pointer; color: var(--brand-purple); font-weight: bold; user-select: none; transition: 0.2s; flex-shrink: 0; }
+        .help-btn:hover { background: var(--brand-purple); color: #fff; }
+        body.dark-mode .help-btn { color: var(--text-main); }
+        body.dark-mode .help-btn:hover { background: var(--brand-cyan); color: var(--brand-dark); }
+        
+        .tooltip { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.2; word-wrap: break-word; }
+        .hidden-tooltip { display: none; padding: 8px 12px; background: var(--bg-tooltip); border-left: 3px solid var(--border-active-tab); margin-top: 6px; width: 100%; box-sizing: border-box; border-radius: 0 8px 8px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-size: 12px; color: var(--text-main);}
+        
+        .dropdown { position: relative; display: inline-block; flex-shrink: 0; margin-left: 5px; }
+        .menu-btn { border: 0; background: transparent; font-family: inherit; cursor: pointer; color: var(--text-muted); padding: 2px 8px; font-weight: bold; font-size: 16px; user-select: none; line-height: 1; border-radius: 12px; transition: 0.2s; }
+        .menu-btn:hover { background-color: var(--bg-btn-hover); color: var(--brand-purple); }
+        body.dark-mode .menu-btn:hover { color: var(--brand-cyan); }
+        
+        #context-menu { display: none; position: fixed; background-color: var(--bg-context-menu); min-width: 220px; box-shadow: 0px 10px 25px var(--shadow-menu); border-radius: 12px; z-index: 10000; border: 1px solid var(--border-main); overflow: hidden; }
+        .c-menu-item { display: block; color: var(--text-main); padding: 12px 16px; cursor: pointer; font-size: 13px; font-weight: 500; transition: 0.2s; user-select: none; word-wrap: break-word; text-decoration: none;}
+        .c-menu-item:focus, .c-menu-item:hover { background-color: var(--bg-context-hover); color: var(--text-link-hover); padding-left: 20px; }
+        .dropdown-divider { border-top: 1px solid var(--border-main); margin: 0 !important; padding: 0 !important; height: 1px; }
+
+        .tab:focus, .card-title:focus, .help-btn:focus, .menu-btn:focus, .btn:focus, .search-clear:focus, .panel-mode button:focus, .panel-settings-menu a:focus { outline: 2px solid var(--brand-purple); outline-offset: 2px; }
+        body.dark-mode .tab:focus, body.dark-mode .card-title:focus, body.dark-mode .help-btn:focus, body.dark-mode .menu-btn:focus, body.dark-mode .btn:focus { outline-color: var(--brand-cyan); }
+        .tooltip, .error-text { white-space: pre-line; }
+        .search-clear { border: 0; padding: 0; background: transparent; font-family: inherit; }
+        .hidden { display: none !important; }
+
+        @media (max-width: 850px) {
+            .header-container { flex-direction: column; align-items: stretch; }
+            .search-wrapper { margin-right: 0; margin-bottom: 15px; }
+            .controls-wrapper { justify-content: flex-end; }
+            .sticky-header { position: static; padding-bottom: 15px; }
+        }
+    
+        .panel-mode { margin-left:8px; display:flex; border:1px solid var(--border-main); border-radius:20px; overflow:hidden; padding:2px; }
+        .panel-mode button { border-radius:18px; border:0; padding:8px 12px; cursor:pointer; background:var(--bg-card); color:var(--text-main); font:inherit; font-size:13px; font-weight:600; }
+        .panel-mode button.active { background:#2563eb; color:#fff; }
+        .settings-anchor { position:relative; }
+        .panel-settings-menu { position:absolute; right:0; top:100%; margin-top:6px; min-width:260px; max-width:90vw; background:var(--bg-card); color:var(--text-main); border:1px solid #cbd5e1; border-radius:8px; padding:6px; box-shadow:0 8px 24px rgba(0,0,0,.2); z-index:1200; }
+        .panel-settings-menu a { display:block; padding:10px; color:inherit; text-decoration:none; border-radius:4px; }
+        .panel-settings-menu a:hover { background:#2563eb; color:white; }
+        .menu-caption { padding:10px 10px 4px; font-size:12px; opacity:.75; }
+        .hidden { display:none !important; }
+    </style>
+</head>
+<body oncontextmenu="event.preventDefault(); return false;">
+
+    <!-- Невидимый фрейм, в который отправляются кастомные panelka:// ссылки -->
+    <iframe name="1c_bridge" id="1c_bridge" style="display:none;"></iframe>
+
+    <div class="sticky-header">
+        <div class="header-container">
+            <div class="search-wrapper">
+                <input type='text' id='searchInput' class='search-bar' placeholder='Поиск по ссылкам...' aria-label='Поиск по ссылкам' oninput='window.performSearch()'>
+                <button type='button' id='searchClear' class='search-clear' onclick='window.clearSearch()' aria-label='Очистить поиск'>&times;</button>
+            </div>
+            <div class="controls-wrapper">
+                <button type="button" class="btn btn-theme" id="btnThemeToggle" onclick="window.toggleThemeUI()" title="Переключить тему" aria-label="Переключить тему"></button>
+                <div id="panelMode" class="panel-mode hidden" role="group" aria-label="Панель">
+                    <button id="panelCommon" onclick="window.selectPanel(false)">Общая панель</button>
+                    <button id="panelMine" onclick="window.selectPanel(true)">Моя панель</button>
+                </div>
+                <a id="btnNativeMode" class="btn btn-mode" href="panelka://switch_mode?u=&n=" target="1c_bridge">⇄ Обычный интерфейс</a>
+                <div class="settings-anchor" id="settingsAnchor">
+                    <button id="settingsToggle" class="btn btn-settings hidden" onclick="window.togglePanelSettings()" aria-expanded="false" aria-controls="panelSettingsMenu">⚙ Настройки ▾</button>
+                    <div id="panelSettingsMenu" class="panel-settings-menu hidden">
+                        <a id="btnSettings" class="hidden" href="panelka://open_settings?u=&amp;n=" target="1c_bridge">Общая панель — для пользователей</a>
+                        <a id="btnPersonal" class="hidden" href="panelka://personal_settings?u=&amp;n=" target="1c_bridge">Моя панель — только для меня</a>
+                        <div id="personalStart" class="hidden"><div id="personalStartCaption" class="menu-caption">Создать мою панель</div>
+                            <a id="createPersonalCommon" href="panelka://personal_create_common?u=&amp;n=" target="1c_bridge">На основе общей панели</a>
+                            <a id="createPersonalEmpty" href="panelka://personal_create_empty?u=&amp;n=" target="1c_bridge">С пустой панели</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tabs" class="tabs" role="tablist" aria-label="Страницы панели"></div>
+    </div>
+    
+    <div id="dashboard"></div>
+    <div id="context-menu" role="menu" aria-label="Действия со ссылкой"></div>
+
+    <!-- Заглушка, куда 1С вставит JSON с данными -->
+    <script type="application/json" id="dashboard-data">
+        /*JSON_DATA_PLACEHOLDER*/{}
+    </script>
+
+    <script>
+        // Единственный словарь отображаемых строк. Технические значения протокола
+        // (статусы, режимы подсказок, имена команд) не являются переводимым текстом.
+        var DASHBOARD_TEXT = {
+            search: 'Поиск по ссылкам...', searchLabel: 'Поиск по ссылкам', clearSearch: 'Очистить поиск',
+            theme: 'Переключить тему', panel: 'Панель', commonPanel: 'Общая панель', personalPanel: 'Моя панель',
+            nativeMode: '⇄ Обычный интерфейс', settings: '⚙ Настройки ▾', settingsShort: '⚙ Настройки',
+            commonSettings: 'Общая панель — для пользователей', personalSettings: 'Моя панель — только для меня',
+            createPersonal: 'Создать мою панель', createFromCommon: 'На основе общей панели', createEmpty: 'С пустой панели',
+            pages: 'Страницы панели', linkActions: 'Действия со ссылкой',
+            loadFailed: 'Сбой загрузки интерфейса', backToNative: 'Вернуться в обычный интерфейс',
+            emptyAdmin: 'Панелька еще не настроена.\nНажмите кнопку «Настройки».',
+            emptyUser: 'В панель пока не добавлены ссылки.',
+            emptyPersonal: 'В вашей панели пока нет ссылок.\nДобавьте их через «Моя панель — только для меня».',
+            emptyTab: 'В этой вкладке пока нет ссылок.',
+            noRightsPrefix: '[НЕТ ПРАВ] ', noRights: 'У вас недостаточно прав для открытия данного объекта.',
+            deletedPrefix: '[УДАЛЕНО] ', deleted: 'Данный объект помечен на удаление.',
+            missingPrefix: '[НЕ НАЙДЕНО] ', missing: 'Объект не найден в базе данных.',
+            unavailablePrefix: '[НЕДОСТУПЕН] ',
+            unavailable: 'Объект недоступен или отсутствует. Обновите Панелька либо обратитесь к администратору.',
+            errorPrefix: '[ОШИБКА] ',
+            checkFailed: 'Не удалось проверить доступность объекта. Обновите Панелька либо обратитесь к администратору.',
+            fileUnavailablePrefix: '[ФАЙЛ НЕДОСТУПЕН] ', helpPrefix: 'Подсказка: ', actionsPrefix: 'Действия: ',
+            open: 'Открыть', runNew: 'Запустить в новом окне', openNew: 'Открыть в новом окне',
+            openCard: 'Открыть объект в справочнике', addObjectFavorite: 'Добавить объект в избранное ⭐',
+            addFavorite: 'Добавить в избранное ⭐', removeObjectFavorite: 'Удалить объект из избранного ❌',
+            removeFavorite: 'Удалить из избранного ❌', copyName: 'Скопировать название',
+            copyWeb: 'Скопировать веб-ссылку (URL)', copyFile: 'Скопировать полный путь к файлу',
+            copyDirectory: 'Скопировать путь к папке', copyObjectUrl: 'Скопировать ссылку на объект (e1cib)',
+            copyInternalUrl: 'Скопировать внутреннюю ссылку (e1cib)', copyExternalUrl: 'Скопировать внешнюю ссылку (e1c://)',
+            copyTooltip: 'Скопировать текст подсказки'
+        };
+
+        function dashboardText(key) { return DASHBOARD_TEXT[key] || ''; }
+
+        function localizeStaticControls() {
+            var labels = {
+                panelCommon: 'commonPanel', panelMine: 'personalPanel', btnNativeMode: 'nativeMode',
+                settingsToggle: 'settings', btnSettings: 'commonSettings', btnPersonal: 'personalSettings',
+                personalStartCaption: 'createPersonal', createPersonalCommon: 'createFromCommon', createPersonalEmpty: 'createEmpty'
+            };
+            for (var id in labels) {
+                if (Object.prototype.hasOwnProperty.call(labels, id)) {
+                    var label = document.getElementById(id);
+                    if (label) label.textContent = dashboardText(labels[id]);
+                }
+            }
+            var attributes = [
+                ['searchInput', 'placeholder', 'search'], ['searchInput', 'aria-label', 'searchLabel'],
+                ['searchClear', 'aria-label', 'clearSearch'], ['btnThemeToggle', 'title', 'theme'],
+                ['btnThemeToggle', 'aria-label', 'theme'], ['panelMode', 'aria-label', 'panel'],
+                ['tabs', 'aria-label', 'pages'], ['context-menu', 'aria-label', 'linkActions']
+            ];
+            for (var i = 0; i < attributes.length; i++) {
+                var item = attributes[i], element = document.getElementById(item[0]);
+                if (element) element.setAttribute(item[1], dashboardText(item[2]));
+            }
+        }
+
+        /** Обработка глобальных ошибок рендера (например, в старых IE) */
+        window.onerror = function(msg, url, line) {
+            var failure = document.createElement('div');
+            failure.style.cssText = 'padding:40px; text-align:center; font-family:sans-serif;';
+            var title = document.createElement('h2');
+            title.textContent = dashboardText('loadFailed');
+            failure.appendChild(title);
+            var details = document.createElement('p');
+            details.textContent = String(msg) + ' (' + line + ')';
+            failure.appendChild(details);
+            var back = document.createElement('a');
+            back.href = 'panelka://switch_mode?u=&n=';
+            back.target = '1c_bridge';
+            back.className = 'btn btn-mode';
+            back.textContent = dashboardText('backToNative');
+            failure.appendChild(back);
+            var bridge = document.getElementById('1c_bridge');
+            document.body.textContent = '';
+            if (bridge) document.body.appendChild(bridge);
+            document.body.appendChild(failure);
+            return false;
+        };
+
+        /** Формирование URL-safe Base64 строки для передачи команд в 1С */
+        // Названия и подсказки — обычный текст, как в интерфейсе 1С.
+        window.escapePbdText = function(text) {
+            return String(text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        };
+        window.tooltipPbdHtml = function(text) {
+            return window.escapePbdText(text).replace(/\r\n|\r|\n/g, '<br>');
+        };
+
+        window.get1CUrl = function(action, rawUrl, extraName) {
+            var u = rawUrl ? btoa(unescape(encodeURIComponent(rawUrl))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '.') : "";
+            var n = extraName ? btoa(unescape(encodeURIComponent(extraName))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '.') : "";
+            return 'panelka://' + action + '?u=' + u + '&n=' + n;
+        };
+
+        /** Отправка команды в 1С через скрытый фрейм */
+        window.sendTo1C = function(action, rawUrl, extraName) {
+            var tempLink = document.createElement('a');
+            tempLink.href = window.get1CUrl(action, rawUrl, extraName);
+            tempLink.target = '1c_bridge';
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+        };
+
+        /** JS-копирование в буфер для защиты от ограничений безопасности платформы 1С */
+        window.fallbackCopyTextToClipboard = function(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0"; 
+            textArea.style.left = "0"; 
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus(); 
+            textArea.select();
+            try { 
+                document.execCommand('copy'); 
+            } catch (err) {}
+            document.body.removeChild(textArea);
+        };
+
+        var DASHBOARD_DATA = {};
+        var linkRegistry = []; 
+        var fileLinkRegistry = Object.create(null);
+        var currentActiveTab = null;
+        var currentMenuLinkId = null;
+        // Идентификаторы определяют связь DOM и состояние; названия остаются текстом.
+        var pageNodes = [];
+        var contextMenuTrigger = null;
+
+        function findPageNode(value) {
+            for (var i = 0; i < pageNodes.length; i++) {
+                if (pageNodes[i].id === value) return pageNodes[i];
+            }
+            // Совместимость с сохранённой в 1С вкладкой прежних версий (название).
+            for (var j = 0; j < pageNodes.length; j++) {
+                if (pageNodes[j].name === value) return pageNodes[j];
+            }
+            return null;
+        }
+
+        function collapsedStorageKey() {
+            var settings = DASHBOARD_DATA.Settings || {};
+            return 'panelka_collapsed_cards_v2:' + String(settings.StateNamespace || (settings.Personal ? 'personal' : 'common'));
+        }
+
+        function readCollapsedCards() {
+            try {
+                var state = JSON.parse(localStorage.getItem(collapsedStorageKey()) || '{}');
+                return state && typeof state === 'object' && !Array.isArray(state) ? state : {};
+            } catch (e) { return {}; }
+        }
+
+        function setCardCollapsed(card, collapsed) {
+            if (collapsed) card.classList.add('collapsed');
+            else card.classList.remove('collapsed');
+            var title = card.querySelector('.card-title');
+            if (title) title.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        }
+
+        function appendText(parent, text, className) {
+            var node = document.createElement('span');
+            if (className) node.className = className;
+            node.textContent = String(text || '');
+            parent.appendChild(node);
+            return node;
+        }
+
+        function appendIcon(parent, source, className) {
+            if (!source) return;
+            var icon = document.createElement('img');
+            icon.src = source;
+            icon.alt = '';
+            if (className) icon.className = className;
+            parent.appendChild(icon);
+        }
+
+        // Значение не проходит через HTML-парсер даже при пустом поиске.
+        function renderHighlightedText(element, text, filter, suffix) {
+            if (!element) return;
+            text = String(text || '');
+            element.textContent = '';
+            var index = filter ? text.toLowerCase().indexOf(filter) : -1;
+            if (index < 0) appendText(element, text);
+            else {
+                appendText(element, text.substring(0, index));
+                appendText(element, text.substring(index, index + filter.length), 'highlight');
+                appendText(element, text.substring(index + filter.length));
+            }
+            if (suffix) appendText(element, suffix);
+        }
+
+        function closeContextMenu(restoreFocus) {
+            var menu = document.getElementById('context-menu');
+            if (menu) menu.style.display = 'none';
+            if (contextMenuTrigger) {
+                contextMenuTrigger.setAttribute('aria-expanded', 'false');
+                if (restoreFocus) contextMenuTrigger.focus();
+            }
+            window.currentMenuLinkId = null;
+        }
+
+        var iconMoon = '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+        var iconSun = '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+
+        function applyTheme() {
+            var isDark = false; 
+            if (DASHBOARD_DATA && DASHBOARD_DATA.Settings && DASHBOARD_DATA.Settings.SavedTheme === true) isDark = true;
+            var btn = document.getElementById("btnThemeToggle");
+            
+            if (isDark) { 
+                document.body.className = "dark-mode"; 
+                if(btn) btn.innerHTML = iconSun; 
+            } else { 
+                document.body.className = ""; 
+                if(btn) btn.innerHTML = iconMoon; 
+            }
+        }
+
+        window.toggleThemeUI = function() {
+            var isDark = document.body.className.indexOf("dark-mode") === -1;
+            document.body.className = isDark ? "dark-mode" : "";
+            
+            var btn = document.getElementById("btnThemeToggle");
+            if(btn) btn.innerHTML = isDark ? iconSun : iconMoon;
+            
+            fixInlineColorsForDarkMode();
+            window.sendTo1C('save_theme', isDark ? "true" : "false");
+        };
+
+        window.togglePanelSettings = function(forceOpen) {
+            var menu = document.getElementById('panelSettingsMenu');
+            var open = forceOpen === true || menu.className.indexOf('hidden') >= 0;
+            menu.className = 'panel-settings-menu' + (open ? '' : ' hidden');
+            document.getElementById('settingsToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        window.selectPanel = function(personal) {
+            if (!!DASHBOARD_DATA.Settings.Personal === personal) return;
+            if (personal && !DASHBOARD_DATA.Settings.HasPersonal) { window.togglePanelSettings(true); return; }
+            var bridgeLink = document.createElement('a');
+            bridgeLink.href = 'panelka://personal_switch?u=&n=';
+            bridgeLink.target = '1c_bridge';
+            document.body.appendChild(bridgeLink); bridgeLink.click(); document.body.removeChild(bridgeLink);
+        };
+        document.addEventListener('click', function(e) {
+            var anchor = document.getElementById('settingsAnchor');
+            if (!anchor) return;
+            var target = e.target;
+            if ((!anchor.contains(target) && !document.getElementById('panelMode').contains(target)) || target.tagName === 'A') {
+                document.getElementById('panelSettingsMenu').className = 'panel-settings-menu hidden';
+                document.getElementById('settingsToggle').setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 27) {
+                var settingsMenu = document.getElementById('panelSettingsMenu');
+                var wasOpen = settingsMenu.className.indexOf('hidden') < 0;
+                settingsMenu.className = 'panel-settings-menu hidden';
+                var toggle = document.getElementById('settingsToggle');
+                toggle.setAttribute('aria-expanded', 'false');
+                if (wasOpen && document.activeElement && settingsMenu.contains(document.activeElement)) toggle.focus();
+            }
+        });
+        window.init = function() {
+            if (!document.getElementById('dashboard-data')) return;
+            try { 
+                DASHBOARD_DATA = JSON.parse(document.getElementById('dashboard-data').textContent); 
+            } catch(e) { return; }
+            
+            if (!DASHBOARD_DATA || !DASHBOARD_DATA.Settings) return;
+            
+            localizeStaticControls();
+            applyTheme();
+            var cfg = DASHBOARD_DATA.Settings;
+            function reveal(id) { document.getElementById(id).className = document.getElementById(id).className.replace('hidden', ''); }
+            if (cfg.IsAdmin || cfg.CanPersonal) reveal('settingsToggle');
+            if (cfg.IsAdmin) reveal('btnSettings');
+            if (cfg.CanPersonal) {
+                reveal('panelMode');
+                reveal(cfg.HasPersonal ? 'btnPersonal' : 'personalStart');
+            }
+            document.getElementById('panelCommon').className = cfg.Personal ? '' : 'active';
+            document.getElementById('panelMine').className = cfg.Personal ? 'active' : '';
+            document.getElementById('panelCommon').setAttribute('aria-pressed', cfg.Personal ? 'false' : 'true');
+            document.getElementById('panelMine').setAttribute('aria-pressed', cfg.Personal ? 'true' : 'false');
+
+            // Отрисовываем интерфейс (или HTML заглушку, если данных нет)
+            renderDOM(); 
+            
+            // Если есть страницы, переключаем на нужную вкладку
+            if (DASHBOARD_DATA.Pages && DASHBOARD_DATA.Pages.length > 0) {
+                var savedTab = DASHBOARD_DATA.Settings.SavedTab;
+                var savedPage = pageNodes[0];
+                if (savedTab) {
+                    for (var i = 0; i < pageNodes.length; i++) {
+                        if (pageNodes[i].name === savedTab) { savedPage = pageNodes[i]; break; }
+                    }
+                }
+                if (savedPage) window.switchTab(savedPage.id, true, true);
+            }
+            
+            // Скрытие контекстного меню по клику в любую область
+            document.onclick = function() { 
+                closeContextMenu(false);
+            };
+            
+            // Отключаем стандартное контекстное меню браузера
+            document.oncontextmenu = function(e) { e.preventDefault(); };
+            window.addEventListener('resize', function() { 
+                clearTimeout(window.resizeTimer); 
+                window.resizeTimer = setTimeout(window.applyDynamicSpans, 100); 
+            });
+            
+            // Сообщаем 1С, что HTML загрузился и готов
+            setTimeout(function() { window.sendTo1C('html_loaded'); }, 200);
+            
+            initKeyboardNavigation();
+        };
+
+        /** НАВИГАЦИЯ С КЛАВИАТУРЫ (Стрелки + Переключение вкладок) */
+        function initKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                var keyCode = e.keyCode || e.which;
+                
+                var focused = document.activeElement;
+                var menu = document.getElementById('context-menu');
+                if (menu && menu.style.display === 'block' && menu.contains(focused)) {
+                    if (keyCode === 27 || keyCode === 9) {
+                        if (keyCode === 27) e.preventDefault();
+                        closeContextMenu(true);
+                        return;
+                    }
+                    if (keyCode === 32) {
+                        e.preventDefault();
+                        if (focused) focused.click();
+                        return;
+                    }
+                    var items = Array.prototype.slice.call(menu.querySelectorAll('.c-menu-item'));
+                    var itemIndex = items.indexOf(focused);
+                    var nextItem = itemIndex;
+                    if (keyCode === 40) nextItem = (itemIndex + 1) % items.length;
+                    else if (keyCode === 38) nextItem = (itemIndex - 1 + items.length) % items.length;
+                    else if (keyCode === 36) nextItem = 0;
+                    else if (keyCode === 35) nextItem = items.length - 1;
+                    else return;
+                    e.preventDefault();
+                    if (items[nextItem]) items[nextItem].focus();
+                    return;
+                }
+                if (focused && focused.classList.contains('tab')) {
+                    var visibleTabs = [];
+                    for (var t = 0; t < pageNodes.length; t++) {
+                        if (pageNodes[t].tab.style.display !== 'none') visibleTabs.push(pageNodes[t]);
+                    }
+                    var selectedIndex = -1;
+                    for (var v = 0; v < visibleTabs.length; v++) {
+                        if (visibleTabs[v].tab === focused) selectedIndex = v;
+                    }
+                    var nextTab = selectedIndex;
+                    if (keyCode === 39) nextTab = (selectedIndex + 1) % visibleTabs.length;
+                    else if (keyCode === 37) nextTab = (selectedIndex - 1 + visibleTabs.length) % visibleTabs.length;
+                    else if (keyCode === 36) nextTab = 0;
+                    else if (keyCode === 35) nextTab = visibleTabs.length - 1;
+                    else return;
+                    e.preventDefault();
+                    if (visibleTabs[nextTab]) {
+                        window.switchTab(visibleTabs[nextTab].id);
+                        visibleTabs[nextTab].tab.focus();
+                    }
+                    return;
+                }
+                // Стандартная клавиша меню и Shift+F10 доступны для каждой ссылки.
+                if (focused && focused.classList.contains('link-item') &&
+                    (keyCode === 93 || (keyCode === 121 && e.shiftKey))) {
+                    var focusedId = focused.id.match(/link_(\d+)/);
+                    if (focusedId) window.showContextMenu(e, focused, parseInt(focusedId[1], 10));
+                    return;
+                }
+
+                // Перехват Enter для запуска ссылки
+                if (keyCode === 13) {
+                    if (document.activeElement && document.activeElement.classList.contains('link-item')) {
+                        e.preventDefault();
+                        var linkIdMatch = document.activeElement.id.match(/link_(\d+)/);
+                        if (linkIdMatch) {
+                            var id = parseInt(linkIdMatch[1], 10);
+                            var linkObj = linkRegistry[id];
+                            if (linkObj && linkObj.Status === 'ОК') {
+                                window.sendTo1C('open', linkObj.Url, linkObj.Name);
+                            }
+                        }
+                        return;
+                    }
+                }
+
+                if (keyCode < 37 || keyCode > 40) return; 
+                
+                var searchInput = document.getElementById('searchInput');
+                var isSearchFocused = (document.activeElement === searchInput);
+                var isLinkFocused = document.activeElement && document.activeElement.classList.contains('link-item');
+                var isBodyFocused = (document.activeElement === document.body);
+
+                if (isSearchFocused && (keyCode === 37 || keyCode === 39)) return;
+                if (!isSearchFocused && !isLinkFocused && !isBodyFocused) return;
+
+                var activeLinks = [];
+                var allLinks = document.querySelectorAll('.tab-content.active .link-item');
+                
+                for(var i=0; i<allLinks.length; i++) {
+                    var el = allLinks[i];
+                    var card = el.closest('.card');
+                    var row = el.closest('.link-row');
+                    if (card && card.style.display !== 'none' && !card.classList.contains('collapsed') && row && !row.classList.contains('hidden')) {
+                        activeLinks.push(el);
+                    }
+                }
+
+                if (activeLinks.length === 0) return;
+
+                if (keyCode === 40) { // Вниз
+                    e.preventDefault();
+                    if (isSearchFocused || isBodyFocused) activeLinks[0].focus();
+                    else if (isLinkFocused) {
+                        var idx = activeLinks.indexOf(document.activeElement);
+                        if (idx !== -1 && idx < activeLinks.length - 1) activeLinks[idx + 1].focus();
+                    }
+                } else if (keyCode === 38) { // Вверх
+                    e.preventDefault();
+                    if (isLinkFocused) {
+                        var idx = activeLinks.indexOf(document.activeElement);
+                        if (idx > 0) activeLinks[idx - 1].focus();
+                        else searchInput.focus();
+                    }
+                } else if (keyCode === 37 || keyCode === 39) { // Влево / Вправо
+                    if (isLinkFocused) {
+                        e.preventDefault();
+                        var currentRect = document.activeElement.getBoundingClientRect();
+                        var bestMatch = null;
+                        var minDistance = Infinity;
+
+                        for (var i = 0; i < activeLinks.length; i++) {
+                            var cand = activeLinks[i];
+                            if (cand === document.activeElement) continue;
+                            
+                            var rect = cand.getBoundingClientRect();
+                            var dx = rect.left - currentRect.left;
+                            var dy = rect.top - currentRect.top;
+
+                            if (keyCode === 39 && dx > 10) { 
+                                var dist = Math.abs(dy) * 5 + Math.abs(dx);
+                                if (dist < minDistance) { minDistance = dist; bestMatch = cand; }
+                            } else if (keyCode === 37 && dx < -10) { 
+                                var dist = Math.abs(dy) * 5 + Math.abs(dx);
+                                if (dist < minDistance) { minDistance = dist; bestMatch = cand; }
+                            }
+                        }
+                        
+                        if (bestMatch) {
+                            bestMatch.focus();
+                        } else {
+                            switchTabByOffset(keyCode === 39 ? 1 : -1);
+                        }
+                    } else if (isBodyFocused) {
+                        e.preventDefault();
+                        switchTabByOffset(keyCode === 39 ? 1 : -1);
+                    }
+                }
+            });
+        }
+
+        /** Перелистывание вкладок */
+        function switchTabByOffset(offset) {
+            var allTabs = document.querySelectorAll('.tab');
+            var tabs = [];
+            for (var t = 0; t < allTabs.length; t++) {
+                if (allTabs[t].style.display !== 'none') tabs.push(allTabs[t]);
+            }
+            var activeTab = document.querySelector('.tab.active');
+            if (tabs.length > 0 && activeTab) {
+                var idx = tabs.indexOf(activeTab);
+                var newIdx = idx + offset;
+                if (idx >= 0 && newIdx >= 0 && newIdx < tabs.length) {
+                    var targetTab = tabs[newIdx];
+                    targetTab.click();
+                    setTimeout(function() {
+                        var newLinks = document.querySelectorAll('.tab-content.active .link-item');
+                        for (var i = 0; i < newLinks.length; i++) {
+                            var card = newLinks[i].closest('.card');
+                            var row = newLinks[i].closest('.link-row');
+                            if (card && card.style.display !== 'none' && !card.classList.contains('collapsed') && row && !row.classList.contains('hidden')) {
+                                newLinks[i].focus();
+                                return;
+                            }
+                        }
+                        targetTab.focus();
+                    }, 100);
+                }
+            }
+        }
+
+        window.switchTab = function(pageId, skipSearch, skipSave) {
+            var selected = findPageNode(pageId);
+            if (!selected) return;
+            currentActiveTab = selected.id;
+            if (!skipSave) window.sendTo1C('save_tab', selected.name);
+            for (var i = 0; i < pageNodes.length; i++) {
+                var page = pageNodes[i];
+                var active = page === selected;
+                page.tab.classList.toggle('active', active);
+                page.tab.setAttribute('aria-selected', active ? 'true' : 'false');
+                page.tab.tabIndex = active ? 0 : -1;
+                page.content.classList.toggle('active', active);
+            }
+            if (!skipSearch) window.performSearch();
+            else window.applyDynamicSpans();
+        };
+
+        window.toggleCard = function(titleEl) {
+            var card = titleEl.closest('.card');
+            if (!card) return;
+            var isCollapsed = !card.classList.contains('collapsed');
+            setCardCollapsed(card, isCollapsed);
+            try {
+                var collapsedCards = readCollapsedCards();
+                var key = card.getAttribute('data-state-key');
+                if (isCollapsed) collapsedCards[key] = true;
+                else delete collapsedCards[key];
+                localStorage.setItem(collapsedStorageKey(), JSON.stringify(collapsedCards));
+            } catch(e) {}
+            window.applyDynamicSpans();
+        };
+
+        window.setFavoriteUI = function(rawUrl, isFav) {
+            var input = document.getElementById('searchInput');
+            var filter = input ? input.value.toLowerCase() : '';
+            for (var j = 0; j < linkRegistry.length; j++) {
+                if (linkRegistry[j].Url !== rawUrl) continue;
+                linkRegistry[j].IsFavorite = isFav;
+                var linkEl = document.getElementById('link_' + linkRegistry[j].globalId);
+                if (linkEl) renderHighlightedText(linkEl, linkEl.getAttribute('data-name'), filter, isFav ? ' ⭐' : '');
+            }
+        };
+
+        window.markFileAsUnavailable = function(filePath, errorText, deferLayout) {
+            var targetUrl = "ext_file:" + filePath;
+            var fileLinks = fileLinkRegistry[targetUrl] || [];
+            var needsRender = false;
+            
+            for(var j=0; j<fileLinks.length; j++) {
+                fileLinks[j].Status = 'Ошибка'; 
+                
+                var linkEl = document.getElementById('link_' + fileLinks[j].globalId);
+                if (linkEl && linkEl.className.indexOf('link-error') === -1) {
+                    linkEl.className += ' link-error';
+                    linkEl.removeAttribute('href');
+                    linkEl.setAttribute('onclick', 'return false;');
+                    
+                    var oldName = linkEl.getAttribute('data-name');
+                    var newName = dashboardText('fileUnavailablePrefix') + oldName;
+                    linkEl.setAttribute('data-name', newName);
+                    
+                    renderHighlightedText(linkEl, newName, '', fileLinks[j].IsFavorite ? ' ⭐' : '');
+                    
+                    var container = linkEl.closest('.link-container');
+                    if (container && !container.querySelector('.error-text')) {
+                        var errDiv = document.createElement('div');
+                        errDiv.className = 'error-text';
+                        errDiv.textContent = errorText;
+                        container.appendChild(errDiv);
+                    }
+                    needsRender = true;
+                }
+            }
+            if (needsRender && !deferLayout) window.applyDynamicSpans();
+        };
+
+        /** Построение DOM-дерева на основе переданного JSON */
+        function renderDOM() {
+            var tabsContainer = document.getElementById('tabs');
+            var dashContainer = document.getElementById('dashboard');
+            var tMode = DASHBOARD_DATA.Settings.TooltipMode || "Нет"; 
+            var isAdmin = DASHBOARD_DATA.Settings.IsAdmin;
+            
+            var collapsedCards = readCollapsedCards();
+            
+            tabsContainer.innerHTML = ''; 
+            dashContainer.innerHTML = ''; 
+            linkRegistry = [];
+            fileLinkRegistry = Object.create(null);
+            pageNodes = [];
+
+            // Проверяем, есть ли вообще ссылки для отрисовки
+            var hasAnyLinks = false;
+            if (DASHBOARD_DATA.Pages) {
+                for (var p = 0; p < DASHBOARD_DATA.Pages.length; p++) {
+                    if (DASHBOARD_DATA.Pages[p].Columns && DASHBOARD_DATA.Pages[p].Columns.length > 0) {
+                        hasAnyLinks = true;
+                        break;
+                    }
+                }
+            }
+
+            // --- HTML ЗАГЛУШКА ДЛЯ ПУСТОЙ ПАНЕЛИ ---
+            if (!hasAnyLinks) {
+                var emptyMessage = DASHBOARD_DATA.Settings.Personal ? dashboardText('emptyPersonal') :
+                    dashboardText(isAdmin ? 'emptyAdmin' : 'emptyUser');
+                var emptyPanel = document.createElement('div');
+                emptyPanel.style.cssText = 'display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:50vh; text-align:center;';
+                var emptyCaption = appendText(emptyPanel, emptyMessage);
+                emptyCaption.style.cssText = 'font-size:18px; font-weight:600; line-height:1.5; color:var(--text-muted); margin-bottom:24px; white-space:pre-line;';
+                if (isAdmin && !DASHBOARD_DATA.Settings.Personal) {
+                    var setupLink = document.createElement('a');
+                    setupLink.href = 'panelka://open_settings?u=&n=';
+                    setupLink.target = '1c_bridge';
+                    setupLink.className = 'btn btn-settings';
+                    setupLink.textContent = dashboardText('settingsShort');
+                    emptyPanel.appendChild(setupLink);
+                }
+                dashContainer.appendChild(emptyPanel);
+                return;
+            }
+            // ----------------------------------------
+
+            var collapseIconSvg = '<svg class="collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>';
+
+            for (var p = 0; p < DASHBOARD_DATA.Pages.length; p++) {
+                var page = DASHBOARD_DATA.Pages[p];
+                
+                if (!page.Id) throw new Error('Не задан идентификатор страницы панели.');
+                var pageId = String(page.Id);
+                var tab = document.createElement('button');
+                tab.type = 'button';
+                tab.className = 'tab';
+                tab.id = 'panelka_tab_' + p;
+                tab.setAttribute('role', 'tab');
+                tab.setAttribute('data-tab', pageId);
+                tab.setAttribute('aria-selected', 'false');
+                tab.setAttribute('aria-controls', 'panelka_content_' + p);
+                tab.tabIndex = -1;
+                tab.onclick = (function(id) { return function() { window.switchTab(id, false); }; })(pageId);
+                appendIcon(tab, page.IconBase64, 'tab-icon');
+                appendText(tab, page.Name);
+                tabsContainer.appendChild(tab);
+
+                var content = document.createElement('div');
+                content.className = 'tab-content';
+                content.id = 'panelka_content_' + p;
+                content.setAttribute('role', 'tabpanel');
+                content.setAttribute('aria-labelledby', tab.id);
+                content.setAttribute('data-tab', pageId);
+                pageNodes.push({id: pageId, name: page.Name, tab: tab, content: content});
+
+                if (!page.Columns || page.Columns.length === 0) {
+                    var emptyTab = appendText(content, dashboardText('emptyTab'));
+                    emptyTab.style.cssText = 'color:var(--text-muted); padding:20px;';
+                } else {
+                    for (var c = 0; c < page.Columns.length; c++) {
+                        var colData = page.Columns[c];
+                        var card = document.createElement('div');
+                        if (!colData.Id) throw new Error('Не задан идентификатор колонки панели.');
+                        var columnId = String(colData.Id);
+                        var stateKey = JSON.stringify([pageId, columnId]);
+                        var isCollapsed = collapsedCards[stateKey] === true;
+                        card.setAttribute('data-state-key', stateKey);
+                        card.className = 'card card-span-1' + (isCollapsed ? ' collapsed' : '');
+
+                        var cardTitle = document.createElement('button');
+                        cardTitle.type = 'button';
+                        cardTitle.className = 'card-title';
+                        cardTitle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                        cardTitle.setAttribute('aria-controls', 'panelka_card_' + p + '_' + c);
+                        cardTitle.onclick = function() { window.toggleCard(this); };
+                        var caption = document.createElement('span');
+                        caption.style.cssText = 'display:flex; align-items:center;';
+                        appendIcon(caption, colData.IconBase64, 'col-icon');
+                        var colName = appendText(caption, colData.Name, 'col-name-text');
+                        colName.setAttribute('data-name', colData.Name);
+                        colName.style.color = colData.Color;
+                        cardTitle.appendChild(caption);
+                        var collapseIcon = document.createElement('span');
+                        collapseIcon.setAttribute('aria-hidden', 'true');
+                        collapseIcon.innerHTML = collapseIconSvg;
+                        cardTitle.appendChild(collapseIcon);
+                        card.appendChild(cardTitle);
+
+                        var cardBody = document.createElement('div'); 
+                        cardBody.className = 'card-body';
+                        cardBody.id = 'panelka_card_' + p + '_' + c;
+
+                        if (colData.Types) {
+                            for (var t2 = 0; t2 < colData.Types.length; t2++) {
+                                var typeData2 = colData.Types[t2];
+                                var group = document.createElement('div'); 
+                                group.className = 'type-group';
+
+                                if (typeData2.Name !== "Прочее" && DASHBOARD_DATA.Settings.GroupByType) {
+                                    var typeHeader = document.createElement('div');
+                                    typeHeader.className = 'type-header';
+                                    appendIcon(typeHeader, typeData2.IconBase64);
+                                    var typeName = appendText(typeHeader, typeData2.Name, 'type-name-text');
+                                    typeName.setAttribute('data-name', typeData2.Name);
+                                    group.appendChild(typeHeader);
+                                }
+
+                                if (typeData2.Links) {
+                                    for (var l2 = 0; l2 < typeData2.Links.length; l2++) {
+                                        var link = typeData2.Links[l2];
+                                        link.globalId = linkRegistry.length; 
+                                        linkRegistry.push(link);
+                                        if (String(link.Url || '').indexOf('ext_file:') === 0) {
+                                            if (!fileLinkRegistry[link.Url]) fileLinkRegistry[link.Url] = [];
+                                            fileLinkRegistry[link.Url].push(link);
+                                        }
+
+                                        var row = document.createElement('div'); 
+                                        row.className = 'link-row';
+
+                                        var displayName = String(link.Name || '').replace(/[\n\r]/g, ' ');
+                                        var displayPrefix = ''; 
+                                        var errorText = ''; 
+                                        var urlInfo = isAdmin ? '\n' + link.Url : '';
+                                        
+                                        if (link.Status === 'НетПрав') { 
+                                            displayPrefix = dashboardText('noRightsPrefix'); 
+                                            errorText = dashboardText('noRights') + urlInfo; 
+                                        } else if (link.Status === 'Удален') { 
+                                            displayPrefix = dashboardText('deletedPrefix'); 
+                                            errorText = dashboardText('deleted') + urlInfo; 
+                                        } else if (link.Status === 'НеНайден') { 
+                                            displayPrefix = dashboardText('missingPrefix'); 
+                                            errorText = dashboardText('missing') + urlInfo; 
+                                        } else if (link.Status === 'Недоступен') {
+                                            displayPrefix = dashboardText('unavailablePrefix');
+                                            errorText = dashboardText('unavailable') + urlInfo;
+                                        } else if (link.Status === 'Ошибка') { 
+                                            displayPrefix = dashboardText('errorPrefix'); 
+                                            errorText = dashboardText('checkFailed') + urlInfo; 
+                                        }
+                                        
+                                        displayName = displayPrefix + displayName;
+                                        var container = document.createElement('div');
+                                        container.className = 'link-container';
+                                        var header = document.createElement('div');
+                                        header.className = 'link-header';
+                                        var linkEl = document.createElement('a');
+                                        linkEl.tabIndex = 0;
+                                        linkEl.id = 'link_' + link.globalId;
+                                        linkEl.className = 'link-item' + (link.Status === 'ОК' ? '' : ' link-error');
+                                        linkEl.setAttribute('data-name', displayName);
+                                        linkEl.setAttribute('data-raw-url', link.Url);
+                                        if (link.Status === 'ОК') {
+                                            linkEl.href = window.get1CUrl('open', link.Url);
+                                            linkEl.target = '1c_bridge';
+                                        } else {
+                                            linkEl.setAttribute('aria-disabled', 'true');
+                                            linkEl.onclick = function() { return false; };
+                                        }
+                                        renderHighlightedText(linkEl, displayName, '', link.IsFavorite ? ' ⭐' : '');
+                                        header.appendChild(linkEl);
+                                        container.appendChild(header);
+                                        if (link.Tooltip) {
+                                            var currentTMode = tMode;
+                                            if (link.Status !== 'ОК' && currentTMode === 'Нет') currentTMode = 'Снизу';
+                                            if (currentTMode === 'Всплывающая') linkEl.title = link.Tooltip;
+                                            else if (currentTMode === 'Снизу' || currentTMode === 'Кнопка') {
+                                                var tooltip = document.createElement('div');
+                                                tooltip.className = 'tooltip' + (currentTMode === 'Кнопка' ? ' hidden-tooltip' : '');
+                                                tooltip.textContent = link.Tooltip;
+                                                tooltip.id = 'panelka_tooltip_' + link.globalId;
+                                                container.appendChild(tooltip);
+                                                if (currentTMode === 'Кнопка') {
+                                                    var helpButton = document.createElement('button');
+                                                    helpButton.type = 'button';
+                                                    helpButton.className = 'help-btn';
+                                                    helpButton.textContent = '?';
+                                                    helpButton.setAttribute('aria-label', dashboardText('helpPrefix') + displayName);
+                                                    helpButton.setAttribute('aria-controls', tooltip.id);
+                                                    helpButton.setAttribute('aria-expanded', 'false');
+                                                    helpButton.onclick = function(event) { window.toggleTooltip(event, this); };
+                                                    header.appendChild(helpButton);
+                                                }
+                                            }
+                                        }
+                                        if (link.Status !== 'ОК') appendText(container, errorText, 'error-text');
+                                        row.appendChild(container);
+                                        var dropdown = document.createElement('div');
+                                        dropdown.className = 'dropdown';
+                                        var menuButton = document.createElement('button');
+                                        menuButton.type = 'button';
+                                        menuButton.className = 'menu-btn';
+                                        menuButton.textContent = '⋮';
+                                        menuButton.setAttribute('aria-label', dashboardText('actionsPrefix') + displayName);
+                                        menuButton.setAttribute('aria-haspopup', 'menu');
+                                        menuButton.setAttribute('aria-controls', 'context-menu');
+                                        menuButton.setAttribute('aria-expanded', 'false');
+                                        menuButton.onclick = (function(id) {
+                                            return function(event) { window.showContextMenu(event, this, id); };
+                                        })(link.globalId);
+                                        dropdown.appendChild(menuButton);
+                                        row.appendChild(dropdown);
+
+                                        row.oncontextmenu = (function(id) { 
+                                            return function(e) { window.showContextMenu(e, null, id); }; 
+                                        })(link.globalId);
+                                        
+                                        group.appendChild(row);
+                                    }
+                                }
+                                if (group.childNodes.length > 0) cardBody.appendChild(group);
+                            }
+                        }
+                        card.appendChild(cardBody);
+                        content.appendChild(card);
+                    }
+                }
+                dashContainer.appendChild(content);
+            }
+            fixInlineColorsForDarkMode();
+        }
+
+        window.applyDynamicSpans = function() {
+            var containerWidth = document.getElementById('dashboard').clientWidth || window.innerWidth;
+            var maxGridCols = Math.floor((containerWidth + 25) / 365);
+            if (maxGridCols < 1) maxGridCols = 1;
+            
+            var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+            var availableHeight = vh - 180; 
+            var rowHeight = 30; 
+            var maxItemsPerColumn = Math.floor(availableHeight / rowHeight);
+            
+            if (maxItemsPerColumn < 8) maxItemsPerColumn = 8;   
+            if (maxItemsPerColumn > 15) maxItemsPerColumn = 15; 
+            
+            var activeContent = document.querySelector('.tab-content.active');
+            if (!activeContent) return;
+
+            var cards = activeContent.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                if (card.style.display === 'none') return;
+                
+                var weight = 0;
+                card.querySelectorAll('.link-row:not(.hidden)').forEach(function() { weight += 1; });
+                card.querySelectorAll('.type-header:not(.hidden)').forEach(function() { weight += 1.5; });
+                
+                var span = Math.ceil(weight / maxItemsPerColumn);
+                if (span < 1) span = 1; 
+                if (span > maxGridCols) span = maxGridCols; 
+                
+                card.className = card.className.replace(/card-span-\d+/g, '').trim();
+                card.classList.add('card-span-' + span);
+            });
+        };
+
+        function fixInlineColorsForDarkMode() {
+            var isDark = document.body.className.indexOf("dark-mode") > -1;
+            var spans = document.querySelectorAll('.col-name-text');
+            for(var i = 0; i < spans.length; i++) {
+                if(isDark) { 
+                    spans[i].setAttribute('data-orig-color', spans[i].style.color); 
+                    spans[i].style.color = '#FFFFFF'; 
+                } else { 
+                    var origColor = spans[i].getAttribute('data-orig-color'); 
+                    if(origColor) spans[i].style.color = origColor; 
+                }
+            }
+        }
+
+        window.toggleTooltip = function(e, btn) { 
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            var tt = btn.parentElement.parentElement.querySelector('.hidden-tooltip'); 
+            if (tt) {
+                var open = tt.style.display !== 'block';
+                tt.style.display = open ? 'block' : 'none';
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            } 
+        };
+
+        window.showContextMenu = function(e, btnNode, id) {
+            e.preventDefault(); 
+            e.stopPropagation();
+            
+            var menu = document.getElementById('context-menu'); 
+            if (!menu) return;
+            
+            if (menu.style.display === 'block' && window.currentMenuLinkId === id) {
+                closeContextMenu(true);
+                return false;
+            }
+            closeContextMenu(false);
+            contextMenuTrigger = btnNode || (e.currentTarget && e.currentTarget.querySelector('.menu-btn')) || document.getElementById('link_' + id);
+            if (contextMenuTrigger) contextMenuTrigger.setAttribute('aria-expanded', 'true');
+            window.currentMenuLinkId = id;
+            
+            menu.innerHTML = '';
+            var link = linkRegistry[id];
+            if (!link) { closeContextMenu(false); return false; }
+
+            function addItem(text, action, stringToCopy) { 
+                var el = document.createElement('a'); 
+                el.className = 'c-menu-item'; 
+                el.textContent = text;
+                el.setAttribute('role', 'menuitem');
+                el.tabIndex = -1; 
+                el.target = '1c_bridge';
+                el.href = window.get1CUrl(action, link.Url, stringToCopy || "");
+                
+                el.onclick = function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    closeContextMenu(true);
+                    // Отдельная ссылка моста передаёт событие 1С, независимо от скрытия меню.
+                    // Исходный переход отменён: команда отправляется ровно один раз.
+                    window.sendTo1C(action, link.Url, stringToCopy || "");
+                    return false;
+                }; 
+                menu.appendChild(el); 
+            }
+
+            if (link.Status === 'ОК') {
+                addItem(dashboardText('open'), 'open');
+                if (link.IsSysCmd || link.IsExtFile || link.IsAddProc || (link.IsStandard && !link.IsDataLink && !link.IsWebLink)) { 
+                    addItem(dashboardText(link.IsAddProc || link.IsExtFile ? 'runNew' : 'openNew'), 'open_new'); 
+                }
+            }
+
+            var canFav = false; 
+            if (link.Status === 'ОК' && ((link.IsAddProc && DASHBOARD_DATA.Settings.IsAdmin) || link.IsStandard)) { 
+                canFav = true; 
+            }
+
+            if ((link.IsAddProc && DASHBOARD_DATA.Settings.IsAdmin && link.Status === 'ОК') || canFav || link.IsFavorite) {
+                var divider = document.createElement('div');
+                divider.className = 'dropdown-divider';
+                menu.appendChild(divider);
+                
+                if (link.IsAddProc && DASHBOARD_DATA.Settings.IsAdmin && link.Status === 'ОК') { 
+                    addItem(dashboardText('openCard'), 'open_card'); 
+                }
+                if (canFav || link.IsFavorite) { 
+                    var favAddText = dashboardText(link.IsAddProc ? 'addObjectFavorite' : 'addFavorite');
+                    var favRemoveText = dashboardText(link.IsAddProc ? 'removeObjectFavorite' : 'removeFavorite');
+                    if (link.IsFavorite) addItem(favRemoveText, 'remove_fav', link.Name); 
+                    else addItem(favAddText, 'add_fav', link.Name); 
+                }
+            }
+
+            var divider = document.createElement('div');
+                divider.className = 'dropdown-divider';
+                menu.appendChild(divider);
+            addItem(dashboardText('copyName'), 'copy_text', link.Name);
+
+            if (link.Status === 'ОК') {
+                if (link.IsWebLink) { 
+                    addItem(dashboardText('copyWeb'), 'copy_url', link.Url); 
+                } else if (link.IsExtFile) { 
+                    addItem(dashboardText('copyFile'), 'copy_file', link.Url); 
+                    addItem(dashboardText('copyDirectory'), 'copy_dir', link.Url); 
+                } else if (link.IsAddProc) { 
+                    if (DASHBOARD_DATA.Settings.IsAdmin) { 
+                        addItem(dashboardText('copyObjectUrl'), 'copy_text', link.Url); 
+                    } 
+                } else if (link.IsStandard) { 
+                    addItem(dashboardText('copyInternalUrl'), 'copy_text', link.Url); 
+                    addItem(dashboardText('copyExternalUrl'), 'copy_ext_url', link.Url); 
+                }
+            }
+
+            if (link.HasTooltip) addItem(dashboardText('copyTooltip'), 'copy_text', link.Tooltip);
+
+            menu.style.display = 'block';
+            var topPos = e.clientY; 
+            var leftPos = e.clientX;
+            
+            if(btnNode) { 
+                var rect = btnNode.getBoundingClientRect(); 
+                topPos = rect.bottom; 
+                leftPos = rect.left - menu.offsetWidth + 20; 
+            }
+            if (leftPos < 10) leftPos = 10;
+            if (topPos + menu.offsetHeight > window.innerHeight) topPos = window.innerHeight - menu.offsetHeight - 10;
+            if (!isFinite(topPos) || topPos < 10) topPos = 10;
+            if (!isFinite(leftPos) || leftPos < 10) leftPos = 10;
+            
+            menu.style.top = topPos + 'px'; 
+            menu.style.left = leftPos + 'px';
+            var firstItem = menu.querySelector('.c-menu-item');
+            if (firstItem) firstItem.focus();
+            return false;
+        };
+
+        window.clearSearch = function() { 
+            var input = document.getElementById('searchInput'); 
+            if (input) { 
+                input.value = ''; 
+                window.performSearch(); 
+                input.focus(); 
+            } 
+        };
+        
+        window.applySearchFrom1C = function(searchText) { 
+            var input = document.getElementById('searchInput'); 
+            if (input) { input.value = searchText; } 
+            window.performSearch(); 
+        };
+
+        window.performSearch = function() {
+            var input = document.getElementById('searchInput'); 
+            if (!input) return;
+            
+            var filter = input.value.toLowerCase();
+            var clearBtn = document.getElementById('searchClear');
+            if (clearBtn) clearBtn.style.display = (filter.length > 0) ? 'block' : 'none';
+            
+            var isSearching = filter.length > 0;
+            var firstVisibleTab = null; 
+            var tabContents = document.querySelectorAll('.tab-content');
+            var collapsedCards = readCollapsedCards();
+
+            for (var t = 0; t < tabContents.length; t++) {
+                var content = tabContents[t]; 
+                var tabHasVisibleCards = false; 
+                var tabName = content.getAttribute('data-tab');
+                var cards = content.querySelectorAll('.card');
+                
+                for (var c = 0; c < cards.length; c++) {
+                    var card = cards[c]; 
+                    var cardHasVisibleLinks = false;
+                    var colNameSpan = card.querySelector('.col-name-text');
+                    var origColName = colNameSpan ? colNameSpan.getAttribute('data-name') : "";
+                    var colMatch = filter !== "" && origColName.toLowerCase().indexOf(filter) > -1;
+
+                    renderHighlightedText(colNameSpan, origColName, filter);
+
+                    var typeGroups = card.querySelectorAll('.type-group');
+                    for (var g = 0; g < typeGroups.length; g++) {
+                        var group = typeGroups[g]; 
+                        var groupHasVisibleLinks = false;
+                        var typeNameSpan = group.querySelector('.type-name-text');
+                        var origTypeName = typeNameSpan ? typeNameSpan.getAttribute('data-name') : "";
+                        var typeMatch = filter !== "" && origTypeName.toLowerCase().indexOf(filter) > -1;
+
+                        renderHighlightedText(typeNameSpan, origTypeName, filter);
+
+                        var rows = group.querySelectorAll('.link-row');
+                        for (var r = 0; r < rows.length; r++) {
+                            var row = rows[r]; 
+                            var linkItem = row.querySelector('.link-item'); 
+                            if (!linkItem) continue;
+                            
+                            var originalText = linkItem.getAttribute('data-name');
+                            var linkIdMatch = linkItem.id.match(/link_(\d+)/);
+                            var linkId = linkIdMatch ? parseInt(linkIdMatch[1], 10) : -1;
+                            var fObj = linkRegistry[linkId];
+                            var favIco = (fObj && fObj.IsFavorite) ? ' ⭐' : '';
+                            
+                            if (filter === "") {
+                                renderHighlightedText(linkItem, originalText, '', favIco); 
+                                row.classList.remove('hidden'); 
+                                groupHasVisibleLinks = true;
+                            } else {
+                                var linkMatch = originalText.toLowerCase().indexOf(filter) > -1;
+                                if (linkMatch) {
+                                    renderHighlightedText(linkItem, originalText, filter, favIco);
+                                    row.classList.remove('hidden'); 
+                                    groupHasVisibleLinks = true;
+                                } else if (colMatch || typeMatch) {
+                                    renderHighlightedText(linkItem, originalText, '', favIco);
+                                    row.classList.remove('hidden'); 
+                                    groupHasVisibleLinks = true;
+                                } else { 
+                                    row.classList.add('hidden'); 
+                                }
+                            }
+                        }
+                        var header = group.querySelector('.type-header');
+                        if (header) { 
+                            if (filter !== "" && !groupHasVisibleLinks) header.classList.add('hidden'); 
+                            else header.classList.remove('hidden'); 
+                        }
+                        
+                        if (groupHasVisibleLinks || filter === "") group.style.display = 'block'; 
+                        else group.style.display = 'none';
+                        
+                        if (groupHasVisibleLinks) cardHasVisibleLinks = true;
+                    }
+                    if (cardHasVisibleLinks || filter === "") { 
+                        card.style.display = 'inline-block'; 
+                        tabHasVisibleCards = true; 
+                        
+                        setCardCollapsed(card, !isSearching && collapsedCards[card.getAttribute('data-state-key')] === true);
+                    } else { 
+                        card.style.display = 'none'; 
+                    }
+                }
+
+                var pageNode = findPageNode(tabName);
+                var tabHeader = pageNode ? pageNode.tab : null;
+                if (tabHeader) {
+                    if (filter === "" || tabHasVisibleCards) { 
+                        tabHeader.style.display = 'flex'; 
+                        if (!firstVisibleTab) firstVisibleTab = tabName; 
+                    } else { 
+                        tabHeader.style.display = 'none'; 
+                    }
+                }
+            }
+            if (filter !== "") { 
+                var activeTabHeader = document.querySelector('.tab.active'); 
+                if (activeTabHeader && activeTabHeader.style.display === 'none' && firstVisibleTab) { 
+                    window.switchTab(firstVisibleTab, true, true); 
+                } 
+            } else { 
+                if (currentActiveTab && findPageNode(currentActiveTab)) { 
+                    window.switchTab(currentActiveTab, true, true); 
+                } 
+            }
+            window.applyDynamicSpans();
+        };
+
+        window.onload = window.init;
+    </script>
+</body>
+</html>

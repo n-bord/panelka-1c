@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?><Значение xmlns="" xmlns:d1p1="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="d1p1:Structure">
+	<d1p1:Property name="ВерсияСхемы">
+		<d1p1:Value xsi:type="xs:decimal">3</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="Страницы">
+		<d1p1:Value xsi:type="d1p1:ValueTable">
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИД</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИмяСтраницы</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИмяКартинки</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">РолиДоступа</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Порядок</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:decimal</d1p1:Type>
+					<d1p1:NumberQualifiers>
+						<d1p1:Digits>0</d1p1:Digits>
+						<d1p1:FractionDigits>0</d1p1:FractionDigits>
+						<d1p1:AllowedSign>Any</d1p1:AllowedSign>
+					</d1p1:NumberQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			
+			
+			
+			
+		<d1p1:row><d1p1:Value>page-main</d1p1:Value><d1p1:Value>Главная</d1p1:Value><d1p1:Value>Избранное</d1p1:Value><d1p1:Value/><d1p1:Value>0</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-c7006b4e-dcd2-5513-8cd6-7a9a275e3629</d1p1:Value><d1p1:Value>Продажи</d1p1:Value><d1p1:Value>ПереместитьВверх</d1p1:Value><d1p1:Value/><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-d2b1b2a9-ba1b-503f-be0b-09feb69eb92d</d1p1:Value><d1p1:Value>Закупки</d1p1:Value><d1p1:Value>ПереместитьВниз</d1p1:Value><d1p1:Value/><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-e8e9060f-a2d5-5a23-a9f7-e10830ff4c3f</d1p1:Value><d1p1:Value>Остатки и склад</d1p1:Value><d1p1:Value>Отчет</d1p1:Value><d1p1:Value/><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-0cb2e953-0a09-5d35-86f8-6366b2a86331</d1p1:Value><d1p1:Value>Возвраты</d1p1:Value><d1p1:Value>ПереместитьВлево</d1p1:Value><d1p1:Value/><d1p1:Value>40</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-9c03869f-fcf0-59ac-8c9e-97604d70d048</d1p1:Value><d1p1:Value>Деньги и расчёты</d1p1:Value><d1p1:Value>ПолеВводаКалькулятор</d1p1:Value><d1p1:Value/><d1p1:Value>50</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-991020ae-b520-5236-9083-d2430dd0b3a3</d1p1:Value><d1p1:Value>Администрирование</d1p1:Value><d1p1:Value>Настройка</d1p1:Value><d1p1:Value>ПолныеПрава</d1p1:Value><d1p1:Value>60</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-unassigned</d1p1:Value><d1p1:Value>Не распределено</d1p1:Value><d1p1:Value>Папка</d1p1:Value><d1p1:Value/><d1p1:Value>100000</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>page-standard</d1p1:Value><d1p1:Value>Стандартные инструменты</d1p1:Value><d1p1:Value>Настройка</d1p1:Value><d1p1:Value/><d1p1:Value>100010</d1p1:Value></d1p1:row></d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="Колонки">
+		<d1p1:Value xsi:type="d1p1:ValueTable">
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИД</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИДСтраницы</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИмяКолонки</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИмяКартинки</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Порядок</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:decimal</d1p1:Type>
+					<d1p1:NumberQualifiers>
+						<d1p1:Digits>0</d1p1:Digits>
+						<d1p1:FractionDigits>0</d1p1:FractionDigits>
+						<d1p1:AllowedSign>Any</d1p1:AllowedSign>
+					</d1p1:NumberQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			
+			
+			
+			
+			
+			
+		<d1p1:row><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value>page-main</d1p1:Value><d1p1:Value>Приёмка</d1p1:Value><d1p1:Value>ПереместитьВниз</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value>page-main</d1p1:Value><d1p1:Value>Отгрузка</d1p1:Value><d1p1:Value>ПереместитьВверх</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value>page-main</d1p1:Value><d1p1:Value>Под рукой</d1p1:Value><d1p1:Value>Скрепка</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-a7c8de97-d4a6-508d-aa9e-fe17da475c96</d1p1:Value><d1p1:Value>page-main</d1p1:Value><d1p1:Value>Контроль дня</d1p1:Value><d1p1:Value>Диаграмма</d1p1:Value><d1p1:Value>40</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-24bf6230-859d-5cbb-8603-d3fa3813ccaf</d1p1:Value><d1p1:Value>page-c7006b4e-dcd2-5513-8cd6-7a9a275e3629</d1p1:Value><d1p1:Value>Заказы и документы</d1p1:Value><d1p1:Value>Документ</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-8674553a-5206-5fc3-832f-dbbd6ffa7261</d1p1:Value><d1p1:Value>page-c7006b4e-dcd2-5513-8cd6-7a9a275e3629</d1p1:Value><d1p1:Value>Клиенты</d1p1:Value><d1p1:Value>Пользователь</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-b30de501-21b2-5825-920b-1897e2ea067c</d1p1:Value><d1p1:Value>page-c7006b4e-dcd2-5513-8cd6-7a9a275e3629</d1p1:Value><d1p1:Value>Цены</d1p1:Value><d1p1:Value>ПолеВводаКалькулятор</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-564c7e91-f73f-58e6-b067-06e49e821235</d1p1:Value><d1p1:Value>page-c7006b4e-dcd2-5513-8cd6-7a9a275e3629</d1p1:Value><d1p1:Value>После продажи</d1p1:Value><d1p1:Value>ПереместитьВлево</d1p1:Value><d1p1:Value>40</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-eae2a6e5-3465-5cde-beb1-0d39c2a488d5</d1p1:Value><d1p1:Value>page-d2b1b2a9-ba1b-503f-be0b-09feb69eb92d</d1p1:Value><d1p1:Value>Документы закупки</d1p1:Value><d1p1:Value>Документ</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-480f88f7-04eb-526d-b54b-e4d142a3e52d</d1p1:Value><d1p1:Value>page-d2b1b2a9-ba1b-503f-be0b-09feb69eb92d</d1p1:Value><d1p1:Value>Поставщики и товары</d1p1:Value><d1p1:Value>Справочник</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-f4ad5e1a-aa2c-54f6-b72a-f1268b5b2541</d1p1:Value><d1p1:Value>page-d2b1b2a9-ba1b-503f-be0b-09feb69eb92d</d1p1:Value><d1p1:Value>Расхождения и возвраты</d1p1:Value><d1p1:Value>Изменить</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-2be02247-6663-5776-827c-9907d27fcca2</d1p1:Value><d1p1:Value>page-e8e9060f-a2d5-5a23-a9f7-e10830ff4c3f</d1p1:Value><d1p1:Value>Запасы</d1p1:Value><d1p1:Value>Диаграмма</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-41963a7c-3f2c-5f4b-a60f-6405444e9a44</d1p1:Value><d1p1:Value>page-e8e9060f-a2d5-5a23-a9f7-e10830ff4c3f</d1p1:Value><d1p1:Value>Движение товаров</d1p1:Value><d1p1:Value>ПереместитьВверх</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-9f588dfd-81ed-5981-81d6-5fc2c967260d</d1p1:Value><d1p1:Value>page-e8e9060f-a2d5-5a23-a9f7-e10830ff4c3f</d1p1:Value><d1p1:Value>Справочники склада</d1p1:Value><d1p1:Value>Справочник</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-b12fa69f-1f72-5e51-8100-daca9b96650a</d1p1:Value><d1p1:Value>page-e8e9060f-a2d5-5a23-a9f7-e10830ff4c3f</d1p1:Value><d1p1:Value>Уточнение складского учёта</d1p1:Value><d1p1:Value>Изменить</d1p1:Value><d1p1:Value>40</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-2d54987d-7daa-5d17-aaea-42a11c6d36e4</d1p1:Value><d1p1:Value>page-0cb2e953-0a09-5d35-86f8-6366b2a86331</d1p1:Value><d1p1:Value>Возвраты товаров</d1p1:Value><d1p1:Value>ПереместитьВлево</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-a372dae1-aee8-5df3-bc8a-e7ba57f6783e</d1p1:Value><d1p1:Value>page-0cb2e953-0a09-5d35-86f8-6366b2a86331</d1p1:Value><d1p1:Value>Корректировки документов</d1p1:Value><d1p1:Value>Изменить</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-fafaf324-0b90-5c53-b037-64636b2a8452</d1p1:Value><d1p1:Value>page-0cb2e953-0a09-5d35-86f8-6366b2a86331</d1p1:Value><d1p1:Value>Акты расхождений</d1p1:Value><d1p1:Value>Документ</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-93d26706-4c2f-53cc-8705-d8764f61deca</d1p1:Value><d1p1:Value>page-9c03869f-fcf0-59ac-8c9e-97604d70d048</d1p1:Value><d1p1:Value>Банк</d1p1:Value><d1p1:Value>ПолеВводаКалькулятор</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-ded375f6-e749-540b-ae87-0167f55d53e7</d1p1:Value><d1p1:Value>page-9c03869f-fcf0-59ac-8c9e-97604d70d048</d1p1:Value><d1p1:Value>Касса и подотчёт</d1p1:Value><d1p1:Value>ПолеВводаКалькулятор</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-f9558e2d-f4c0-5976-a5a0-39debb3e683c</d1p1:Value><d1p1:Value>page-9c03869f-fcf0-59ac-8c9e-97604d70d048</d1p1:Value><d1p1:Value>Контрагенты и расчёты</d1p1:Value><d1p1:Value>Пользователь</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-80952378-7441-5012-8eeb-a631e806c4ae</d1p1:Value><d1p1:Value>page-991020ae-b520-5236-9083-d2430dd0b3a3</d1p1:Value><d1p1:Value>Пользователи и доступ</d1p1:Value><d1p1:Value>Пользователь</d1p1:Value><d1p1:Value>10</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-eda8889a-d1aa-5c9a-90a1-2d26573bba53</d1p1:Value><d1p1:Value>page-991020ae-b520-5236-9083-d2430dd0b3a3</d1p1:Value><d1p1:Value>Обслуживание</d1p1:Value><d1p1:Value>Обработка</d1p1:Value><d1p1:Value>20</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-8d7abd48-740b-5c58-95fb-5a90cceae044</d1p1:Value><d1p1:Value>page-991020ae-b520-5236-9083-d2430dd0b3a3</d1p1:Value><d1p1:Value>Основные справочники</d1p1:Value><d1p1:Value>Справочник</d1p1:Value><d1p1:Value>30</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-unassigned</d1p1:Value><d1p1:Value>page-unassigned</d1p1:Value><d1p1:Value>Не распределено</d1p1:Value><d1p1:Value>Папка</d1p1:Value><d1p1:Value>100000</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>column-standard</d1p1:Value><d1p1:Value>page-standard</d1p1:Value><d1p1:Value>Стандартные инструменты</d1p1:Value><d1p1:Value>Настройка</d1p1:Value><d1p1:Value>100010</d1p1:Value></d1p1:row></d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="КаталогСсылок">
+		<d1p1:Value xsi:type="d1p1:ValueTable">
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИД</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Источник</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Ссылка</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Наименование</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Подсказка</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		<d1p1:row><d1p1:Value>link-71b4a6c3-bf6f-576a-b609-9668956dc4b8</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ЗаказПоставщику</d1p1:Value><d1p1:Value>Заказы поставщикам</d1p1:Value><d1p1:Value>План поставок и ожидаемые товары</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-030280c8-5d66-5919-b27f-b261d10682d4</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ПриобретениеТоваровУслуг</d1p1:Value><d1p1:Value>Поступления товаров</d1p1:Value><d1p1:Value>Оформить поступление от поставщика</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-1e8ddafc-8458-51f1-b61e-026fba05c870</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ПриходныйОрдерНаТовары</d1p1:Value><d1p1:Value>Приёмка на склад</d1p1:Value><d1p1:Value>Принять товар по приходному ордеру</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-43329947-a776-58d7-9d5c-bb647e2e42ec</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Номенклатура</d1p1:Value><d1p1:Value>Проверить товар</d1p1:Value><d1p1:Value>Найти карточку товара перед приёмкой</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-15e5c6db-400e-5072-8f8c-32319ce1fa42</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ЗаказКлиента</d1p1:Value><d1p1:Value>Заказы клиентов</d1p1:Value><d1p1:Value>Проверить заказы к отгрузке</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-821a4e83-e0b9-5c11-a0f7-b5298a37ad83</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.РеализацияТоваровУслуг</d1p1:Value><d1p1:Value>Реализации товаров</d1p1:Value><d1p1:Value>Оформить продажу и отгрузку</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-8303bc39-e9bf-5ab1-8b73-7a3738d0442d</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.РасходныйОрдерНаТовары</d1p1:Value><d1p1:Value>Отгрузка со склада</d1p1:Value><d1p1:Value>Передать товар по расходному ордеру</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-f6df8677-dd75-5bff-be51-e4cb5f204ed3</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Партнеры</d1p1:Value><d1p1:Value>Партнёры</d1p1:Value><d1p1:Value>Поставщики и покупатели</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-1aca91fd-7f0b-5a17-a8a7-3dd7f955bc8e</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Склады</d1p1:Value><d1p1:Value>Склады</d1p1:Value><d1p1:Value>Места хранения товаров</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-e64a05e9-2088-5f75-bbf9-416b4bdc2bc8</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.АктОРасхожденияхПослеПриемки</d1p1:Value><d1p1:Value>Расхождения при приёмке</d1p1:Value><d1p1:Value>Сопоставить поставку с фактическим наличием</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-8b0fac4e-3fb5-509f-9ce7-d8d1841803f3</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ВозвратТоваровПоставщику</d1p1:Value><d1p1:Value>Возврат поставщику</d1p1:Value><d1p1:Value>Открыть документы возврата поставщику</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-b57b8840-a25a-58f9-8a3f-0ea925a6d9cf</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.СчетНаОплатуКлиенту</d1p1:Value><d1p1:Value>Счета клиентам</d1p1:Value><d1p1:Value>Подготовить счёт перед отгрузкой</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-5296c499-dbc5-5d93-9b79-2ed0f34fe37e</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ВозвратТоваровОтКлиента</d1p1:Value><d1p1:Value>Возвраты клиентов</d1p1:Value><d1p1:Value>Принять возвращённый покупателем товар</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-d842f816-df68-5b84-8d9f-cc138bb4a896</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.АктОРасхожденияхПослеОтгрузки</d1p1:Value><d1p1:Value>Расхождения после отгрузки</d1p1:Value><d1p1:Value>Разобрать замечания покупателя</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-cedaf8e2-f7e6-54fd-a1de-b7de7c76e0fd</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Контрагенты</d1p1:Value><d1p1:Value>Контрагенты</d1p1:Value><d1p1:Value>Реквизиты юридических лиц и предпринимателей</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-4f7db7c1-0986-5c59-a231-e3dbab782b20</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Организации</d1p1:Value><d1p1:Value>Наши организации</d1p1:Value><d1p1:Value>Реквизиты организаций предприятия</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-54649005-84e7-554f-81d0-cd895a6adfeb</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Валюты</d1p1:Value><d1p1:Value>Валюты</d1p1:Value><d1p1:Value>Список валют и их курсы</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-501e0f5f-2697-5432-a3a1-6849c7b3a829</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/app/Отчет.ОстаткиИДоступностьТоваров</d1p1:Value><d1p1:Value>Что доступно к продаже</d1p1:Value><d1p1:Value>Проверить свободный остаток перед обещанием клиенту</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-a195684b-5445-56c6-9d25-c570de34dc3d</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/app/Отчет.ВедомостьПоТоварамНаСкладах</d1p1:Value><d1p1:Value>Движение товаров</d1p1:Value><d1p1:Value>Оценить приход и расход за выбранный период</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-78ba1cb5-6c37-53e2-b4f6-8cf216a73a31</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ПересчетТоваров</d1p1:Value><d1p1:Value>Пересчёты на складе</d1p1:Value><d1p1:Value>Проверить незавершённые пересчёты</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-c99c5032-ca00-5c02-88cf-bf07d98fdc5f</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.КорректировкаЗадолженности</d1p1:Value><d1p1:Value>Корректировки расчётов</d1p1:Value><d1p1:Value>Открыть документы корректировки задолженности</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-7f4d7576-c01b-5e10-817e-e1587ab1d6a1</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ДоговорыКонтрагентов</d1p1:Value><d1p1:Value>Договоры с клиентами</d1p1:Value><d1p1:Value>Найти договор и условия взаиморасчётов</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-b2d7c24a-5a74-5db1-9baa-081c884222fb</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.УстановкаЦенНоменклатуры</d1p1:Value><d1p1:Value>Установка цен</d1p1:Value><d1p1:Value>Открыть документы изменения цен</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-c24e7cee-a2a2-579b-a397-848d6d97f859</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ВидыЦен</d1p1:Value><d1p1:Value>Виды цен</d1p1:Value><d1p1:Value>Посмотреть используемые виды цен</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-a724c3a2-fb02-5152-a41a-5769f7b0edaf</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ЦеновыеГруппы</d1p1:Value><d1p1:Value>Ценовые группы</d1p1:Value><d1p1:Value>Группировка товаров для ценообразования</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-895df1cd-3a33-55ee-9317-c2d4b976f970</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.КорректировкаРеализации</d1p1:Value><d1p1:Value>Корректировки реализации</d1p1:Value><d1p1:Value>Открыть документы уточнения продажи</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-72a03e7c-82f1-5310-b58e-93f7df5a034d</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.КорректировкаПриобретения</d1p1:Value><d1p1:Value>Корректировки приобретения</d1p1:Value><d1p1:Value>Открыть документы уточнения поступления</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-1e21212b-c664-5d83-9e9c-aefa649ae692</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ПеремещениеТоваров</d1p1:Value><d1p1:Value>Перемещения товаров</d1p1:Value><d1p1:Value>Переместить товар между складами</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-4d13ba0f-3f7d-53b5-8f41-db1fac2a56c9</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ОприходованиеИзлишковТоваров</d1p1:Value><d1p1:Value>Оприходование излишков</d1p1:Value><d1p1:Value>Оформить выявленные излишки</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-1e77d9fd-fc05-53f4-a1f7-8ab24c6c7b86</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.СписаниеНедостачТоваров</d1p1:Value><d1p1:Value>Списание недостач</d1p1:Value><d1p1:Value>Оформить выявленные недостачи</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-0c8e30ac-02d7-5834-a7bc-67920511f875</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.АктОРасхожденияхПослеПеремещения</d1p1:Value><d1p1:Value>Расхождения при перемещении</d1p1:Value><d1p1:Value>Проверить расхождения между складами</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-b4acfed8-221e-5506-ad64-96ab29ee60a5</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ХарактеристикиНоменклатуры</d1p1:Value><d1p1:Value>Характеристики товаров</d1p1:Value><d1p1:Value>Размеры, цвета и другие варианты товара</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-95c02db1-7ffb-5d7b-b850-34f4fc92cbf2</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.СерииНоменклатуры</d1p1:Value><d1p1:Value>Серии товаров</d1p1:Value><d1p1:Value>Найти серию или партию товара</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-fd53657c-478d-5364-82cf-c9806642e62b</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ВидыНоменклатуры</d1p1:Value><d1p1:Value>Виды номенклатуры</d1p1:Value><d1p1:Value>Посмотреть правила учёта групп товаров</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-00876c69-7477-5bbb-9496-8f1a006d45d1</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.КорректировкаНазначенияТоваров</d1p1:Value><d1p1:Value>Назначения товаров</d1p1:Value><d1p1:Value>Открыть документы изменения назначения запасов</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-e12de6fa-1835-5e65-a565-4d759341368e</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.КорректировкаОбособленногоУчетаЗапасов</d1p1:Value><d1p1:Value>Обособленный учёт запасов</d1p1:Value><d1p1:Value>Посмотреть корректировки обособленного учёта</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-bb2e3112-8e1d-5c25-962f-4353effb2317</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.КорректировкаПоОрдеруНаТовары</d1p1:Value><d1p1:Value>Корректировки ордеров</d1p1:Value><d1p1:Value>Найти документы уточнения складских ордеров</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-4392d73c-df0f-51c8-b9fa-ebbaf65bf688</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ПоступлениеБезналичныхДенежныхСредств</d1p1:Value><d1p1:Value>Поступления на счёт</d1p1:Value><d1p1:Value>Открыть входящие банковские платежи</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-8e002e4e-311b-5f44-9d3a-20b17c6b9e09</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.СписаниеБезналичныхДенежныхСредств</d1p1:Value><d1p1:Value>Списания со счёта</d1p1:Value><d1p1:Value>Открыть исходящие банковские платежи</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-2e8710f9-6b16-58b1-82a3-52e1e4e76b3a</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ОжидаемоеПоступлениеДенежныхСредств</d1p1:Value><d1p1:Value>Ожидаемые поступления</d1p1:Value><d1p1:Value>Посмотреть запланированные поступления денег</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-936ae587-d450-5f65-9c6b-01945cdb6c2b</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.ПриходныйКассовыйОрдер</d1p1:Value><d1p1:Value>Приходные кассовые ордера</d1p1:Value><d1p1:Value>Найти документы поступления наличных</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-00f0e8ff-512f-5f53-afaf-151e8d05e149</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.РасходныйКассовыйОрдер</d1p1:Value><d1p1:Value>Расходные кассовые ордера</d1p1:Value><d1p1:Value>Найти документы выдачи наличных</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-656591ba-2362-59f6-9936-6fa519e2f140</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Документ.АвансовыйОтчет</d1p1:Value><d1p1:Value>Авансовые отчёты</d1p1:Value><d1p1:Value>Посмотреть документы подотчётных расходов</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-42a12066-94d2-5dbf-aed8-7085606f683d</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.Пользователи</d1p1:Value><d1p1:Value>Пользователи</d1p1:Value><d1p1:Value>Открыть список пользователей базы</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-464bb51c-3c12-54e6-ab13-be859c7abcfe</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ГруппыДоступа</d1p1:Value><d1p1:Value>Группы доступа</d1p1:Value><d1p1:Value>Посмотреть группы и их участников</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-d6875a6f-20fb-5a87-8031-b6b897a3010e</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ПрофилиГруппДоступа</d1p1:Value><d1p1:Value>Профили групп доступа</d1p1:Value><d1p1:Value>Посмотреть состав профилей</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-3e91b4e2-9eb9-5cd9-8829-0ed98f669355</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/app/ОбщаяФорма.РегламентныеИФоновыеЗадания</d1p1:Value><d1p1:Value>Фоновые задания</d1p1:Value><d1p1:Value>Проверить выполнение заданий</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-f751efbb-bc7d-5867-bf5f-a16888726a1c</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ДополнительныеОтчетыИОбработки</d1p1:Value><d1p1:Value>Дополнительные обработки</d1p1:Value><d1p1:Value>Открыть подключённые отчёты и обработки</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-a7975dcf-e1ab-5b96-a298-0aa515876cac</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ГруппыПользователей</d1p1:Value><d1p1:Value>Группы пользователей</d1p1:Value><d1p1:Value>Посмотреть объединение пользователей в группы</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>link-5f9ae03f-5b7d-5e2f-9232-d1a9347e3a3b</d1p1:Value><d1p1:Value>objects</d1p1:Value><d1p1:Value>e1cib/list/Справочник.ПользовательскиеНастройкиОтчетов</d1p1:Value><d1p1:Value>Настройки отчётов</d1p1:Value><d1p1:Value>Найти сохранённые пользовательские настройки</d1p1:Value></d1p1:row></d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="Размещения">
+		<d1p1:Value xsi:type="d1p1:ValueTable">
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИД</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИДСсылки</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">ИДКолонки</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Наименование</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Подсказка</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:string</d1p1:Type>
+					<d1p1:StringQualifiers>
+						<d1p1:Length>0</d1p1:Length>
+						<d1p1:AllowedLength>Variable</d1p1:AllowedLength>
+					</d1p1:StringQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">Порядок</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:decimal</d1p1:Type>
+					<d1p1:NumberQualifiers>
+						<d1p1:Digits>0</d1p1:Digits>
+						<d1p1:FractionDigits>0</d1p1:FractionDigits>
+						<d1p1:AllowedSign>Any</d1p1:AllowedSign>
+					</d1p1:NumberQualifiers>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">СвоеНаименование</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:boolean</d1p1:Type>
+				</d1p1:ValueType>
+			</d1p1:column>
+			<d1p1:column>
+				<d1p1:Name xsi:type="xs:string">СвояПодсказка</d1p1:Name>
+				<d1p1:ValueType>
+					<d1p1:Type>xs:boolean</d1p1:Type>
+				</d1p1:ValueType>
+			</d1p1:column>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		<d1p1:row><d1p1:Value>placement-b4b88cd1-7d18-5ddd-9025-c01923753ca4</d1p1:Value><d1p1:Value>link-71b4a6c3-bf6f-576a-b609-9668956dc4b8</d1p1:Value><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5436aaa8-df81-5b48-8bd3-e59eba5ac3c3</d1p1:Value><d1p1:Value>link-030280c8-5d66-5919-b27f-b261d10682d4</d1p1:Value><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-9bf413f6-158b-5d39-bda7-2b3081131a4a</d1p1:Value><d1p1:Value>link-1e8ddafc-8458-51f1-b61e-026fba05c870</d1p1:Value><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-7c1b47bf-77be-5ada-be4c-c45c0adf98b6</d1p1:Value><d1p1:Value>link-43329947-a776-58d7-9d5c-bb647e2e42ec</d1p1:Value><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-1749fc3d-48dd-5467-984f-e4607ab0cdaa</d1p1:Value><d1p1:Value>link-15e5c6db-400e-5072-8f8c-32319ce1fa42</d1p1:Value><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-cd35ae39-3566-5f5e-a49c-1f393d797bbf</d1p1:Value><d1p1:Value>link-821a4e83-e0b9-5c11-a0f7-b5298a37ad83</d1p1:Value><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-80e7015f-4cb6-5845-b3a5-2b18d9534637</d1p1:Value><d1p1:Value>link-8303bc39-e9bf-5ab1-8b73-7a3738d0442d</d1p1:Value><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-461f8d74-c2c6-5459-9a3f-dc78e0cac947</d1p1:Value><d1p1:Value>link-43329947-a776-58d7-9d5c-bb647e2e42ec</d1p1:Value><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value>Номенклатура</d1p1:Value><d1p1:Value>Быстро найти товар и характеристики</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-8a635a49-40ed-5a63-8171-da9385eadf18</d1p1:Value><d1p1:Value>link-f6df8677-dd75-5bff-be51-e4cb5f204ed3</d1p1:Value><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-93e296f3-9d21-5d84-ae56-1d9a63a56238</d1p1:Value><d1p1:Value>link-1aca91fd-7f0b-5a17-a8a7-3dd7f955bc8e</d1p1:Value><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-1cc08931-2e07-5f50-a0c8-ace7475c907a</d1p1:Value><d1p1:Value>link-e64a05e9-2088-5f75-bbf9-416b4bdc2bc8</d1p1:Value><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>50</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-bc5d72b2-6d99-5f17-8c52-b26dc49f5c5a</d1p1:Value><d1p1:Value>link-8b0fac4e-3fb5-509f-9ce7-d8d1841803f3</d1p1:Value><d1p1:Value>column-862bdb71-ff8f-5c6c-927b-995662dd7ca4</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>60</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-54466b3e-98bf-5c5d-8d22-88bcc99c43d3</d1p1:Value><d1p1:Value>link-b57b8840-a25a-58f9-8a3f-0ea925a6d9cf</d1p1:Value><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-e796dbc6-9166-5824-b04d-3a1b52e1fe07</d1p1:Value><d1p1:Value>link-5296c499-dbc5-5d93-9b79-2ed0f34fe37e</d1p1:Value><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>50</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-f00f7540-7ea9-50c5-a8e0-710d90a0150a</d1p1:Value><d1p1:Value>link-d842f816-df68-5b84-8d9f-cc138bb4a896</d1p1:Value><d1p1:Value>column-c8a4ea0c-a502-5472-b3bc-a24e66ed2596</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>60</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-cfce590a-b22a-583b-98da-cf36b6f2cbe2</d1p1:Value><d1p1:Value>link-cedaf8e2-f7e6-54fd-a1de-b7de7c76e0fd</d1p1:Value><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5983550b-8f48-5256-a4ed-5f7d7f69202a</d1p1:Value><d1p1:Value>link-4f7db7c1-0986-5c59-a231-e3dbab782b20</d1p1:Value><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>50</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-af148d73-9bc4-598f-8ab9-fcb5d05bcc34</d1p1:Value><d1p1:Value>link-54649005-84e7-554f-81d0-cd895a6adfeb</d1p1:Value><d1p1:Value>column-8f81ed0a-48f9-5ac3-9807-a99554998823</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>60</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-06a2eb7c-3b73-5c8e-a9c7-1d3972f6f69f</d1p1:Value><d1p1:Value>link-501e0f5f-2697-5432-a3a1-6849c7b3a829</d1p1:Value><d1p1:Value>column-a7c8de97-d4a6-508d-aa9e-fe17da475c96</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-0daeea39-e19f-5099-84fe-240a5a97d738</d1p1:Value><d1p1:Value>link-a195684b-5445-56c6-9d25-c570de34dc3d</d1p1:Value><d1p1:Value>column-a7c8de97-d4a6-508d-aa9e-fe17da475c96</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-0f63a7c6-b835-5652-ad44-5a05c480221f</d1p1:Value><d1p1:Value>link-78ba1cb5-6c37-53e2-b4f6-8cf216a73a31</d1p1:Value><d1p1:Value>column-a7c8de97-d4a6-508d-aa9e-fe17da475c96</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-31ccae5e-4ee7-5753-bee5-9fe5b1322899</d1p1:Value><d1p1:Value>link-c99c5032-ca00-5c02-88cf-bf07d98fdc5f</d1p1:Value><d1p1:Value>column-a7c8de97-d4a6-508d-aa9e-fe17da475c96</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-916c9856-e7ff-54f0-9a6b-c3102694ae8c</d1p1:Value><d1p1:Value>link-15e5c6db-400e-5072-8f8c-32319ce1fa42</d1p1:Value><d1p1:Value>column-24bf6230-859d-5cbb-8603-d3fa3813ccaf</d1p1:Value><d1p1:Value/><d1p1:Value>Состав, сроки и состояние исполнения заказов</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5a0a6faf-2035-5e9c-956a-b61aef245248</d1p1:Value><d1p1:Value>link-b57b8840-a25a-58f9-8a3f-0ea925a6d9cf</d1p1:Value><d1p1:Value>column-24bf6230-859d-5cbb-8603-d3fa3813ccaf</d1p1:Value><d1p1:Value>Счета на оплату</d1p1:Value><d1p1:Value>Найти выставленный клиенту счёт</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-54893f14-db93-5cae-a514-7f8a36e29259</d1p1:Value><d1p1:Value>link-821a4e83-e0b9-5c11-a0f7-b5298a37ad83</d1p1:Value><d1p1:Value>column-24bf6230-859d-5cbb-8603-d3fa3813ccaf</d1p1:Value><d1p1:Value>Реализации товаров и услуг</d1p1:Value><d1p1:Value>Открыть документы продажи</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-3ae2b52f-7e38-507c-aefa-c44fa3b7fa48</d1p1:Value><d1p1:Value>link-8303bc39-e9bf-5ab1-8b73-7a3738d0442d</d1p1:Value><d1p1:Value>column-24bf6230-859d-5cbb-8603-d3fa3813ccaf</d1p1:Value><d1p1:Value>Выдача со склада</d1p1:Value><d1p1:Value>Проверить складское исполнение отгрузки</d1p1:Value><d1p1:Value>40</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-9aa58080-34d4-5e66-88a3-d4587ecb70ae</d1p1:Value><d1p1:Value>link-f6df8677-dd75-5bff-be51-e4cb5f204ed3</d1p1:Value><d1p1:Value>column-8674553a-5206-5fc3-832f-dbbd6ffa7261</d1p1:Value><d1p1:Value/><d1p1:Value>Найти покупателя и его карточку</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-4f5d3bf0-66c1-5202-a9b7-a53e0f825652</d1p1:Value><d1p1:Value>link-cedaf8e2-f7e6-54fd-a1de-b7de7c76e0fd</d1p1:Value><d1p1:Value>column-8674553a-5206-5fc3-832f-dbbd6ffa7261</d1p1:Value><d1p1:Value/><d1p1:Value>Проверить реквизиты стороны договора</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-ee6caa3f-ec9e-54b8-a9f1-96eb2400fc31</d1p1:Value><d1p1:Value>link-7f4d7576-c01b-5e10-817e-e1587ab1d6a1</d1p1:Value><d1p1:Value>column-8674553a-5206-5fc3-832f-dbbd6ffa7261</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-c073759b-62f1-5d72-a089-dba685e24bd2</d1p1:Value><d1p1:Value>link-43329947-a776-58d7-9d5c-bb647e2e42ec</d1p1:Value><d1p1:Value>column-8674553a-5206-5fc3-832f-dbbd6ffa7261</d1p1:Value><d1p1:Value>Каталог товаров</d1p1:Value><d1p1:Value>Подобрать товар для предложения клиенту</d1p1:Value><d1p1:Value>40</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-2b92cf59-d650-51e1-8f22-b86f9962f794</d1p1:Value><d1p1:Value>link-4f7db7c1-0986-5c59-a231-e3dbab782b20</d1p1:Value><d1p1:Value>column-8674553a-5206-5fc3-832f-dbbd6ffa7261</d1p1:Value><d1p1:Value/><d1p1:Value>Выбрать организацию продавца</d1p1:Value><d1p1:Value>50</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-afd051e9-4d21-5188-9c1c-88ae6a38fffb</d1p1:Value><d1p1:Value>link-b2d7c24a-5a74-5db1-9baa-081c884222fb</d1p1:Value><d1p1:Value>column-b30de501-21b2-5825-920b-1897e2ea067c</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5e74087c-de40-5cdb-a34b-5c49a97d87d5</d1p1:Value><d1p1:Value>link-c24e7cee-a2a2-579b-a397-848d6d97f859</d1p1:Value><d1p1:Value>column-b30de501-21b2-5825-920b-1897e2ea067c</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-2a4747db-7bf0-5667-aeeb-5dc8cd990da2</d1p1:Value><d1p1:Value>link-a724c3a2-fb02-5152-a41a-5769f7b0edaf</d1p1:Value><d1p1:Value>column-b30de501-21b2-5825-920b-1897e2ea067c</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-8d33874e-8f6e-5245-b2fe-a70e2d122cb5</d1p1:Value><d1p1:Value>link-5296c499-dbc5-5d93-9b79-2ed0f34fe37e</d1p1:Value><d1p1:Value>column-564c7e91-f73f-58e6-b067-06e49e821235</d1p1:Value><d1p1:Value>Возвраты покупателей</d1p1:Value><d1p1:Value>Найти возврат по продаже</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-7e4fb062-daab-5d49-99e1-4cb7e790fabe</d1p1:Value><d1p1:Value>link-895df1cd-3a33-55ee-9317-c2d4b976f970</d1p1:Value><d1p1:Value>column-564c7e91-f73f-58e6-b067-06e49e821235</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-a98a1635-9825-5f8c-a6e1-8b826d7a341a</d1p1:Value><d1p1:Value>link-d842f816-df68-5b84-8d9f-cc138bb4a896</d1p1:Value><d1p1:Value>column-564c7e91-f73f-58e6-b067-06e49e821235</d1p1:Value><d1p1:Value>Акты расхождений</d1p1:Value><d1p1:Value>Разобрать расхождения по отгруженным товарам</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-592aacad-95db-5f59-a351-c0654fee3cd1</d1p1:Value><d1p1:Value>link-71b4a6c3-bf6f-576a-b609-9668956dc4b8</d1p1:Value><d1p1:Value>column-eae2a6e5-3465-5cde-beb1-0d39c2a488d5</d1p1:Value><d1p1:Value/><d1p1:Value>Проверить ожидаемые поставки и сроки</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-84d376a2-70b0-5492-b6de-da060e9d77dc</d1p1:Value><d1p1:Value>link-030280c8-5d66-5919-b27f-b261d10682d4</d1p1:Value><d1p1:Value>column-eae2a6e5-3465-5cde-beb1-0d39c2a488d5</d1p1:Value><d1p1:Value>Приобретения товаров и услуг</d1p1:Value><d1p1:Value>Открыть документы поступления от поставщика</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-146a3c0a-54d1-5056-8ae6-f633bf2e43cc</d1p1:Value><d1p1:Value>link-1e8ddafc-8458-51f1-b61e-026fba05c870</d1p1:Value><d1p1:Value>column-eae2a6e5-3465-5cde-beb1-0d39c2a488d5</d1p1:Value><d1p1:Value>Приходные ордера</d1p1:Value><d1p1:Value>Проверить приёмку поставок на склад</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-a47f28e0-97a5-51d6-9396-b58fe9925c1a</d1p1:Value><d1p1:Value>link-f6df8677-dd75-5bff-be51-e4cb5f204ed3</d1p1:Value><d1p1:Value>column-480f88f7-04eb-526d-b54b-e4d142a3e52d</d1p1:Value><d1p1:Value>Поставщики</d1p1:Value><d1p1:Value>Найти карточку поставщика</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-e8a10bb7-cef9-50db-8de2-985ecede7d8a</d1p1:Value><d1p1:Value>link-cedaf8e2-f7e6-54fd-a1de-b7de7c76e0fd</d1p1:Value><d1p1:Value>column-480f88f7-04eb-526d-b54b-e4d142a3e52d</d1p1:Value><d1p1:Value>Контрагенты поставщиков</d1p1:Value><d1p1:Value>Проверить реквизиты поставщика</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-3145fb07-eb9f-573e-927d-c331f2faa997</d1p1:Value><d1p1:Value>link-7f4d7576-c01b-5e10-817e-e1587ab1d6a1</d1p1:Value><d1p1:Value>column-480f88f7-04eb-526d-b54b-e4d142a3e52d</d1p1:Value><d1p1:Value>Договоры с поставщиками</d1p1:Value><d1p1:Value>Проверить условия договора перед закупкой</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-0fadccb1-6f6a-5a1b-8550-79924ed0148d</d1p1:Value><d1p1:Value>link-43329947-a776-58d7-9d5c-bb647e2e42ec</d1p1:Value><d1p1:Value>column-480f88f7-04eb-526d-b54b-e4d142a3e52d</d1p1:Value><d1p1:Value>Номенклатура</d1p1:Value><d1p1:Value>Состав и характеристики закупаемых товаров</d1p1:Value><d1p1:Value>40</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5ed961bc-c388-56f0-a755-7d120a815a5b</d1p1:Value><d1p1:Value>link-4f7db7c1-0986-5c59-a231-e3dbab782b20</d1p1:Value><d1p1:Value>column-480f88f7-04eb-526d-b54b-e4d142a3e52d</d1p1:Value><d1p1:Value>Организации покупателя</d1p1:Value><d1p1:Value>Уточнить получателя поставки</d1p1:Value><d1p1:Value>50</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-fe035f4f-732a-5450-9603-56e95b816045</d1p1:Value><d1p1:Value>link-e64a05e9-2088-5f75-bbf9-416b4bdc2bc8</d1p1:Value><d1p1:Value>column-f4ad5e1a-aa2c-54f6-b72a-f1268b5b2541</d1p1:Value><d1p1:Value>Акты после приёмки</d1p1:Value><d1p1:Value>Зафиксированные недостачи и излишки поставки</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-9967faa7-434d-5271-be60-5efcd5d800d4</d1p1:Value><d1p1:Value>link-72a03e7c-82f1-5310-b58e-93f7df5a034d</d1p1:Value><d1p1:Value>column-f4ad5e1a-aa2c-54f6-b72a-f1268b5b2541</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-7490eeee-ea7f-51cf-b644-538cff9f3258</d1p1:Value><d1p1:Value>link-8b0fac4e-3fb5-509f-9ce7-d8d1841803f3</d1p1:Value><d1p1:Value>column-f4ad5e1a-aa2c-54f6-b72a-f1268b5b2541</d1p1:Value><d1p1:Value>Возвраты поставщикам</d1p1:Value><d1p1:Value>Найти документы обратной отгрузки поставщику</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-b222b309-8d0a-533b-b1da-7181deb9319c</d1p1:Value><d1p1:Value>link-a195684b-5445-56c6-9d25-c570de34dc3d</d1p1:Value><d1p1:Value>column-2be02247-6663-5776-827c-9907d27fcca2</d1p1:Value><d1p1:Value>Движение и остатки товаров</d1p1:Value><d1p1:Value>Проверить приход и расход за период</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-9dac058e-241b-5cfd-8dfa-f32496ed09d8</d1p1:Value><d1p1:Value>link-501e0f5f-2697-5432-a3a1-6849c7b3a829</d1p1:Value><d1p1:Value>column-2be02247-6663-5776-827c-9907d27fcca2</d1p1:Value><d1p1:Value>Остатки и доступность</d1p1:Value><d1p1:Value>Оценить запас перед обещанием клиенту</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-81dba16f-e352-55e7-a197-3cf373d6b3ba</d1p1:Value><d1p1:Value>link-1e21212b-c664-5d83-9e9c-aefa649ae692</d1p1:Value><d1p1:Value>column-41963a7c-3f2c-5f4b-a60f-6405444e9a44</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-ab4704fb-15a7-5847-8cca-587c5efcfd95</d1p1:Value><d1p1:Value>link-78ba1cb5-6c37-53e2-b4f6-8cf216a73a31</d1p1:Value><d1p1:Value>column-41963a7c-3f2c-5f4b-a60f-6405444e9a44</d1p1:Value><d1p1:Value>Пересчёты товаров</d1p1:Value><d1p1:Value>Сверить фактическое наличие</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-94bdee54-a50f-5875-9af4-0ceca9c66830</d1p1:Value><d1p1:Value>link-4d13ba0f-3f7d-53b5-8f41-db1fac2a56c9</d1p1:Value><d1p1:Value>column-41963a7c-3f2c-5f4b-a60f-6405444e9a44</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-4ff2d708-57ae-51a8-a5c6-ed8909ec1ff8</d1p1:Value><d1p1:Value>link-1e77d9fd-fc05-53f4-a1f7-8ab24c6c7b86</d1p1:Value><d1p1:Value>column-41963a7c-3f2c-5f4b-a60f-6405444e9a44</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-cdb986ce-dc2a-5a76-b37f-a302495aca0c</d1p1:Value><d1p1:Value>link-43329947-a776-58d7-9d5c-bb647e2e42ec</d1p1:Value><d1p1:Value>column-9f588dfd-81ed-5981-81d6-5fc2c967260d</d1p1:Value><d1p1:Value>Номенклатура</d1p1:Value><d1p1:Value>Найти товар для проверки запаса</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-dab5547e-c44c-54b1-8628-893d21da72e4</d1p1:Value><d1p1:Value>link-1aca91fd-7f0b-5a17-a8a7-3dd7f955bc8e</d1p1:Value><d1p1:Value>column-9f588dfd-81ed-5981-81d6-5fc2c967260d</d1p1:Value><d1p1:Value/><d1p1:Value>Уточнить место хранения</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5b094551-a718-5f7a-ad25-b13b9a5692d5</d1p1:Value><d1p1:Value>link-0c8e30ac-02d7-5834-a7bc-67920511f875</d1p1:Value><d1p1:Value>column-41963a7c-3f2c-5f4b-a60f-6405444e9a44</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>50</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-9676f23c-8e14-5a62-aed6-6c3411d8c840</d1p1:Value><d1p1:Value>link-b4acfed8-221e-5506-ad64-96ab29ee60a5</d1p1:Value><d1p1:Value>column-9f588dfd-81ed-5981-81d6-5fc2c967260d</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-3ddf6922-44dd-5333-9367-69cbb5a3eeaa</d1p1:Value><d1p1:Value>link-95c02db1-7ffb-5d7b-b850-34f4fc92cbf2</d1p1:Value><d1p1:Value>column-9f588dfd-81ed-5981-81d6-5fc2c967260d</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-b0b382d7-136f-5cd3-ab52-327be1c24c57</d1p1:Value><d1p1:Value>link-fd53657c-478d-5364-82cf-c9806642e62b</d1p1:Value><d1p1:Value>column-9f588dfd-81ed-5981-81d6-5fc2c967260d</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>50</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-1076b052-d569-5db1-9a95-b5e3f781ee49</d1p1:Value><d1p1:Value>link-00876c69-7477-5bbb-9496-8f1a006d45d1</d1p1:Value><d1p1:Value>column-b12fa69f-1f72-5e51-8100-daca9b96650a</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-898c25b7-a4a7-54c1-83b9-5051f8995fe0</d1p1:Value><d1p1:Value>link-e12de6fa-1835-5e65-a565-4d759341368e</d1p1:Value><d1p1:Value>column-b12fa69f-1f72-5e51-8100-daca9b96650a</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-29b32547-4afe-58b1-b072-5ccfa279cd65</d1p1:Value><d1p1:Value>link-bb2e3112-8e1d-5c25-962f-4353effb2317</d1p1:Value><d1p1:Value>column-b12fa69f-1f72-5e51-8100-daca9b96650a</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-90fb82bf-c49f-5e32-8849-d5c56198f18a</d1p1:Value><d1p1:Value>link-5296c499-dbc5-5d93-9b79-2ed0f34fe37e</d1p1:Value><d1p1:Value>column-2d54987d-7daa-5d17-aaea-42a11c6d36e4</d1p1:Value><d1p1:Value>От покупателей</d1p1:Value><d1p1:Value>Документы возврата товара клиентами</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-db50b54b-a3ae-5169-a760-43f4f1dd1733</d1p1:Value><d1p1:Value>link-8b0fac4e-3fb5-509f-9ce7-d8d1841803f3</d1p1:Value><d1p1:Value>column-2d54987d-7daa-5d17-aaea-42a11c6d36e4</d1p1:Value><d1p1:Value>Поставщикам</d1p1:Value><d1p1:Value>Документы возврата товара поставщикам</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-b4ed0d72-a8e8-5c68-8716-a3c3cd5f64d9</d1p1:Value><d1p1:Value>link-895df1cd-3a33-55ee-9317-c2d4b976f970</d1p1:Value><d1p1:Value>column-a372dae1-aee8-5df3-bc8a-e7ba57f6783e</d1p1:Value><d1p1:Value>Реализации</d1p1:Value><d1p1:Value>Уточнение ранее оформленной продажи</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-0ad2f16c-f6b9-578f-b204-92acc2edfea3</d1p1:Value><d1p1:Value>link-72a03e7c-82f1-5310-b58e-93f7df5a034d</d1p1:Value><d1p1:Value>column-a372dae1-aee8-5df3-bc8a-e7ba57f6783e</d1p1:Value><d1p1:Value>Приобретения</d1p1:Value><d1p1:Value>Уточнение ранее оформленной закупки</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-4669010f-b147-5e4b-8920-160f9edda1bb</d1p1:Value><d1p1:Value>link-c99c5032-ca00-5c02-88cf-bf07d98fdc5f</d1p1:Value><d1p1:Value>column-a372dae1-aee8-5df3-bc8a-e7ba57f6783e</d1p1:Value><d1p1:Value>Задолженность</d1p1:Value><d1p1:Value>Документы уточнения взаиморасчётов</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-3aabcf3d-2fe7-5287-9421-e1675289c663</d1p1:Value><d1p1:Value>link-e64a05e9-2088-5f75-bbf9-416b4bdc2bc8</d1p1:Value><d1p1:Value>column-fafaf324-0b90-5c53-b037-64636b2a8452</d1p1:Value><d1p1:Value>После приёмки</d1p1:Value><d1p1:Value>Расхождения с поставщиком</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-62043f4b-3cee-50d0-b93a-f434ee211120</d1p1:Value><d1p1:Value>link-d842f816-df68-5b84-8d9f-cc138bb4a896</d1p1:Value><d1p1:Value>column-fafaf324-0b90-5c53-b037-64636b2a8452</d1p1:Value><d1p1:Value>После отгрузки</d1p1:Value><d1p1:Value>Расхождения с покупателем</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-2c99e56d-b79a-5aaf-915d-7e6fc559ec58</d1p1:Value><d1p1:Value>link-0c8e30ac-02d7-5834-a7bc-67920511f875</d1p1:Value><d1p1:Value>column-fafaf324-0b90-5c53-b037-64636b2a8452</d1p1:Value><d1p1:Value>После перемещения</d1p1:Value><d1p1:Value>Расхождения между складами</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-04d10b3b-0c8c-50b3-a5a0-bef8dd515d29</d1p1:Value><d1p1:Value>link-4392d73c-df0f-51c8-b9fa-ebbaf65bf688</d1p1:Value><d1p1:Value>column-93d26706-4c2f-53cc-8705-d8764f61deca</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-1b8e386a-3055-577f-994f-455e4b4ac781</d1p1:Value><d1p1:Value>link-8e002e4e-311b-5f44-9d3a-20b17c6b9e09</d1p1:Value><d1p1:Value>column-93d26706-4c2f-53cc-8705-d8764f61deca</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-79a72cb7-4c4c-51c0-bb0c-ce79a606e4e1</d1p1:Value><d1p1:Value>link-2e8710f9-6b16-58b1-82a3-52e1e4e76b3a</d1p1:Value><d1p1:Value>column-93d26706-4c2f-53cc-8705-d8764f61deca</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-f9cd19ef-10aa-5105-a673-b05ae0065ad3</d1p1:Value><d1p1:Value>link-936ae587-d450-5f65-9c6b-01945cdb6c2b</d1p1:Value><d1p1:Value>column-ded375f6-e749-540b-ae87-0167f55d53e7</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-7cf358c4-b4f4-5927-a6fb-7d462316d338</d1p1:Value><d1p1:Value>link-00f0e8ff-512f-5f53-afaf-151e8d05e149</d1p1:Value><d1p1:Value>column-ded375f6-e749-540b-ae87-0167f55d53e7</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-158376cd-fb23-580d-8b4f-c88f483b8c90</d1p1:Value><d1p1:Value>link-656591ba-2362-59f6-9936-6fa519e2f140</d1p1:Value><d1p1:Value>column-ded375f6-e749-540b-ae87-0167f55d53e7</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-9ad33011-a81f-5005-9cac-da469185c6a2</d1p1:Value><d1p1:Value>link-c99c5032-ca00-5c02-88cf-bf07d98fdc5f</d1p1:Value><d1p1:Value>column-f9558e2d-f4c0-5976-a5a0-39debb3e683c</d1p1:Value><d1p1:Value>Корректировки задолженности</d1p1:Value><d1p1:Value>Открыть документы уточнения расчётов</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-955f4c54-44c5-5816-b404-83a00513d300</d1p1:Value><d1p1:Value>link-cedaf8e2-f7e6-54fd-a1de-b7de7c76e0fd</d1p1:Value><d1p1:Value>column-f9558e2d-f4c0-5976-a5a0-39debb3e683c</d1p1:Value><d1p1:Value/><d1p1:Value>Реквизиты получателей и плательщиков</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-fbebdf8e-5d2b-57b8-b28a-0337af60e35c</d1p1:Value><d1p1:Value>link-7f4d7576-c01b-5e10-817e-e1587ab1d6a1</d1p1:Value><d1p1:Value>column-f9558e2d-f4c0-5976-a5a0-39debb3e683c</d1p1:Value><d1p1:Value>Договоры контрагентов</d1p1:Value><d1p1:Value>Основания и условия взаиморасчётов</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-657444db-2fa3-57dc-9de3-c3d6b4d88eb6</d1p1:Value><d1p1:Value>link-4f7db7c1-0986-5c59-a231-e3dbab782b20</d1p1:Value><d1p1:Value>column-f9558e2d-f4c0-5976-a5a0-39debb3e683c</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-818b52fd-367a-5b4d-8601-5dcbe83703b0</d1p1:Value><d1p1:Value>link-54649005-84e7-554f-81d0-cd895a6adfeb</d1p1:Value><d1p1:Value>column-f9558e2d-f4c0-5976-a5a0-39debb3e683c</d1p1:Value><d1p1:Value>Валюты и курсы</d1p1:Value><d1p1:Value>Открыть список валют</d1p1:Value><d1p1:Value>50</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-5ec5a0aa-19a7-594b-9746-15a2259a5814</d1p1:Value><d1p1:Value>link-42a12066-94d2-5dbf-aed8-7085606f683d</d1p1:Value><d1p1:Value>column-80952378-7441-5012-8eeb-a631e806c4ae</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-2efedf10-a82f-500d-9db6-cf850bfba760</d1p1:Value><d1p1:Value>link-464bb51c-3c12-54e6-ab13-be859c7abcfe</d1p1:Value><d1p1:Value>column-80952378-7441-5012-8eeb-a631e806c4ae</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-0c78800f-5e69-5dc8-a2f2-e9a81a8ce42a</d1p1:Value><d1p1:Value>link-d6875a6f-20fb-5a87-8031-b6b897a3010e</d1p1:Value><d1p1:Value>column-80952378-7441-5012-8eeb-a631e806c4ae</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-433e7f95-c07f-5b9e-881b-a3998f9468ff</d1p1:Value><d1p1:Value>link-3e91b4e2-9eb9-5cd9-8829-0ed98f669355</d1p1:Value><d1p1:Value>column-eda8889a-d1aa-5c9a-90a1-2d26573bba53</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>10</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-1fa10bcf-78a5-50ad-8e4f-6a2c6bc7ed05</d1p1:Value><d1p1:Value>link-f751efbb-bc7d-5867-bf5f-a16888726a1c</d1p1:Value><d1p1:Value>column-eda8889a-d1aa-5c9a-90a1-2d26573bba53</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-692fe115-cf61-53bf-acc3-0a7bd4fe8fea</d1p1:Value><d1p1:Value>link-a7975dcf-e1ab-5b96-a298-0aa515876cac</d1p1:Value><d1p1:Value>column-80952378-7441-5012-8eeb-a631e806c4ae</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-813ebfe2-bf1b-56b1-9da3-73a17391984b</d1p1:Value><d1p1:Value>link-5f9ae03f-5b7d-5e2f-9232-d1a9347e3a3b</d1p1:Value><d1p1:Value>column-eda8889a-d1aa-5c9a-90a1-2d26573bba53</d1p1:Value><d1p1:Value/><d1p1:Value/><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>false</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-10aabe64-dc86-5ff8-a9e8-ef7329e73c69</d1p1:Value><d1p1:Value>link-4f7db7c1-0986-5c59-a231-e3dbab782b20</d1p1:Value><d1p1:Value>column-8d7abd48-740b-5c58-95fb-5a90cceae044</d1p1:Value><d1p1:Value>Организации</d1p1:Value><d1p1:Value>Карточки организаций предприятия</d1p1:Value><d1p1:Value>10</d1p1:Value><d1p1:Value>true</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-bf2f5197-2208-5839-aff9-6a7f965b908b</d1p1:Value><d1p1:Value>link-1aca91fd-7f0b-5a17-a8a7-3dd7f955bc8e</d1p1:Value><d1p1:Value>column-8d7abd48-740b-5c58-95fb-5a90cceae044</d1p1:Value><d1p1:Value/><d1p1:Value>Список мест хранения</d1p1:Value><d1p1:Value>20</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-cf549146-524d-5302-8a74-72d8fb816236</d1p1:Value><d1p1:Value>link-fd53657c-478d-5364-82cf-c9806642e62b</d1p1:Value><d1p1:Value>column-8d7abd48-740b-5c58-95fb-5a90cceae044</d1p1:Value><d1p1:Value/><d1p1:Value>Правила учёта и заполнения карточек товаров</d1p1:Value><d1p1:Value>30</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row><d1p1:row><d1p1:Value>placement-926c91f5-e786-51a3-86d3-06dca81af6f5</d1p1:Value><d1p1:Value>link-54649005-84e7-554f-81d0-cd895a6adfeb</d1p1:Value><d1p1:Value>column-8d7abd48-740b-5c58-95fb-5a90cceae044</d1p1:Value><d1p1:Value/><d1p1:Value>Список используемых валют</d1p1:Value><d1p1:Value>40</d1p1:Value><d1p1:Value>false</d1p1:Value><d1p1:Value>true</d1p1:Value></d1p1:row></d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="Группировать">
+		<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="РазрешитьПерсональнуюПанельПанелька">
+		<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="РазрешитьИмпортЛичнойПанелиПанелька">
+		<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="РазрешитьЭкспортЛичнойПанелиПанелька">
+		<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="НеПрименятьОграниченияИсточниковКАдминистраторамПанелька">
+		<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="ИсточникиПерсональныхПанелейПанелька">
+		<d1p1:Value xsi:type="d1p1:Structure">
+			<d1p1:Property name="Справочники">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="Документы">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ЖурналыДокументов">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="Отчеты">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="Обработки">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ПланыВидовХарактеристик">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ПланыСчетов">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ПланыВидовРасчета">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ПланыОбмена">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="РегистрыСведений">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="РегистрыНакопления">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="РегистрыБухгалтерии">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="РегистрыРасчета">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="БизнесПроцессы">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="Задачи">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ОбщиеФормы">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="Константы">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ВнешниеИсточникиДанных">
+				<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="СтандартныеИнструменты">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ДополнительныеОбработки">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ВебСсылки">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+			<d1p1:Property name="ЛокальныеФайлы">
+				<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+			</d1p1:Property>
+		</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="НеРаспределенныеНаОтдельнойВкладке">
+		<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="СтандартныеНаОтдельнойВкладке">
+		<d1p1:Value xsi:type="xs:boolean">false</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="ЗаполнятьКомментарийИзМетаданных">
+		<d1p1:Value xsi:type="xs:boolean">true</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="РежимОтображенияПодсказок">
+		<d1p1:Value xsi:type="xs:string">Снизу</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="ШрифтКолонки">
+		<d1p1:Value xmlns:d3p1="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xsi:type="d3p1:Font" ref="style:NormalTextFont" height="13" bold="true" kind="StyleItem"/>
+	</d1p1:Property>
+	<d1p1:Property name="ЦветКолонки">
+		<d1p1:Value xmlns:d3p1="http://v8.1c.ru/8.1/data/ui" xsi:type="d3p1:Color">auto</d1p1:Value>
+	</d1p1:Property>
+	<d1p1:Property name="ШрифтГруппировки">
+		<d1p1:Value xmlns:d3p1="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xsi:type="d3p1:Font" ref="style:NormalTextFont" height="9" kind="StyleItem"/>
+	</d1p1:Property>
+	<d1p1:Property name="ЦветГруппировки">
+		<d1p1:Value xmlns:d3p1="http://v8.1c.ru/8.1/data/ui" xmlns:d3p2="http://v8.1c.ru/8.1/data/ui/colors/web" xsi:type="d3p1:Color">d3p2:DarkGray</d1p1:Value>
+	</d1p1:Property>
+</Значение>

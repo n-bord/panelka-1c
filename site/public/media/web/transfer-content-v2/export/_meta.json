@@ -1,0 +1,35 @@
+{
+  "source": "Записи/Экспорт веб версия.mp4",
+  "sourceSha256": "215feee83d54f82b6ee1d57abaada24857639b18a23281b9169d6f5f62ac2943",
+  "holdEndSeconds": 0.8,
+  "steps": [
+    {
+      "name": "01-transfer",
+      "start": 0,
+      "end": 4.28,
+      "posterTime": 4.25,
+      "title": "Откройте перенос настроек",
+      "description": "В редакторе нужной панели откройте «Доп. настройки» и вкладку «Перенос и сброс». Здесь находятся команды импорта и экспорта.",
+      "files": {
+        "mp4": "01-transfer.mp4",
+        "webm": "01-transfer.webm",
+        "poster": "01-transfer.jpg"
+      },
+      "duration": 5.08
+    },
+    {
+      "name": "02-save-file",
+      "start": 4.0,
+      "end": 8.61,
+      "posterTime": 7.25,
+      "title": "Сохраните XML-копию",
+      "description": "Нажмите «Экспорт в файл…», выберите папку и имя файла, затем подтвердите сохранение. Дождитесь сообщения «Настройки выгружены».",
+      "files": {
+        "mp4": "02-save-file.mp4",
+        "webm": "02-save-file.webm",
+        "poster": "02-save-file.jpg"
+      },
+      "duration": 5.41
+    }
+  ]
+}

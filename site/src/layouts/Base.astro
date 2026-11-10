@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import { Github, Menu } from 'lucide-react';
+import ThemeToggle from '../components/ThemeToggle';
+import { GITHUB_URL } from '../lib/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Показывать кнопку мобильного меню (только на страницах документации). */
+  withNavToggle?: boolean;
+}
+
+const { title, description, withNavToggle = false } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/gif" href={`${base}media/panelka.gif`} />
+    <link rel="icon" type="image/png" href={`${base}favicon.png`} />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <title>{title} — Панелька</title>
+    {/* Тема и режим интерфейса применяются до первой отрисовки — без мигания */}
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('panelka-theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+
+        // Режим интерфейса: URL-параметр > сохранённый выбор > 1С.
+        var mode = new URLSearchParams(window.location.search).get('interface');
+        if (mode !== '1c' && mode !== 'web') {
+          try { mode = localStorage.getItem('panelka-interface'); } catch (e) {}
+        }
+        if (mode !== '1c' && mode !== 'web') mode = '1c';
+        document.documentElement.dataset.interface = mode;
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      {withNavToggle && (
+        <button
+          class="site-header__icon-btn nav-toggle"
+          type="button"
+          aria-label="Открыть меню разделов"
+          aria-expanded="false"
+          data-nav-toggle
+        >
+          <Menu size={18} aria-hidden />
+        </button>
+      )}
+      <a class="site-header__brand" href={base}>
+        <img class="pixel" src={`${base}media/panelka.gif`} alt="Панелька" width="30" height="30" />
+        Панелька
+        <span class="site-header__tag">документация</span>
+      </a>
+      <nav class="site-header__nav" aria-label="Основная навигация">
+        <a class="site-header__link" href={`${base}docs/introduction/`}>Документация</a>
+        <a class="site-header__icon-btn" href={GITHUB_URL} target="_blank" rel="noopener noreferrer" aria-label="Репозиторий на GitHub">
+          <Github size={18} aria-hidden />
+        </a>
+        <ThemeToggle client:load />
+      </nav>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+      <span>Панелька — обработка для 1С:Предприятие</span>
+      <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">github.com/n-bord/panelka-1c</a>
+    </footer>
+  </body>
+</html>

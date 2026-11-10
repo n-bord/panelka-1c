@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConditionalAppearance xmlns="http://v8.1c.ru/8.1/data-composition-system/settings"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core"
+ xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system">
+  <item>
+    <selection><item><field>ДеревоПанелиНазвание</field></item><item><field>ДеревоПанелиПодсказка</field></item><item><field>ДеревоПанелиОтображение</field></item></selection>
+    <filter><item xsi:type="FilterItemComparison"><left xsi:type="dcscor:Field">ДеревоПанели.Вид</left><comparisonType>Equal</comparisonType><right xsi:type="xs:string">Page</right></item></filter>
+    <appearance><dcscor:item xsi:type="SettingsParameterValue"><dcscor:parameter>Шрифт</dcscor:parameter><dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" bold="true" italic="false" kind="WindowsFont"/></dcscor:item><dcscor:item xsi:type="SettingsParameterValue"><dcscor:parameter>ЦветФона</dcscor:parameter><dcscor:value xsi:type="v8ui:Color">#EBF2F8</dcscor:value></dcscor:item></appearance>
+  </item>
+  <item>
+    <selection><item><field>ДеревоПанелиНазвание</field></item></selection>
+    <filter><item xsi:type="FilterItemComparison"><left xsi:type="dcscor:Field">ДеревоПанели.Вид</left><comparisonType>Equal</comparisonType><right xsi:type="xs:string">Column</right></item></filter>
+    <appearance><dcscor:item xsi:type="SettingsParameterValue"><dcscor:parameter>Шрифт</dcscor:parameter><dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" bold="true" italic="false" kind="WindowsFont"/></dcscor:item></appearance>
+  </item>
+  <item>
+    <selection><item><field>ДеревоПанелиНазвание</field></item></selection>
+    <filter><item xsi:type="FilterItemComparison"><left xsi:type="dcscor:Field">ДеревоПанели.Вид</left><comparisonType>Equal</comparisonType><right xsi:type="xs:string">Group</right></item></filter>
+    <appearance><dcscor:item xsi:type="SettingsParameterValue"><dcscor:parameter>Шрифт</dcscor:parameter><dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" bold="false" italic="false" kind="WindowsFont"/></dcscor:item></appearance>
+  </item>
+</ConditionalAppearance>

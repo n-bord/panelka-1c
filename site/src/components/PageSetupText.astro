@@ -1,0 +1,110 @@
+---
+import nativeStructure from '../assets/media/page-guide/1c-structure.jpg';
+import nativeSource from '../assets/media/page-guide/1c-source.jpg';
+import nativeProperties from '../assets/media/page-guide/1c-properties.jpg';
+import nativeResult from '../assets/media/page-guide/1c-result.jpg';
+import nativePicture from '../assets/media/page-guide/1c-picture.jpg';
+import nativeRoles from '../assets/media/page-guide/1c-roles.jpg';
+import webStructure from '../assets/media/page-guide/web-structure.jpg';
+import webSource from '../assets/media/page-guide/web-source.jpg';
+import webProperties from '../assets/media/page-guide/web-properties.jpg';
+import webResult from '../assets/media/page-guide/web-result.jpg';
+import webPicture from '../assets/media/page-guide/web-picture.jpg';
+import webRoles from '../assets/media/page-guide/web-roles.jpg';
+
+interface Props {
+  mode: '1c' | 'web';
+  part?: 'basic' | 'appearance';
+}
+
+const { mode, part = 'basic' } = Astro.props;
+const web = mode === 'web';
+const shots = web
+  ? { structure: webStructure, source: webSource, properties: webProperties, result: webResult, picture: webPicture, roles: webRoles }
+  : { structure: nativeStructure, source: nativeSource, properties: nativeProperties, result: nativeResult, picture: nativePicture, roles: nativeRoles };
+---
+
+{part === 'basic' ? (
+  <div class="page-setup-text">
+    <h4>Подготовьте страницу и колонку</h4>
+    <p>
+      Выберите существующую страницу, например «Главную», или создайте отдельную для своей задачи.
+      {web ? <> Для новой страницы нажмите <strong>«+ Страница»</strong>, введите название и нажмите <strong>«Создать»</strong>.</>
+        : <> Для новой страницы нажмите правой кнопкой мыши на страницу в дереве и выберите <strong>«Добавить страницу»</strong>. Задайте название в свойствах справа.</>}
+    </p>
+    <p>
+      {web ? <>На нужной странице нажмите <strong>«Добавить колонку»</strong>. Справа задайте название и нажмите <strong>«Применить»</strong>.</>
+        : <>В контекстном меню нужной страницы добавьте колонку. Выберите её в дереве и задайте название в свойствах справа.</>}
+      {' '}Сгруппируйте ссылки по рабочим задачам: например, приёмка, отгрузка и контроль остатков.
+      На снимке — колонка «Приёмка» внутри страницы «Мой склад».
+    </p>
+    <figure>
+      <img src={shots.structure.src} width={shots.structure.width} height={shots.structure.height} alt="Созданная страница Мой склад и колонка Приёмка в редакторе панели" loading="lazy" />
+      <figcaption>Структура готова к наполнению: страница объединяет колонки, а в колонки добавляются ссылки.</figcaption>
+    </figure>
+
+    <h4>Добавьте ссылку и объясните её назначение</h4>
+    <p>
+      Выберите колонку. Слева откройте источник <strong>«Метаданные»</strong> и категорию <strong>«Документы»</strong>.
+      Найдите нужный объект по части названия. В примере — «Приходный ордер на товары».
+      {web ? <> Нажмите <strong>«+»</strong> у найденного объекта: ссылка появится в выбранной колонке.</>
+        : <> Перетащите найденный объект из списка слева в нужную колонку дерева.</>}
+    </p>
+    <figure>
+      <img src={shots.source.src} width={shots.source.width} height={shots.source.height} alt={web ? 'Результат поиска объекта в метаданных и кнопка плюс для добавления в колонку Приёмка' : 'Найденный Приходный ордер на товары слева и целевая колонка Приёмка в дереве справа'} loading="lazy" />
+      <figcaption>{web ? '«+» добавляет объект в выбранную колонку редактора.' : 'Найденный объект нужно перенести в колонку «Приёмка».'} Это ссылка на список документов.</figcaption>
+    </figure>
+    <p>
+      Выберите добавленную ссылку {web ? 'в предпросмотре' : 'в дереве'}. В свойствах справа задайте
+      понятное название и подсказку: например, <strong>«Приёмка на склад»</strong> и
+      <strong> «Принять товар по приходному ордеру»</strong>.
+      Проверьте, где применятся изменения: только в этой колонке или во всех размещениях с общим значением.
+      {web && <> Нажмите <strong>«Применить»</strong>, чтобы обновить предпросмотр.</>}
+    </p>
+    <figure style={`max-width:${shots.properties.width}px`}>
+      <img src={shots.properties.src} width={shots.properties.width} height={shots.properties.height} alt="Свойства ссылки: область применения, название, подсказка и путь к списку документов" loading="lazy" />
+      <figcaption>Название помогает найти действие, подсказка поясняет, зачем открывать ссылку. Путь определяет, какой объект откроется.</figcaption>
+    </figure>
+
+    <h4>Сохраните и проверьте результат</h4>
+    <p>
+      Нажмите <strong>«Сохранить и закрыть»</strong>. На рабочей панели откройте нужную страницу:
+      проверьте название колонки, подпись и подсказку ссылки. Нажмите на ссылку и убедитесь,
+      что открывается нужный список.
+      {web && <> Кнопка «Применить» в свойствах меняет черновик; для записи всей настройки нужно сохранение.</>}
+    </p>
+    <figure style={`max-width:${shots.result.width}px`}>
+      <img src={shots.result.src} width={shots.result.width} height={shots.result.height} alt="Сохранённая страница Мой склад с колонкой Приёмка, ссылкой Приёмка на склад и подсказкой" loading="lazy" />
+      <figcaption>Результат примера: одна рабочая колонка с первой ссылкой. Остальные ссылки добавляются тем же способом.</figcaption>
+    </figure>
+  </div>
+) : (
+  <div class="page-setup-appearance">
+    <h4>Картинка страницы или колонки</h4>
+    <p>
+      Выберите страницу {web ? 'в предпросмотре' : 'в дереве'} и в свойствах справа нажмите
+      <strong> «Выбрать картинку»</strong>. Найдите подходящий значок по названию: в примере введено «склад».
+      {web ? <> Нажмите на нужную картинку.</> : <> Выделите картинку и нажмите <strong>«Выбрать»</strong>.</>}
+      {' '}Для оформления колонки сначала выберите саму колонку: её название и картинка настраиваются отдельно от страницы.
+    </p>
+    <figure style={`max-width:${shots.picture.width}px`}>
+      <img src={shots.picture.src} width={shots.picture.width} height={shots.picture.height} alt="Окно выбора картинки с поиском по слову склад и найденными значками" loading="lazy" />
+      <figcaption>Поиск сужает список картинок. Выберите значок, который помогает отличать этот раздел от остальных.</figcaption>
+    </figure>
+
+    <h4>Роли видимости страницы</h4>
+    <p>
+      Выберите страницу и нажмите <strong>«Выбрать роли»</strong> в её свойствах.
+      В открывшемся списке отметьте нужные роли и подтвердите выбор.
+      Роль «Администрирование» на снимке служит примером; для рабочей страницы выбирайте роли её пользователей.
+    </p>
+    <figure style={`max-width:${shots.roles.width}px`}>
+      <img src={shots.roles.src} width={shots.roles.width} height={shots.roles.height} alt="Фрагмент окна выбора ролей: флажком отмечена роль Администрирование" loading="lazy" />
+      <figcaption>Флажок отмечает выбранную роль. Этот параметр относится к видимости страницы, а не к правам на документы.</figcaption>
+    </figure>
+    <p>
+      {web && <>Подтвердите свойства кнопкой <strong>«Применить»</strong>. </>}
+      После оформления и выбора ролей сохраните всю настройку панели.
+    </p>
+  </div>
+)}

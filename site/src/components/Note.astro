@@ -1,0 +1,23 @@
+---
+// Информационный блок для статей.
+// Использование в MDX: <Note title="Подсказка">текст</Note>
+import { Info, Lightbulb } from 'lucide-react';
+
+interface Props {
+  title?: string;
+  variant?: 'note' | 'tip';
+}
+
+const { title, variant = 'note' } = Astro.props;
+const Icon = variant === 'tip' ? Lightbulb : Info;
+---
+
+<aside class:list={['admonition', `admonition--${variant}`]}>
+  <p class="admonition__title">
+    <Icon size={15} aria-hidden />
+    {title ?? (variant === 'tip' ? 'Совет' : 'Примечание')}
+  </p>
+  <div class="admonition__body">
+    <slot />
+  </div>
+</aside>

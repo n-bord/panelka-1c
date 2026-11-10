@@ -1,0 +1,35 @@
+{
+  "source": "Записи/Экспорт обычный интерфейс.mp4",
+  "sourceSha256": "c691d3783fa1314e7402139a0370c835c87013e63d1cd2ffeb9dd2c159b54c44",
+  "holdEndSeconds": 0.8,
+  "steps": [
+    {
+      "name": "01-transfer",
+      "start": 0,
+      "end": 5.4,
+      "posterTime": 5.25,
+      "title": "Откройте перенос настроек",
+      "description": "В редакторе нужной панели откройте «Доп. настройки» и вкладку «Перенос и сброс». Здесь находятся команды импорта и экспорта.",
+      "files": {
+        "mp4": "01-transfer.mp4",
+        "webm": "01-transfer.webm",
+        "poster": "01-transfer.jpg"
+      },
+      "duration": 6.2
+    },
+    {
+      "name": "02-save-file",
+      "start": 5.0,
+      "end": 8.78,
+      "posterTime": 7.15,
+      "title": "Сохраните XML-копию",
+      "description": "Нажмите «Экспорт в файл…», выберите папку и имя файла, затем подтвердите сохранение. Дождитесь сообщения «Настройки выгружены».",
+      "files": {
+        "mp4": "02-save-file.mp4",
+        "webm": "02-save-file.webm",
+        "poster": "02-save-file.jpg"
+      },
+      "duration": 4.58
+    }
+  ]
+}

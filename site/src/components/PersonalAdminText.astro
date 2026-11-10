@@ -1,0 +1,67 @@
+---
+import nativePolicy from '../assets/media/personal-guide/1c-policy.jpg';
+import nativeSources from '../assets/media/personal-guide/1c-sources.jpg';
+import nativeUsers from '../assets/media/personal-guide/1c-users.jpg';
+import nativeStructure from '../assets/media/personal-guide/1c-structure.jpg';
+import webPolicy from '../assets/media/personal-guide/web-policy.jpg';
+import webSources from '../assets/media/personal-guide/web-sources.jpg';
+import webUsers from '../assets/media/personal-guide/web-users.jpg';
+import webStructure from '../assets/media/personal-guide/web-structure.jpg';
+
+interface Props { mode: '1c' | 'web'; part: 'setup' | 'view' }
+const { mode, part } = Astro.props;
+const shots = mode === 'web'
+  ? { policy: webPolicy, sources: webSources, users: webUsers, structure: webStructure }
+  : { policy: nativePolicy, sources: nativeSources, users: nativeUsers, structure: nativeStructure };
+---
+
+<div class="personal-admin-text" data-personal-part={part}>
+  {part === 'setup' ? <>
+    <h4>Разрешите личные панели</h4>
+    <p>
+      В общей настройке откройте <strong>«Доп. настройки» → «Настройки персональных панелей»</strong>.
+      Установите флажок <strong>«Включить персональную панель»</strong>.
+      Отдельно решите, разрешать ли пользователям импорт и экспорт XML и должны ли ограничения
+      источников действовать на администраторов. Назначение этих параметров приведено в таблице ниже.
+    </p>
+    <figure>
+      <img src={shots.policy.src} width={shots.policy.width} height={shots.policy.height} alt="Включение персональной панели, исключение для администраторов и отдельные разрешения импорта и экспорта" loading="lazy" />
+      <figcaption>Основной флажок включает режим. Остальные разрешения задаются независимо от него.</figcaption>
+    </figure>
+
+    <h4>Выберите источники под задачи сотрудников</h4>
+    <p>
+      Отметьте нужные категории метаданных: например, документы, справочники и отчёты.
+      В блоке <strong>«Другие источники»</strong> отдельно разрешите стандартные инструменты,
+      дополнительные отчёты и обработки, веб-ссылки или локальные файлы, если они нужны в личных панелях.
+      Набор флажков на снимке служит примером — подберите его под свою базу.
+    </p>
+    <figure>
+      <img src={shots.sources.src} width={shots.sources.width} height={shots.sources.height} alt="Категории метаданных и другие разрешённые источники для персональных панелей" loading="lazy" />
+      <figcaption>Разрешение источника определяет, что доступно в личной панели. Права на сами объекты задаются в 1С отдельно.</figcaption>
+    </figure>
+  </> : <>
+    <h4>Найдите сохранённую панель</h4>
+    <p>
+      В блоке сохранённых персональных панелей нажмите <strong>«Обновить»</strong>.
+      При необходимости найдите сотрудника по имени, выберите строку его панели и нажмите
+      <strong> «Просмотреть»</strong>. Даты, число страниц и ссылок помогают отличить нужную запись.
+    </p>
+    <figure>
+      <img src={shots.users.src} width={shots.users.width} height={shots.users.height} alt="Список сохранённых личных панелей с выбранным пользователем, поиском и командой Просмотреть" loading="lazy" />
+      <figcaption>Список содержит сохранённые личные панели. В записи выбран «Логист (ВолковАИ)».</figcaption>
+    </figure>
+
+    <h4>Изучите структуру</h4>
+    <p>
+      Ниже появится блок <strong>«Панель пользователя … — только просмотр»</strong>.
+      {mode === '1c' ? 'Разверните нужные страницы и колонки дерева.' : 'Прокрутите таблицу до нужной страницы или колонки.'}
+      {' '}Проверьте названия, типы элементов и адреса ссылок.
+      После проверки нажмите <strong>«Закрыть просмотр»</strong>.
+    </p>
+    <figure>
+      <img src={shots.structure.src} width={shots.structure.width} height={shots.structure.height} alt="Структура личной панели только для чтения: страницы, колонки, ссылки, их адреса и подсказки" loading="lazy" />
+      <figcaption>Просмотр помогает проверить состав сохранённой раскладки и адреса её ссылок.</figcaption>
+    </figure>
+  </>}
+</div>

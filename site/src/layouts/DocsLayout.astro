@@ -1,0 +1,296 @@
+---
+import Base from './Base.astro';
+import SidebarNav, { type ResolvedNavEntry } from '../components/SidebarNav.astro';
+import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface PrevNext {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  headings: Heading[];
+  navItems: ResolvedNavEntry[];
+  currentSlug: string;
+  category: string | null;
+  prev: PrevNext | null;
+  next: PrevNext | null;
+}
+
+const { title, description, headings, navItems, currentSlug, category, prev, next } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<Base title={title} description={description} withNavToggle>
+  <div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div>
+  <div class="docs-shell">
+    <aside class="docs-sidebar">
+      <SidebarNav items={navItems} currentSlug={currentSlug} base={base} />
+    </aside>
+
+    <div class="docs-main">
+      <article class="docs-article">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <a href={`${base}docs/introduction/`}>Документация</a>
+          {category && (
+            <>
+              <ChevronRight size={12} class="sep" aria-hidden />
+              <span>{category}</span>
+            </>
+          )}
+          <ChevronRight size={12} class="sep" aria-hidden />
+          <span aria-current="page">{title}</span>
+        </nav>
+
+        <header>
+          <h1>{title}</h1>
+          {description && <p class="lead">{description}</p>}
+        </header>
+
+        <div class="prose">
+          <slot />
+        </div>
+
+        {(prev || next) && (
+          <nav class="prev-next" aria-label="Переход между статьями">
+            {prev ? (
+              <a class="prev" href={`${base}docs/${prev.slug}/`}>
+                <span class="dir">← Назад</span>
+                <span class="name">{prev.title}</span>
+              </a>
+            ) : <span />}
+            {next ? (
+              <a class="next" href={`${base}docs/${next.slug}/`}>
+                <span class="dir">Далее →</span>
+                <span class="name">{next.title}</span>
+              </a>
+            ) : <span />}
+          </nav>
+        )}
+      </article>
+
+      {toc.length > 0 && (
+        <aside class="docs-toc" aria-label="Содержание статьи">
+          <p class="docs-toc__title">На этой странице</p>
+          <ul>
+            {toc.map((h) => (
+              <li>
+                <a href={`#${h.slug}`} class:list={[{ 'depth-3': h.depth === 3 }]} data-toc-link={h.slug}>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+    </div>
+  </div>
+
+  {/* Мобильное меню разделов */}
+  <script is:inline>
+    (function () {
+      var toggle = document.querySelector('[data-nav-toggle]');
+      var backdrop = document.querySelector('[data-nav-backdrop]');
+      if (!toggle) return;
+      function setOpen(open) {
+        document.body.classList.toggle('nav-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      toggle.addEventListener('click', function () {
+        setOpen(!document.body.classList.contains('nav-open'));
+      });
+      if (backdrop) backdrop.addEventListener('click', function () { setOpen(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+      document.querySelectorAll('.docs-sidebar a').forEach(function (a) {
+        a.addEventListener('click', function () { setOpen(false); });
+      });
+    })();
+  </script>
+
+  {/* Переключение интерфейсов 1С / веб */}
+  <script is:inline>
+    (function () {
+      var KEY = 'panelka-interface';
+
+      function currentMode() {
+        return document.documentElement.dataset.interface === 'web' ? 'web' : '1c';
+      }
+
+      function applyTocVisibility(mode) {
+        // Скрываем пункты содержания, чьи заголовки лежат в неактивном варианте.
+        document.querySelectorAll('[data-toc-link]').forEach(function (a) {
+          var li = a.closest('li');
+          var heading = document.getElementById(a.getAttribute('data-toc-link'));
+          if (!li || !heading) return;
+          var pane = heading.closest('[data-interface-pane]');
+          var hidden = pane && pane.getAttribute('data-interface-pane') !== mode;
+          li.style.display = hidden ? 'none' : '';
+        });
+      }
+
+      function setMode(mode, fromPopstate) {
+        document.documentElement.dataset.interface = mode;
+        try { localStorage.setItem(KEY, mode); } catch (e) {}
+        document.querySelectorAll('[data-interface-switch]:not([data-react-interface-switch])').forEach(function (b) {
+          b.setAttribute('aria-selected', String(b.getAttribute('data-interface-switch') === mode));
+        });
+        // Режим отражается в URL без перезагрузки и без захламления истории:
+        // смена режима — это изменение состояния страницы, а не переход.
+        var url = new URL(window.location.href);
+        if (url.searchParams.get('interface') !== mode) {
+          url.searchParams.set('interface', mode);
+          window.history.replaceState(null, '', url);
+        }
+        applyTocVisibility(mode);
+        // Уведомляем интерактивные компоненты (пошаговый просмотр и др.).
+        window.dispatchEvent(new CustomEvent('panelka:interface', { detail: mode }));
+      }
+
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('[data-interface-switch]');
+        if (btn) setMode(btn.getAttribute('data-interface-switch'));
+      });
+
+      // Кнопки «назад/вперёд»: режим следует за URL.
+      window.addEventListener('popstate', function () {
+        var mode = new URLSearchParams(window.location.search).get('interface');
+        if (mode === '1c' || mode === 'web') setMode(mode, true);
+      });
+
+      // Инициализация: режим уже выставлен скриптом в <head>.
+      var mode = currentMode();
+      var url = new URL(window.location.href);
+      if (url.searchParams.get('interface') !== mode) {
+        url.searchParams.set('interface', mode);
+        window.history.replaceState(null, '', url);
+      }
+      try { localStorage.setItem(KEY, mode); } catch (e) {}
+      document.querySelectorAll('[data-interface-switch]:not([data-react-interface-switch])').forEach(function (b) {
+        b.setAttribute('aria-selected', String(b.getAttribute('data-interface-switch') === mode));
+      });
+      applyTocVisibility(mode);
+    })();
+  </script>
+
+  {/* Лайтбокс для скриншотов статьи */}
+  <script is:inline>
+    (function () {
+      var box = null;
+      function close() {
+        if (box) {
+          box.remove();
+          box = null;
+          document.body.style.overflow = '';
+        }
+      }
+      document.addEventListener('click', function (e) {
+        var img = e.target.closest && e.target.closest('.prose img');
+        if (!img || img.classList.contains('pixel')) return;
+        if (box) { close(); return; }
+        box = document.createElement('div');
+        box.className = 'lightbox';
+        box.setAttribute('role', 'dialog');
+        box.setAttribute('aria-label', 'Просмотр изображения');
+        var clone = document.createElement('img');
+        clone.src = img.currentSrc || img.src;
+        clone.alt = img.alt || '';
+        box.appendChild(clone);
+        document.body.appendChild(box);
+        document.body.style.overflow = 'hidden';
+        box.addEventListener('click', close);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+
+  {/* Кнопка копирования кода */}
+  <script is:inline>
+    (function () {
+      document.querySelectorAll('.prose pre').forEach(function (pre) {
+        if (pre.parentElement && pre.parentElement.classList.contains('code-block')) return;
+        var wrap = document.createElement('div');
+        wrap.className = 'code-block';
+        pre.parentNode.insertBefore(wrap, pre);
+        wrap.appendChild(pre);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'code-copy';
+        btn.textContent = 'Копировать';
+        btn.setAttribute('aria-label', 'Копировать код');
+        btn.addEventListener('click', function () {
+          var text = pre.innerText;
+          function done(ok) {
+            btn.textContent = ok ? 'Скопировано' : 'Не удалось';
+            btn.classList.toggle('copied', ok);
+            setTimeout(function () {
+              btn.textContent = 'Копировать';
+              btn.classList.remove('copied');
+            }, 1600);
+          }
+          function legacy() {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try { ok = document.execCommand('copy'); } catch (e) { /* игнорируем */ }
+            document.body.removeChild(ta);
+            done(ok);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            // Clipboard API требует фокуса документа — при отказе
+            // пробуем резервный способ.
+            navigator.clipboard.writeText(text).then(function () { done(true); }, legacy);
+          } else {
+            legacy();
+          }
+        });
+        wrap.appendChild(btn);
+      });
+    })();
+  </script>
+
+  {/* Подсветка активного заголовка в содержании */}
+  <script is:inline>
+    (function () {
+      var links = Array.from(document.querySelectorAll('[data-toc-link]'));
+      if (!links.length || !('IntersectionObserver' in window)) return;
+      var bySlug = new Map(links.map(function (a) { return [a.getAttribute('data-toc-link'), a]; }));
+      var visible = new Set();
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        });
+        links.forEach(function (a) { a.classList.remove('active'); });
+        var first = Array.from(visible).sort(function (a, b) {
+          var elA = document.getElementById(a);
+          var elB = document.getElementById(b);
+          return (elA ? elA.offsetTop : 0) - (elB ? elB.offsetTop : 0);
+        })[0];
+        var link = first ? bySlug.get(first) : null;
+        if (link) link.classList.add('active');
+      }, { rootMargin: '-64px 0px -70% 0px', threshold: 0 });
+      document.querySelectorAll('.prose h2[id], .prose h3[id]').forEach(function (h) {
+        observer.observe(h);
+      });
+    })();
+  </script>
+</Base>

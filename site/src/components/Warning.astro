@@ -1,0 +1,24 @@
+---
+// Блок предупреждения для статей.
+// Использование в MDX: <Warning title="Важно">текст</Warning>
+// variant="danger" — для критичных предупреждений.
+import { TriangleAlert, OctagonX } from 'lucide-react';
+
+interface Props {
+  title?: string;
+  variant?: 'warning' | 'danger';
+}
+
+const { title, variant = 'warning' } = Astro.props;
+const Icon = variant === 'danger' ? OctagonX : TriangleAlert;
+---
+
+<aside class:list={['admonition', `admonition--${variant}`]}>
+  <p class="admonition__title">
+    <Icon size={15} aria-hidden />
+    {title ?? (variant === 'danger' ? 'Внимание' : 'Важно')}
+  </p>
+  <div class="admonition__body">
+    <slot />
+  </div>
+</aside>

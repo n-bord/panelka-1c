@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mdclass:ExternalDataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3e58f9e-520d-49ff-ba6d-705f55746a4b">
+  <producedTypes>
+    <objectType typeId="5ac8bad6-3ca9-432f-a18d-566f6656b676" valueTypeId="94e065a2-79b6-4c81-88a8-39f12b7df80a"/>
+  </producedTypes>
+  <name>Панелька</name>
+  <synonym>
+    <key>ru</key>
+    <value>Панелька</value>
+  </synonym>
+  <comment>https://github.com/n-bord/panelka-1c</comment>
+  <containedObjects classId="c3831ec8-d8d5-4f93-8a22-f9bfae07327f" objectId="73ccf791-121d-43f2-8b8a-cf61d846c950"/>
+  <defaultForm>ExternalDataProcessor.Панелька.Form.Форма</defaultForm>
+  <forms uuid="83388ac1-b542-4af7-beef-b07fd207a208">
+    <name>Форма</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма</value>
+    </synonym>
+    <includeHelpInContents>true</includeHelpInContents>
+    <help>
+      <pages>
+        <lang>ru</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8391bc82-a640-4318-977e-7c160072ff0b">
+    <name>ВыборОбъектовМетаданных</name>
+    <synonym>
+      <key>ru</key>
+      <value>Выбор объектов метаданных</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="c9777a32-00a3-40b4-ab24-3a80a1a94a42">
+    <name>МакетДашбордаHTML</name>
+    <synonym>
+      <key>ru</key>
+      <value>Макет дашборда HTML</value>
+    </synonym>
+    <templateType>TextDocument</templateType>
+  </templates>
+  <forms uuid="6b3212ce-024f-4307-aa01-2ff041a20dad">
+    <name>НастройкиПанелька</name>
+    <synonym>
+      <key>ru</key>
+      <value>Настройки панели</value>
+    </synonym>
+    <includeHelpInContents>true</includeHelpInContents>
+    <help>
+      <pages>
+        <lang>ru</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="c676c50c-ac4f-4a60-96df-e6a8dec9e191">
+    <name>МакетНастроекПанелькаHTML</name>
+    <synonym>
+      <key>ru</key>
+      <value>Настройки панели</value>
+    </synonym>
+    <templateType>TextDocument</templateType>
+  </templates>
+  <forms uuid="4bbf1540-56d1-41f4-a90f-45bd63be53d9"><name>ОкноЗагрузкиПанелька</name><synonym><key>ru</key><value>Загрузка панели</value></synonym><usePurposes>PersonalComputer</usePurposes></forms>
+  <templates uuid="897bb73b-9712-41b8-926c-fb2aabef87c0"><name>МакетЗагрузкиПанелькаHTML</name><templateType>TextDocument</templateType></templates>
+  <forms uuid="e3cae236-1bf4-4912-a225-a0c7cc327f50"><name>ВыборКартинкиПанелька</name><synonym><key>ru</key><value>Выбор картинки</value></synonym><usePurposes>PersonalComputer</usePurposes></forms>
+</mdclass:ExternalDataProcessor>

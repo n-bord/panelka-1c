@@ -1,0 +1,69 @@
+---
+import nativeTransfer from '../assets/media/transfer-guide/1c-transfer.jpg';
+import nativeExport from '../assets/media/transfer-guide/1c-export-file.jpg';
+import nativeImport from '../assets/media/transfer-guide/1c-import-file.jpg';
+import nativeResult from '../assets/media/transfer-guide/1c-result.jpg';
+import webTransfer from '../assets/media/transfer-guide/web-transfer.jpg';
+import webExport from '../assets/media/transfer-guide/web-export-file.jpg';
+import webImport from '../assets/media/transfer-guide/web-import-file.jpg';
+import webResult from '../assets/media/transfer-guide/web-result.jpg';
+
+interface Props {
+  mode: '1c' | 'web';
+  operation: 'export' | 'import';
+}
+
+const { mode, operation } = Astro.props;
+const shots = mode === 'web'
+  ? { transfer: webTransfer, exportFile: webExport, importFile: webImport, result: webResult }
+  : { transfer: nativeTransfer, exportFile: nativeExport, importFile: nativeImport, result: nativeResult };
+---
+
+<div class="transfer-text" data-transfer-operation={operation}>
+  {operation === 'export' ? <>
+    <h4>Откройте экспорт</h4>
+    <p>
+      В редакторе нужной панели нажмите <strong>«Доп. настройки»</strong>, выберите вкладку
+      <strong> «Перенос и сброс»</strong> и нажмите <strong>«Экспорт в файл…»</strong>.
+    </p>
+    <figure style={`max-width:${shots.transfer.width}px`}>
+      <img src={shots.transfer.src} width={shots.transfer.width} height={shots.transfer.height} alt="Вкладка Перенос и сброс с командами Импорт из файла и Экспорт в файл" loading="lazy" />
+      <figcaption>Обе команды переноса находятся в блоке «Импорт и экспорт».</figcaption>
+    </figure>
+
+    <h4>Сохраните XML-копию</h4>
+    <p>
+      Выберите папку и задайте имя файла. Укажите в названии базу, панель и дату — например,
+      «УТ11 — общая панель — 2026-11-09.xml». Подтвердите сохранение и дождитесь сообщения
+      <strong> «Настройки выгружены»</strong>. Полученный XML можно хранить как копию раскладки
+      или использовать для импорта в другую панель.
+    </p>
+    <figure style={`max-width:${shots.exportFile.width}px`}>
+      <img src={shots.exportFile.src} width={shots.exportFile.width} height={shots.exportFile.height} alt="Окно сохранения XML: имя файла, папка и кнопка Сохранить" loading="lazy" />
+      <figcaption>Имя и папку выбирайте под свою задачу. На снимке показан системный диалог macOS; в Windows он выглядит иначе.</figcaption>
+    </figure>
+  </> : <>
+    <h4>Загрузите XML в редактор</h4>
+    <p>
+      Откройте <strong>«Доп. настройки» → «Перенос и сброс» → «Импорт из файла…»</strong>.
+      Найдите ранее выгруженный XML, выберите его и нажмите <strong>«Открыть»</strong>.
+      Дождитесь загрузки настроек в форму. В записи используется готовый пример для УТ 11;
+      вы можете загрузить собственную сохранённую раскладку.
+    </p>
+    <figure style={`max-width:${shots.importFile.width}px`}>
+      <img src={shots.importFile.src} width={shots.importFile.width} height={shots.importFile.height} alt="Окно загрузки настроек с выбранным XML-файлом и кнопкой Открыть" loading="lazy" />
+      <figcaption>Выберите файл настроек Панельки в формате XML.</figcaption>
+    </figure>
+
+    <h4>Проверьте и сохраните раскладку</h4>
+    <p>
+      Перед сохранением проверьте в редакторе страницы, колонки и подписи ссылок.
+      Если результат соответствует ожидаемому, нажмите <strong>«Сохранить и закрыть»</strong>.
+      Дождитесь обновления рабочей панели и откройте несколько ссылок, чтобы проверить их назначение.
+    </p>
+    <figure style={`max-width:${shots.result.width}px`}>
+      <img src={shots.result.src} width={shots.result.width} height={shots.result.height} alt="Рабочая панель после импорта и сохранения: страницы, колонки и ссылки из примера для УТ 11" loading="lazy" />
+      <figcaption>Панель после сохранения импортированного примера. Состав страниц и колонок зависит от выбранного XML.</figcaption>
+    </figure>
+  </>}
+</div>

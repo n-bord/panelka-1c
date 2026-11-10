@@ -1,0 +1,45 @@
+---
+interface Props {
+  src: string;
+  webm?: string;
+  poster: string;
+  title: string;
+  caption: string;
+}
+const { src, webm, poster, title, caption } = Astro.props;
+---
+
+<figure>
+  <video class="overview-video" data-overview-video controls playsinline preload="metadata" width="2036" height="1144" poster={poster} aria-label={title}>
+    {webm && <source src={webm} type="video/webm" />}
+    <source src={src} type="video/mp4" />
+    <a href={src}>Открыть видео: {title}</a>
+  </video>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .overview-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    background: #16130f;
+  }
+</style>
+
+<script>
+  const videos = document.querySelectorAll<HTMLVideoElement>('[data-overview-video]');
+  const pauseAll = () => videos.forEach(video => video.pause());
+  window.addEventListener('panelka:interface', pauseAll);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseAll();
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) (entry.target as HTMLVideoElement).pause();
+    });
+  });
+  videos.forEach(video => observer.observe(video));
+</script>

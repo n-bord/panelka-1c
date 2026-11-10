@@ -1,0 +1,20 @@
+---
+// Переключатель интерфейсов Панельки: [ Интерфейс 1С ] [ Веб-интерфейс ].
+// Режим глобальный: сохраняется между статьями и визитами,
+// поддерживает URL-параметр ?interface=1c|web.
+// Содержимое вариантов размечается через <InterfaceTab mode="1c|web">.
+---
+
+<div class="interface-tabs">
+  <div class="interface-switch" role="tablist" aria-label="Режим интерфейса">
+    <button type="button" role="tab" data-interface-switch="1c" aria-selected="true">
+      Интерфейс 1С
+    </button>
+    <button type="button" role="tab" data-interface-switch="web" aria-selected="false">
+      Веб-интерфейс
+    </button>
+  </div>
+  <div class="interface-tabs__body">
+    <slot />
+  </div>
+</div>

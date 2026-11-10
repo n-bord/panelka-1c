@@ -1,0 +1,55 @@
+---
+import { ChevronRight } from 'lucide-react';
+
+export interface ResolvedNavEntry {
+  slug?: string;
+  label: string;
+  children?: ResolvedNavEntry[];
+}
+
+interface Props {
+  items: ResolvedNavEntry[];
+  currentSlug: string;
+  base: string;
+}
+
+const { items, currentSlug, base } = Astro.props;
+---
+
+<nav class="side-nav" aria-label="Разделы документации">
+  {items.map((entry) =>
+    entry.children ? (
+      <div class="side-nav__group">
+        <details open>
+          <summary>
+            <ChevronRight size={13} className="chevron" aria-hidden />
+            {entry.label}
+          </summary>
+          <ul>
+            {entry.children.map((child) => (
+              <li>
+                <a
+                  href={`${base}docs/${child.slug}/`}
+                  aria-current={child.slug === currentSlug ? 'page' : undefined}
+                >
+                  {child.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </div>
+    ) : (
+      <ul>
+        <li>
+          <a
+            href={`${base}docs/${entry.slug}/`}
+            aria-current={entry.slug === currentSlug ? 'page' : undefined}
+          >
+            {entry.label}
+          </a>
+        </li>
+      </ul>
+    )
+  )}
+</nav>

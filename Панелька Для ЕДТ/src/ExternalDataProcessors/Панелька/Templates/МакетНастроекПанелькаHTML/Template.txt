@@ -1,0 +1,2850 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<style>
+html, body { height: 100%; }
+body { margin: 0; overflow-x: auto; overflow-y: hidden; background: #f4f6f9; color: #37383f; font-family: "Segoe UI", Tahoma, Arial, sans-serif; font-size: 13px; }
+* { box-sizing: border-box; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font-family: inherit; font-size: inherit; }
+input::placeholder, textarea::placeholder { color: #626975; opacity: 1; }
+input::-ms-input-placeholder, textarea::-ms-input-placeholder { color: #626975; }
+body.dark-mode input::placeholder, body.dark-mode textarea::placeholder { color: #a9abb3; }
+body.dark-mode input::-ms-input-placeholder, body.dark-mode textarea::-ms-input-placeholder { color: #a9abb3; }
+
+.app { height: 100%; min-width: 760px; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; }
+.topbar { min-height: 62px; -ms-flex-wrap: wrap; flex-wrap: wrap; row-gap: 6px; padding: 0 16px; background: #ffffff; border-bottom: 1px solid #e5e8ee; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.brand { min-width: 290px; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.logo { width: 34px; height: 34px; line-height: 34px; text-align: center; border-radius: 10px; color: #ffffff; font-weight: 800; background: #6650dc; margin-right: 10px; }
+.brand-title { font-size: 14px; font-weight: 700; }
+.brand-sub { margin-top: 2px; color: #626975; font-size: 10px; }
+.mode-switch { margin-left: 18px; padding: 3px; border-radius: 10px; background: #f1f3f7; white-space: nowrap; }
+.mode-item { display: inline-block; padding: 7px 11px; border-radius: 8px; color: #626975; }
+.mode-item.active { background: #ffffff; color: #37383f; font-weight: 700; box-shadow: 0 1px 5px rgba(0,0,0,.08); }
+.top-spacer { -ms-flex: 1; flex: 1; }
+.btn { display: inline-block; min-height: 34px; line-height: 18px; padding: 7px 12px; margin-left: 7px; border: 1px solid #e0e4ea; border-radius: 9px; background: #ffffff; color: #37383f; font-weight: 600; cursor: pointer; }
+.btn:hover { background: #f8f9fb; border-color: #cdd2db; }
+.btn-primary { color: #ffffff; background: #6650dc; border-color: #6650dc; }
+.btn-primary:hover { background: #6049d0; border-color: #6049d0; }
+.btn-danger { color: #b6333b; }
+.btn-small { min-height: 28px; padding: 4px 8px; font-size: 11px; border-radius: 7px; }
+
+.workspace { min-height: 0; -ms-flex: 1; flex: 1; display: -ms-flexbox; display: flex; }
+.pane { min-height: 0; background: #ffffff; }
+.left { width: 300px; min-width: 250px; border-right: 1px solid #e5e8ee; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; }
+.center { min-width: 420px; min-height: 0; -ms-flex: 1; flex: 1; background: #f4f6f9; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; }
+.right { width: 340px; min-width: 300px; border-left: 1px solid #e5e8ee; overflow-y: auto; }
+.pane-head { padding: 14px 14px 11px; border-bottom: 1px solid #e5e8ee; }
+.pane-title { font-size: 14px; font-weight: 700; }
+.pane-sub { margin-top: 4px; color: #626975; font-size: 10.5px; line-height: 1.35; }
+
+.search { position: relative; margin-top: 10px; }
+.search input { width: 100%; padding: 8px 9px 8px 29px; border: 1px solid #808997; border-radius: 8px; outline: none; color: #37383f; background: #ffffff; }
+.search input:focus { border-color: #08c4a9; box-shadow: 0 0 0 3px rgba(8,196,169,.08); }
+.search-mark { position: absolute; top: 7px; left: 10px; color: #626975; }
+.source-tabs { padding: 9px 10px 5px; }
+.source-tab { display: inline-block; margin: 0 4px 4px 0; padding: 6px 8px; border: 1px solid #e1e5eb; border-radius: 8px; background: #ffffff; color: #626975; font-size: 11px; }
+.source-tab.active { border-color: #bcb3ff; background: #f5f3ff; color: #6049d0; font-weight: 700; }
+.metadata-groups { padding: 4px 10px 5px; border-bottom: 1px solid #eef0f4; }
+.metadata-group { display: inline-block; margin: 0 4px 4px 0; padding: 4px 7px; border-radius: 12px; background: #f4f6f9; color: #626975; font-size: 10px; }
+.metadata-group.active { background: #e9fbf7; color: #007967; font-weight: 700; }
+.source-list { min-height: 0; -ms-flex: 1; flex: 1; overflow-y: auto; padding: 5px 9px 14px; }
+.source-item { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; padding: 8px; margin-bottom: 3px; border: 1px solid transparent; border-radius: 9px; }
+.source-item:hover { background: #f6f8fb; border-color: #edf0f4; }
+.source-icon { width: 30px; min-width: 30px; height: 30px; line-height: 30px; margin-right: 9px; border-radius: 8px; text-align: center; background: #f1efff; color: #6049d0; font-weight: 800; }
+.source-text { min-width: 0; -ms-flex: 1; flex: 1; }
+.source-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 650; }
+.source-type { margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #626975; font-size: 10px; }
+.add-mini { width: 27px; min-width: 27px; height: 27px; line-height: 25px; margin-left: 7px; border: 1px solid #d7f3ed; border-radius: 8px; text-align: center; background: #effcf9; color: #007967; font-size: 17px; font-weight: 700; }
+.add-mini:hover { background: #e3faf5; }
+.source-empty { padding: 18px 10px; color: #626975; text-align: center; font-size: 11px; line-height: 1.5; }
+.source-card { margin: 8px 1px; padding: 11px; border: 1px solid #e3e6ec; border-radius: 10px; background: #ffffff; }
+.source-card-title { font-weight: 700; }
+.source-card-text { margin-top: 4px; color: #626975; font-size: 10.5px; line-height: 1.4; }
+.source-card-actions { margin-top: 9px; }
+.source-card-actions .btn { margin-left: 0; margin-right: 5px; }
+
+.canvas-toolbar { min-height: 52px; padding: 9px 14px; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.canvas-title { font-size: 13px; font-weight: 700; }
+.crumb { margin-left: 8px; padding: 5px 8px; border: 1px solid #e1e5eb; border-radius: 7px; background: #ffffff; color: #626975; font-size: 10px; }
+.canvas-note { margin-left: auto; color: #626975; font-size: 10px; }
+.preview-shell { min-height: 0; -ms-flex: 1; flex: 1; margin: 0 14px 14px; overflow: auto; border: 1px solid #e2e5eb; border-radius: 14px; background: #ffffff; box-shadow: 0 6px 24px rgba(55,56,63,.07); }
+.preview-header { padding: 12px 14px 0; border-bottom: 1px solid #e6e9ee; background: #ffffff; }
+.preview-top { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.fake-search { -ms-flex: 1; flex: 1; padding: 7px 12px; border: 1px solid #e2e5eb; border-radius: 18px; background: #fafbfc; color: #626975; font-size: 11px; }
+.preview-badge { margin-left: 7px; padding: 6px 9px; border: 1px solid #e1e5eb; border-radius: 8px; color: #626975; font-size: 10px; }
+.page-tabs { margin-top: 9px; white-space: nowrap; overflow-x: auto; }
+.page-tab { display: inline-block; padding: 8px 10px 7px; border-bottom: 2px solid transparent; color: #626975; font-size: 11.5px; font-weight: 600; }
+.page-tab.active { color: #007967; border-bottom-color: #08c4a9; }
+.page-tab.add { color: #6049d0; }
+.board { padding: 14px; font-size: 0; }
+.column-card, .new-column { display: inline-block; vertical-align: top; width: 48.8%; margin: 0 1.2% 13px 0; font-size: 13px; }
+        .new-column { font-family: inherit; cursor: pointer; background: transparent; text-decoration: none; box-sizing: border-box; }
+        .system-column-note { border: 1px dashed #cfd5de; border-radius: 12px; padding: 18px; text-align: center; color: #626975; font-size: 12px; background: rgba(255,255,255,.45); }
+
+.column-card { min-height: 160px; padding: 13px; border: 1px solid #e3e6ec; border-radius: 12px; background: #ffffff; box-shadow: 0 2px 11px rgba(55,56,63,.04); }
+.column-card.selected { border-color: #a99dfb; box-shadow: 0 0 0 3px rgba(125,106,255,.08); }
+.column-select { display: block; }
+.column-head { padding-bottom: 9px; border-bottom: 1px solid #eceef2; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.column-symbol { width: 27px; min-width: 27px; height: 27px; line-height: 27px; margin-right: 8px; border-radius: 8px; text-align: center; background: #f1efff; color: #6d5af0; font-weight: 800; }
+.column-name { min-width: 0; -ms-flex: 1; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; font-weight: 800; text-transform: none; letter-spacing: .35px; }
+.column-count { margin-left: 8px; color: #626975; font-size: 9.5px; white-space: nowrap; }
+.type-head { margin: 10px 3px 4px; color: #705df0; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; }
+.link-row { display: -ms-flexbox; display: flex; padding: 6px 6px 6px 5px; border-left: 3px solid transparent; border-radius: 7px; }
+.link-row:hover { background: #f6f8fb; border-left-color: #08c4a9; }
+.link-row.selected { background: #f4f2ff; border-left-color: #6650dc; }
+.link-dot { width: 7px; min-width: 7px; height: 7px; margin: 5px 7px 0 0; border-radius: 50%; background: #08c4a9; }
+.link-text { min-width: 0; -ms-flex: 1; flex: 1; }
+.link-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; font-weight: 600; }
+.link-tip { display: block; margin-top: 3px; white-space: pre-line; word-wrap: break-word; overflow-wrap: break-word; color: #626975; font-size: 10.5px; line-height: 1.4; }
+.empty-column { padding: 18px 5px; color: #626975; text-align: center; font-size: 10px; }
+.new-column { min-height: 74px; line-height: 74px; border: 1px dashed #bcc4d0; border-radius: 12px; text-align: center; background: rgba(255,255,255,.55); color: #626975; }
+.new-column:hover { border-color: #08c4a9; background: #f5fffd; color: #007967; }
+.empty-board { padding: 38px 18px; text-align: center; color: #626975; font-size: 12px; line-height: 1.6; }
+
+.property { padding: 14px; border-bottom: 1px solid #e8ebef; }
+.prop-caption { margin-bottom: 9px; color: #626975; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .55px; }
+.selected-block { margin-bottom: 12px; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.selected-icon { width: 37px; min-width: 37px; height: 37px; line-height: 37px; margin-right: 9px; border-radius: 10px; text-align: center; background: #f1efff; color: #6d5af0; font-weight: 800; }
+.selected-title { font-size: 13px; font-weight: 700; }
+.selected-type { margin-top: 2px; color: #626975; font-size: 10px; }
+.field { margin-bottom: 10px; }
+.label { display: block; margin-bottom: 5px; font-size: 10.5px; font-weight: 700; }
+.label-hint, .field-hint { display: block; margin-top: 4px; color: #626975; font-size: 10px; font-weight: 400; line-height: 1.4; }
+.field input, .field textarea, .field select { width: 100%; padding: 7px 8px; border: 1px solid #808997; border-radius: 8px; background: #ffffff; color: #37383f; outline: none; }
+.field textarea { height: 62px; resize: vertical; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: #08c4a9; box-shadow: 0 0 0 3px rgba(8,196,169,.07); }
+.field-actions { margin-top: 7px; }
+.field-actions .btn { margin-left: 0; margin-right: 5px; }
+.property .field select { display: block; }
+.property #nameScope, .property #tipScope { margin-bottom: 6px; }
+.property-actions { margin-top: 12px; }
+.property-actions .btn { margin: 0 5px 5px 0; }
+.property-actions .info { margin: 1px 0 7px; }
+.property-section, .property-danger { margin-top: 12px; padding-top: 11px; border-top: 1px solid #e8ebef; }
+.property-section .order-actions { margin-top: 0; }
+.property-section .order-actions .btn { margin: 0 5px 4px 0; }
+.column-assignment-page + .column-assignment-page { margin-top: 5px; }
+.chips { margin: -2px 0 7px; }
+.chip { cursor: pointer; display: inline-block; margin: 2px 3px 2px 0; padding: 5px 7px; border: 1px solid #e1e4ea; border-radius: 12px; background: #ffffff; color: #626975; font-size: 9.5px; }
+.chip.active { border-color: #c8c0ff; background: #f2efff; color: #6651e8; font-weight: 700; }
+.chip.disabled { color: #b0b5bd; background: #f7f8fa; }
+.info { margin-top: 8px; padding: 8px 9px; border-radius: 8px; background: #f7f8fa; color: #626975; font-size: 9.5px; line-height: 1.45; }
+.danger-link { display: inline-block; max-width: 100%; padding: 5px 9px; border: 1px solid #edcbd0; border-radius: 7px; color: #b6333b; font-size: 11px; line-height: 16px; font-weight: 600; }
+.danger-link:hover { background: #fff3f4; border-color: #dba4aa; }
+
+.modal-backdrop { position: fixed; z-index: 50; left: 0; top: 0; right: 0; bottom: 0; display: none; background: rgba(39,41,48,.32); }
+.modal { width: 390px; max-width: 90%; margin: 13% auto 0; padding: 15px; border-radius: 12px; background: #ffffff; box-shadow: 0 18px 50px rgba(0,0,0,.22); }
+.modal-title { font-size: 14px; font-weight: 700; }
+.modal-text { margin: 5px 0 11px; color: #626975; font-size: 10.5px; }
+.modal-actions { margin-top: 12px; text-align: right; }
+.modal-actions .btn { margin-left: 5px; }
+.confirm-modal { width: 420px; max-width: 90%; }
+.confirm-head { display: flex; align-items: flex-start; }
+.confirm-icon { width: 34px; height: 34px; line-height: 34px; text-align: center; border-radius: 50%; background: #fff1f1; color: #b6333b; font-size: 18px; font-weight: 700; margin-right: 11px; flex: 0 0 auto; }
+.confirm-content { min-width: 0; flex: 1; }
+.confirm-object { margin-top: 8px; padding: 8px 10px; border: 1px solid #eceef3; border-radius: 8px; background: #fafbfc; color: #4d5158; font-size: 10.5px; font-weight: 600; word-break: break-word; }
+.btn-danger { background: #b6333b; border-color: #b6333b; color: #ffffff; }
+.btn-danger:hover { background: #c44141; border-color: #c44141; color: #ffffff; }
+
+.icon-modal { width: 760px; max-width: 92%; margin: 6% auto 0; padding: 15px; border-radius: 12px; background: #ffffff; box-shadow: 0 18px 50px rgba(0,0,0,.22); }
+.icon-picker-toolbar { margin-top: 10px; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.icon-picker-toolbar input { -ms-flex: 1; flex: 1; }
+.icon-current { margin-left: 10px; color: #626975; font-size: 9.5px; white-space: nowrap; }
+.icon-grid { margin-top: 10px; max-height: 430px; overflow-y: auto; padding: 2px; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-align: stretch; align-items: stretch; }
+.icon-tile { width: 122px; min-height: 86px; margin: 0 7px 7px 0; padding: 9px 7px; box-sizing: border-box; border: 1px solid #e5e7ec; border-radius: 9px; background: #ffffff; color: #454852; text-decoration: none; text-align: center; }
+.icon-tile:hover { border-color: #6650dc; background: #faf9ff; }
+.icon-tile.active { border-color: #08c4a9; box-shadow: inset 0 0 0 1px #08c4a9; background: #f4fffd; }
+.icon-tile-img { height: 35px; margin-bottom: 5px; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; }
+.icon-tile-img img { max-width: 32px; max-height: 32px; }
+.icon-tile-empty { width: 30px; height: 30px; line-height: 28px; border: 1px dashed #cfd3da; border-radius: 7px; color: #626975; font-size: 18px; margin: 0 auto; box-sizing: border-box; }
+.icon-tile-caption { font-size: 9.5px; line-height: 1.2; font-weight: 600; word-break: break-word; }
+.icon-tile-name { margin-top: 3px; color: #626975; font-size: 8px; line-height: 1.15; word-break: break-word; }
+.icon-preview-box { margin-top: 7px; min-height: 42px; padding: 7px 9px; border: 1px solid #e5e7ec; border-radius: 8px; background: #fafbfc; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+.icon-preview-box img { width: 28px; height: 28px; object-fit: contain; margin-right: 9px; }
+.icon-preview-placeholder { width: 28px; height: 28px; line-height: 26px; margin-right: 9px; border: 1px dashed #cfd3da; border-radius: 7px; text-align: center; color: #626975; box-sizing: border-box; }
+.icon-preview-name { font-size: 10px; font-weight: 600; color: #50545d; word-break: break-word; }
+.mini-icon { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; margin-right: 4px; }
+.column-icon-img { width: 15px; height: 15px; object-fit: contain; }
+
+.toast { position: fixed; z-index: 100; left: 50%; bottom: 18px; display: none; padding: 9px 13px; border-radius: 8px; background: #37383f; color: #ffffff; font-size: 10.5px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+
+
+/* Темная тема. Значения подобраны в той же палитре, что и основной HTML-дашборд Панелька. */
+body.dark-mode { background: #25262b; color: #ececf0; }
+body.dark-mode .topbar,
+body.dark-mode .pane,
+body.dark-mode .preview-shell,
+body.dark-mode .preview-header,
+body.dark-mode .column-card,
+body.dark-mode .source-card,
+body.dark-mode .modal,
+body.dark-mode .icon-modal { background: #37383f; color: #ececf0; }
+body.dark-mode .center { background: #25262b; }
+body.dark-mode .topbar,
+body.dark-mode .left,
+body.dark-mode .right,
+body.dark-mode .pane-head,
+body.dark-mode .metadata-groups,
+body.dark-mode .preview-shell,
+body.dark-mode .preview-header,
+body.dark-mode .column-card,
+body.dark-mode .column-head,
+body.dark-mode .property,
+body.dark-mode .property-section,
+body.dark-mode .property-danger,
+body.dark-mode .source-card,
+body.dark-mode .icon-tile,
+body.dark-mode .icon-preview-box { border-color: #4a4c55; }
+body.dark-mode .brand-sub,
+body.dark-mode .pane-sub,
+body.dark-mode .canvas-note,
+body.dark-mode .source-type,
+body.dark-mode .source-empty,
+body.dark-mode .source-card-text,
+body.dark-mode .column-count,
+body.dark-mode .link-tip,
+body.dark-mode .prop-caption,
+body.dark-mode .selected-type,
+body.dark-mode .label-hint,
+body.dark-mode .field-hint,
+body.dark-mode .modal-text,
+body.dark-mode .icon-current,
+body.dark-mode .icon-tile-name,
+body.dark-mode .empty-column,
+body.dark-mode .empty-board,
+body.dark-mode .search-mark,
+body.dark-mode .icon-tile-empty,
+body.dark-mode .icon-preview-placeholder { color: #a9abb3; }
+body.dark-mode .mode-switch,
+body.dark-mode .metadata-group,
+body.dark-mode .info { background: #2d2e34; }
+body.dark-mode .mode-item { color: #aeb0b7; }
+body.dark-mode .mode-item.active { background: #464851; color: #ffffff; box-shadow: none; }
+body.dark-mode .btn,
+body.dark-mode .source-tab,
+body.dark-mode .crumb,
+body.dark-mode .chip,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select { background: #2d2e34; color: #ececf0; border-color: #52545e; }
+body.dark-mode .field input, body.dark-mode .field textarea, body.dark-mode .field select, body.dark-mode .search input { border-color: #858a96; }
+body.dark-mode .btn:hover,
+body.dark-mode .source-tab:hover { background: #464851; border-color: #666873; }
+body.dark-mode .btn-primary { background: #6650dc; border-color: #6650dc; color: #ffffff; }
+body.dark-mode .source-tab.active,
+body.dark-mode .chip.active { background: #464054; border-color: #7d6aff; color: #c9c1ff; }
+body.dark-mode .metadata-group.active { background: #27433f; color: #55ddc8; }
+body.dark-mode .source-item:hover,
+body.dark-mode .link-row:hover { background: #414249; border-color: #4d4f57; }
+body.dark-mode .source-icon,
+body.dark-mode .column-symbol,
+body.dark-mode .selected-icon { background: #464054; color: #c8bfff; }
+body.dark-mode .add-mini { background: #27433f; border-color: #31534e; color: #59ddc8; }
+body.dark-mode .add-mini:hover { background: #31534e; }
+body.dark-mode .fake-search { background: #2d2e34; color: #9fa2aa; border-color: #4a4c55; }
+body.dark-mode .preview-badge { color: #b2b4bb; border-color: #4a4c55; }
+body.dark-mode .page-tab { color: #aeb0b8; }
+body.dark-mode .page-tab.active { color: #55ddc8; border-bottom-color: #08c4a9; }
+body.dark-mode .page-tab.add { color: #bdb4ff; }
+body.dark-mode .column-card.selected { border-color: #8f80ff; box-shadow: 0 0 0 3px rgba(125,106,255,.13); }
+body.dark-mode .type-head { color: #b5aaff; }
+body.dark-mode .link-row.selected { background: #454052; }
+body.dark-mode .new-column { background: #303137; border-color: #5a5d66; color: #aaaeb7; }
+body.dark-mode .new-column:hover { background: #28403d; border-color: #08c4a9; color: #55ddc8; }
+body.dark-mode .system-column-note { background: #303137; border-color: #5a5d66; color: #aaaeb7; }
+body.dark-mode .info { color: #aeb0b7; }
+body.dark-mode .toggle { background: #8a909a; }
+body.dark-mode .toggle.on { background: #08c4a9; }
+body.dark-mode .icon-tile { background: #2d2e34; color: #ececf0; }
+body.dark-mode .icon-tile:hover { background: #464054; border-color: #7d6aff; }
+body.dark-mode .icon-tile.active { background: #27433f; border-color: #08c4a9; }
+body.dark-mode .icon-preview-box { background: #2d2e34; }
+body.dark-mode .icon-preview-name { color: #ececf0; }
+body.dark-mode .confirm-icon { background: #4a2f33; color: #ff8f8f; }
+body.dark-mode .confirm-object { background: #2d2e34; border-color: #4a4c55; color: #ececf0; }
+body.dark-mode .btn-danger { background: #b6333b; border-color: #b6333b; color: #ffffff; }
+body.dark-mode .btn-danger:hover { background: #b64049; border-color: #b64049; }
+body.dark-mode .toast { background: #101114; color: #ffffff; }
+body.dark-mode ::-webkit-scrollbar-track { background: #2d2e34; }
+body.dark-mode ::-webkit-scrollbar-thumb { background: #5a5d66; }
+.theme-btn { min-width: 88px; text-align: center; }
+
+@media (max-width: 1180px) {
+    .left { width: 265px; }
+    .right { width: 305px; }
+    .brand { min-width: 240px; }
+    .column-card, .new-column { width: 98%; margin-right: 0; }
+}
+
+/* FIX9: подгруппы источников, контекстное меню и управление порядком */
+.source-section-title { margin: 12px 2px 5px; color: #626975; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.source-section-title:first-child { margin-top: 2px; }
+.order-actions { margin-top: 8px; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 5px; }
+.context-menu { position: fixed; z-index: 400; min-width: 215px; display: none; padding: 5px; border: 1px solid #dfe3ea; border-radius: 9px; background: #ffffff; box-shadow: 0 12px 36px rgba(0,0,0,.18); }
+.context-item { display: block; padding: 8px 10px; border-radius: 6px; color: #37383f; text-decoration: none; font-size: 11px; white-space: nowrap; }
+.context-item:hover { background: #f4f6f9; }
+.context-item.danger { color: #b6333b; }
+.context-separator { height: 1px; margin: 4px 3px; background: #eceef2; }
+.choice-actions { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: end; justify-content: flex-end; gap: 6px; }
+.choice-actions .btn { margin-left: 0; }
+.btn-warn { color: #9c6200; border-color: #f1d29b; background: #fff9ef; }
+.btn-warn:hover { background: #fff4df; border-color: #e8c278; }
+body.dark-mode .source-section-title { color: #b4b7c0; }
+body.dark-mode .context-menu { background: #37383f; border-color: #4d4f58; box-shadow: 0 12px 36px rgba(0,0,0,.38); }
+body.dark-mode .context-item { color: #e8e8ec; }
+body.dark-mode .context-item:hover { background: #464851; }
+body.dark-mode .context-item.danger, body.dark-mode .danger-link { color: #ff8f8f; }
+body.dark-mode .danger-link { border-color: #774b51; }
+body.dark-mode .danger-link:hover { background: #4a2f33; border-color: #ac636b; }
+body.dark-mode .context-separator { background: #4b4d55; }
+body.dark-mode .btn-warn { color: #f0c06c; border-color: #6c5a38; background: #40382b; }
+
+.placement-block{border:1px solid var(--accent);border-radius:12px;padding:14px;margin-bottom:16px}
+.placement-block label{display:block;margin-bottom:8px;line-height:1.6}
+.placement-block input[type=checkbox]{width:auto;margin-right:7px}
+.placement-block input:disabled,.placement-block textarea:disabled{opacity:.65}
+
+.property select{margin-bottom:8px}
+.property .label-hint{display:block;margin-top:6px;line-height:1.5}
+a:focus, input:focus, textarea:focus, select:focus, button:focus { outline: 2px solid #6145c7; outline-offset: 2px; }
+body.dark-mode a:focus, body.dark-mode input:focus, body.dark-mode textarea:focus, body.dark-mode select:focus, body.dark-mode button:focus { outline-color: #c5baff; }
+body[aria-busy="true"] { cursor: progress; }
+body[aria-busy="true"]:not([data-quick-command="true"]) a, body[aria-busy="true"]:not([data-quick-command="true"]) button { opacity: .65; }
+@media (max-width: 1050px) { .left { width: 230px; min-width: 200px; } .right { width: 280px; min-width: 240px; } .center { min-width: 280px; } }
+[draggable="true"] { cursor: grab; }
+.drag-end-zone { display: none; padding: 12px; text-align: center; opacity: .65; font-size: 11px; }
+.panelka-dragging .drag-end-zone { display: block; }
+.panelka-drop-before { box-shadow: inset 0 3px 0 #4385e0 !important; }
+.panelka-drop-inside { outline: 2px dashed #4385e0; outline-offset: -3px; }
+.additional-settings { flex: 1; min-height: 0; overflow: auto; padding: 22px 24px; }
+.additional-wrap { max-width: 1180px; margin: 0 auto; }
+.additional-title { margin: 0 0 6px; font-size: 22px; }
+.additional-description { margin: 0 0 18px; color: #626975; }
+.additional-tabs { display: flex; flex-wrap: wrap; border-bottom: 1px solid #dfe3eb; }
+.additional-tab { border: 0; border-bottom: 2px solid transparent; background: transparent; color: #515966;
+    cursor: pointer; padding: 10px 12px; font-weight: 600; }
+.additional-tab[aria-selected="true"] { color: #523ab9; border-bottom-color: #6650dc; }
+.additional-icon { width: 17px; height: 17px; vertical-align: -3px; margin-right: 5px;
+    object-fit: contain; }
+.additional-body { padding: 12px 0; }
+.additional-card { background: #fff; border: 1px solid #dfe3eb; border-radius: 10px; padding: 14px;
+    margin-bottom: 12px; }
+.additional-card h3, .additional-card h4 { margin: 0 0 10px; }
+.additional-card p { margin: 7px 0; }
+.additional-settings .btn { margin: 3px 6px 3px 0; }
+.additional-settings .btn:disabled { opacity: .55; cursor: default; }
+.additional-settings label { display: inline-block; padding: 5px 0; }
+.additional-settings input[type="checkbox"], .additional-settings input[type="radio"] { margin: 0 7px 0 0; vertical-align: -2px; }
+.additional-settings input[type="text"], .additional-settings input[type="number"], .additional-settings select {
+    background: #fff; color: #37383f; border: 1px solid #bcc3d0; border-radius: 6px; padding: 5px 8px;
+}
+.additional-fields { display: flex; flex-wrap: wrap; }
+.additional-field-column { flex: 1 1 215px; max-width: 380px; padding-right: 12px; }
+.additional-field-column .additional-check { display: block; }
+.additional-stack .additional-check { display: block; }
+.additional-stack select { margin: 0 0 0 6px; }
+.additional-appearance-fields { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.additional-appearance-field { flex: 1 1 260px; max-width: 390px; min-width: 0; }
+.additional-appearance-field > span { display: block; margin-bottom: 5px; }
+.additional-settings .additional-value {
+    display: flex; align-items: center; gap: 7px; width: 100%; min-height: 29px;
+    text-align: left; font-weight: normal; margin: 0;
+}
+.additional-value-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.additional-ellipsis { border-left: 1px solid #dfe3eb; padding-left: 7px; }
+.additional-color-swatch { width: 13px; height: 13px; flex: 0 0 13px; border: 1px solid #a4a9b4; }
+body.dark-mode .additional-ellipsis { border-color: #4a4c55; }
+.additional-actions { margin-top: 8px; }
+.additional-table-wrap { overflow: auto; }
+.additional-table { width: 100%; border-collapse: collapse; text-align: left; }
+.additional-table th, .additional-table td { border-bottom: 1px solid #e5e8ee; padding: 7px 8px; overflow-wrap: break-word; }
+.additional-table td label { padding: 0; }
+body.dark-mode .additional-card { background: #272831; border-color: #4a4c55; }
+body.dark-mode .additional-tabs, body.dark-mode .additional-table th, body.dark-mode .additional-table td { border-color: #4a4c55; }
+body.dark-mode .additional-tab, body.dark-mode .additional-description { color: #c8cbd4; }
+body.dark-mode .additional-tab[aria-selected="true"] { color: #d2c6ff; border-bottom-color: #a891ff; }
+body.dark-mode .additional-settings input[type="text"], body.dark-mode .additional-settings input[type="number"],
+body.dark-mode .additional-settings select { background: #30313a; color: #eee; border-color: #6a6c78; }
+</style>
+</head>
+<body>
+<div class="app">
+    <div class="topbar">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">П</div>
+            <div>
+                <div id="settingsBrandTitle" class="brand-title"><span data-ui-text="settingsTitle"></span></div>
+                <div class="brand-sub"><span data-ui-text="builderSubtitle"></span></div>
+            </div>
+        </div>
+        <a class="btn btn-primary" href="panelkasettings://save"><span data-ui-text="save"></span></a><a class="btn btn-primary" href="panelkasettings://save_close"><span data-ui-text="saveClose"></span></a>
+        <div class="mode-switch">
+            <span class="mode-item active"><span data-ui-text="webInterface"></span></span>
+            <a class="mode-item" href="panelkasettings://switch_native"><span data-ui-text="nativeInterface"></span></a>
+        </div>
+        <a id="additionalToggle" class="btn" aria-controls="additionalSettingsPane" aria-expanded="false" href="panelkasettings://open_additional_settings"><span aria-hidden="true">⚙</span> <span data-ui-text="additionalSettings"></span></a>
+        <div class="top-spacer"></div>
+        <a id="themeToggle" class="btn theme-btn" href="javascript:void(0)" onclick="return toggleThemeLocally();"><span data-ui-text="darkTheme"></span></a>
+    </div>
+
+    <section id="additionalSettingsPane" class="additional-settings" style="display:none" aria-labelledby="additionalTitle">
+        <div class="additional-wrap">
+            <h2 id="additionalTitle" class="additional-title"><span data-ui-text="additionalSettings"></span></h2>
+            <p class="additional-description"><span data-ui-text="additionalDescription"></span></p>
+            <div id="additionalTabs" class="additional-tabs" role="tablist" aria-label="Дополнительные настройки"></div>
+            <div id="additionalBody" class="additional-body" role="tabpanel" tabindex="0"></div>
+        </div>
+    </section>
+    <div id="editorWorkspace" class="workspace">
+        <div class="pane left">
+            <div class="pane-head">
+                <div class="pane-title"><span data-ui-text="addItem"></span></div>
+                <div class="pane-sub"><span data-ui-text="addItemHelp"></span></div>
+                <div class="search">
+                    <span class="search-mark" aria-hidden="true">⌕</span>
+                    <input id="sourceSearch" type="text" autocomplete="off" placeholder="" data-ui-placeholder="findObjectPlaceholder" aria-label="" data-ui-label="findObject" oninput="filterSources();" onkeyup="filterSources();">
+                </div>
+            </div>
+            <div id="sourceTabs" class="source-tabs"></div>
+            <div id="personalSourcePolicyHint" class="pane-sub" style="display:none;padding:0 12px 8px"><span data-ui-text="sourcesRestricted"></span></div>
+            <div id="metadataGroups" class="metadata-groups"></div>
+            <div id="sourceList" class="source-list"></div>
+        </div>
+
+        <div class="center">
+            <div class="canvas-toolbar">
+                <div class="canvas-title"><span data-ui-text="previewPanel"></span></div>
+                <div id="activePageCrumb" class="crumb"><span data-ui-text="home"></span></div>
+                <div id="columnsCrumb" class="crumb"><span data-ui-text="zeroColumns"></span></div>
+                <div class="canvas-note"><span data-ui-text="liveChanges"></span></div>
+            </div>
+            <div id="previewShell" class="preview-shell">
+                <div class="preview-header">
+                    <div class="preview-top">
+                        <div class="fake-search"><span data-ui-text="findLink"></span></div>
+                        <div class="preview-badge"><span data-ui-text="preview"></span></div>
+                    </div>
+                    <div id="pageTabs" class="page-tabs"></div>
+                </div>
+                <div id="board" class="board"></div>
+            </div>
+        </div>
+
+        <div id="rightPane" class="pane right">
+            <div class="pane-head">
+                <div class="pane-title"><span data-ui-text="properties"></span></div>
+                <div class="pane-sub"><span data-ui-text="propertiesHelp"></span></div>
+            </div>
+            <div id="properties"></div>
+        </div>
+    </div>
+</div>
+
+<div id="modalBackdrop" aria-label="" data-ui-label="newItem" class="modal-backdrop">
+    <div class="modal">
+        <div id="modalTitle" class="modal-title"><span data-ui-text="newItem"></span></div>
+        <div id="modalText" class="modal-text"></div>
+        <div class="field">
+            <label class="label" for="modalName"><span data-ui-text="name"></span></label>
+            <input id="modalName" type="text" autocomplete="off" maxlength="120">
+        </div>
+        <div class="modal-actions">
+            <a class="btn" href="javascript:void(0)" onclick="closeModal(); return false;"><span data-ui-text="cancel"></span></a>
+            <a id="modalApply" class="btn btn-primary" href="javascript:void(0)" onclick="return prepareModalAction(this);"><span data-ui-text="create"></span></a>
+        </div>
+    </div>
+</div>
+
+<div id="iconModalBackdrop" aria-label="" data-ui-label="chooseImage" class="modal-backdrop">
+    <div class="icon-modal">
+        <div class="modal-title"><span data-ui-text="chooseImage"></span></div>
+        <div class="modal-text"><span data-ui-text="chooseImageHelp"></span></div>
+        <div class="icon-picker-toolbar">
+            <input id="iconSearch" type="text" autocomplete="off" placeholder="" data-ui-placeholder="findImagePlaceholder" aria-label="" data-ui-label="findImage" oninput="filterIcons();" onkeyup="filterIcons();">
+            <div id="iconCurrent" class="icon-current"></div>
+        </div>
+        <div id="iconGrid" class="icon-grid"></div>
+        <div class="modal-actions">
+            <a class="btn" href="panelkasettings://cancel_icon"><span data-ui-text="close"></span></a>
+        </div>
+    </div>
+</div>
+
+<div id="deleteConfirmBackdrop" aria-label="" data-ui-label="deleteConfirmation" class="modal-backdrop">
+    <div class="modal confirm-modal">
+        <div class="confirm-head">
+            <div class="confirm-icon" aria-hidden="true">!</div>
+            <div class="confirm-content">
+                <div id="deleteConfirmTitle" class="modal-title"><span data-ui-text="deleteConfirmation"></span></div>
+                <div id="deleteConfirmText" class="modal-text"><span data-ui-text="deleteSelectedQuestion"></span></div>
+                <div id="deleteConfirmObject" class="confirm-object"></div>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <a class="btn" href="javascript:void(0)" onclick="closeDeleteConfirm(); return false;"><span data-ui-text="cancel"></span></a>
+            <a id="deleteConfirmApply" class="btn btn-danger" href="javascript:void(0)" onclick="return prepareDeleteConfirm(this);"><span data-ui-text="delete"></span></a>
+        </div>
+    </div>
+</div>
+
+<div id="structureChoiceBackdrop" aria-label="" data-ui-label="deleteStructure" class="modal-backdrop">
+    <div class="modal confirm-modal">
+        <div class="confirm-head">
+            <div class="confirm-icon" aria-hidden="true">!</div>
+            <div class="confirm-content">
+                <div id="structureChoiceTitle" class="modal-title"><span data-ui-text="deleteStructure"></span></div>
+                <div id="structureChoiceText" class="modal-text"></div>
+                <div id="structureChoiceObject" class="confirm-object"></div>
+            </div>
+        </div>
+        <div class="choice-actions">
+            <a class="btn" href="javascript:void(0)" onclick="closeStructureChoice(); return false;"><span data-ui-text="cancel"></span></a>
+            <a id="structureChoiceUnassign" class="btn btn-warn" href="javascript:void(0)" onclick="closeStructureChoice();"><span data-ui-text="keepLinks"></span></a>
+            <a id="structureChoiceDelete" class="btn btn-danger" href="javascript:void(0)" onclick="closeStructureChoice();"><span data-ui-text="deleteLinks"></span></a>
+        </div>
+    </div>
+</div>
+
+<div id="panelkaContextMenu" class="context-menu" role="menu" aria-label="" data-ui-label="elementActions"></div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<input type="hidden" id="panelkaEditorDraft" value="">
+<input type="hidden" id="panelkaViewState" value="">
+<input type="hidden" id="panelkaServerResponse" value="">
+<input type="hidden" id="panelkaAdditionalDraft" value="">
+<input type="hidden" id="panelkaThemeDraft" value="">
+<input type="hidden" id="panelkaAdditionalResponse" value="">
+<input type="hidden" id="panelkaPerformanceLog" value="">
+<script>
+var DATA = /*PANELKA_SETTINGS_DATA*/{};
+var modalMode = "";
+var modalPage = "";
+var pendingDeleteUrl = "";
+
+// UI text is separate from protocol commands, metadata names and stored values.
+// A second language can override these captions without changing the data model.
+var UI_TEXT = {ru: {
+    "name": "Название",
+    "tip": "Подсказка",
+    "path": "Путь",
+    "page": "Страница",
+    "nameScope": "Область изменения названия",
+    "tipScope": "Область изменения подсказки",
+    "roles": "Роли доступа",
+    "webExample": "Например, База знаний",
+    "cancel": "Отмена",
+    "add": "Добавить",
+    "enterUrl": "Введите URL",
+    "webRestricted": "Добавление веб-ссылок ограничено администратором.",
+    "wait": "Дождитесь завершения предыдущего действия.",
+    "finishWebDraft": "Завершите добавление веб-ссылки или отмените ввод перед закрытием.",
+    "updateFailed": "Не удалось прочитать обновление настроек. Повторите действие.",
+    "metadata": "Метаданные",
+    "favorites": "Избранное",
+    "opened": "Открытые",
+    "more": "Ещё источники",
+    "settingsTitle": "Настройки «Панельки»",
+    "builderSubtitle": "Визуальный конструктор",
+    "webInterface": "Web-интерфейс",
+    "nativeInterface": "Обычный интерфейс",
+    "darkTheme": "☾ Тёмная",
+    "lightTheme": "☀ Светлая",
+    "save": "Сохранить",
+    "saveClose": "Сохранить и закрыть",
+    "addItem": "Добавить элемент",
+    "addItemHelp": "Выберите источник. Новая ссылка добавляется в активную колонку.",
+    "sourcesRestricted": "Часть источников ограничена администратором.",
+    "previewPanel": "Предпросмотр панели",
+    "home": "Главная",
+    "zeroColumns": "0 колонок",
+    "liveChanges": "Изменения структуры отображаются сразу",
+    "findLink": "Найти ссылку…",
+    "preview": "Предпросмотр",
+    "properties": "Свойства",
+    "propertiesHelp": "Параметры выбранной страницы, колонки или ссылки.",
+    "newItem": "Новый элемент",
+    "create": "Создать",
+    "chooseImage": "Выбор картинки",
+    "chooseImageHelp": "Выберите системную или общую картинку 1С. Текущая картинка отмечена рамкой.",
+    "close": "Закрыть",
+    "deleteConfirmation": "Подтверждение удаления",
+    "deleteSelectedQuestion": "Удалить выбранный элемент?",
+    "delete": "Удалить",
+    "deleteStructure": "Удаление структуры",
+    "keepLinks": "Перенести в «Не распределено»",
+    "deleteLinks": "Удалить из этой структуры",
+    "findObject": "Найти объект",
+    "findObjectPlaceholder": "Найти объект…",
+    "findImage": "Найти картинку",
+    "findImagePlaceholder": "Найти картинку…",
+    "elementActions": "Действия с элементом",
+    "deleteLinkQuestion": "Удалить ссылку?",
+    "deleteLinkHelp": "Ссылка будет полностью удалена из «Панельки».",
+    "deleteColumnQuestion": "Удалить колонку?",
+    "deleteColumnHelp": "Колонка будет удалена.",
+    "deleteColumnChoice": "Перенести ссылки этой колонки в «Не распределено» или удалить их только из этой колонки? Размещения в других колонках сохранятся.",
+    "deletePageQuestion": "Удалить страницу?",
+    "deletePageHelp": "Страница и её колонки будут удалены.",
+    "deletePageChoice": "Перенести ссылки этой страницы в «Не распределено» или удалить их только с этой страницы? Размещения на других страницах сохранятся.",
+    "deletion": "Удаление",
+    "moveEarlier": "← Переместить раньше",
+    "moveLater": "Переместить позже →",
+    "deletePageMenu": "Удалить страницу…",
+    "moveHigher": "↑ Переместить выше",
+    "moveLower": "↓ Переместить ниже",
+    "deleteColumnMenu": "Удалить колонку…",
+    "moveGroupHigher": "↑ Переместить группу выше",
+    "moveGroupLower": "↓ Переместить группу ниже",
+    "removeFromColumn": "Удалить из колонки",
+    "moveToUnassigned": "Перенести в нераспределённое",
+    "deleteLinkMenu": "Удалить ссылку из панели…",
+    "personalSettingsTitle": "Персональная настройка — только для вас",
+    "commonSettingsTitle": "Общая настройка панели",
+    "switchLightTheme": "Переключить на светлую тему",
+    "switchDarkTheme": "Переключить на тёмную тему",
+    "all": "Все",
+    "listsAndReports": "Разделы, списки и отчёты",
+    "specificObjects": "Конкретные объекты",
+    "webAndBrowser": "Веб и браузер",
+    "webLink": "Добавить по ссылке",
+    "panelCatalog": "Каталог панели",
+    "webLinkHelp": "Вставьте навигационную ссылку 1С или веб-адрес, чтобы добавить её в активную колонку.",
+    "addUrl": "Вставить ссылку",
+    "browserBookmarks": "Закладки браузера",
+    "browserBookmarksHelp": "Импорт закладок Chrome, Yandex Browser, Edge, Opera, Brave и Vivaldi.",
+    "openBookmarks": "Открыть закладки",
+    "filesAndTools": "Файлы и обработки",
+    "externalFiles": "Внешние файлы",
+    "externalFilesHelp": "Файлы EPF/ERF можно выбрать по одному, списком или из папки.",
+    "chooseFiles": "Выбрать файлы",
+    "chooseFolder": "Выбрать папку",
+    "additionalTools": "Дополнительные отчёты и обработки",
+    "additionalToolsHelp": "Выбор зарегистрированных обработок БСП или WMS.",
+    "choose": "Выбрать",
+    "advancedTools": "Расширенные инструменты",
+    "standardTools": "Стандартные инструменты",
+    "standardToolsHelp": "Команды платформы 1С для активной колонки панели.",
+    "chooseTools": "Выбрать инструменты",
+    "advancedSelection": "Расширенный выбор",
+    "advancedSelectionHelp": "Открывает существующую форму выбора 1С со всеми поддерживаемыми типами метаданных.",
+    "openSelectionForm": "Открыть форму выбора",
+    "addingSourcesRestricted": "Добавление источников ограничено администратором.",
+    "metadataRestricted": "Добавление метаданных ограничено администратором.",
+    "emptySource": "В этом источнике пока нечего показать.",
+    "emptySourceHelp": "Попробуйте другой раздел или расширенный выбор.",
+    "addToColumn": "Добавить в активную колонку",
+    "addNamedToColumn": "Добавить «{name}» в активную колонку",
+    "addPage": "＋ Страница",
+    "customLinkHint": "Для этой колонки заданы отдельные название или подсказка",
+    "emptyColumn": "В колонке пока нет ссылок",
+    "groupActions": "Действия группы «{group}»",
+    "groupDragHint": "Перетащите группу или нажмите правой кнопкой",
+    "linkCount": "{count} ссыл.",
+    "moveToColumnEnd": "Переместить в конец колонки",
+    "noPages": "Нет страниц",
+    "firstPageHelp": "Создайте первую страницу и колонку.",
+    "columnCount": "{count} кол.",
+    "addColumnToPage": "＋ Добавить колонку на страницу «{page}»",
+    "systemColumnsHelp": "Колонки этой страницы формируются автоматически настройками панели.",
+    "noImage": "Без картинки",
+    "selectedPage": "Выбрана страница",
+    "image": "Картинка",
+    "platformImageHint": "системная или общая картинка 1С",
+    "chooseImageCommand": "Выбрать картинку",
+    "chooseRoles": "Выбрать роли",
+    "homeRolesHelp": "Для страницы «Главная» роли доступа не назначаются.",
+    "apply": "Применить",
+    "pageOrder": "Порядок страницы",
+    "earlier": "← Ранее",
+    "later": "Позже →",
+    "deletePage": "Удалить страницу",
+    "selectedColumn": "Выбрана колонка",
+    "columnOrder": "Порядок колонки",
+    "higher": "↑ Выше",
+    "lower": "↓ Ниже",
+    "deleteColumn": "Удалить колонку",
+    "systemColumnHelp": "Системная колонка создаётся автоматически соответствующей настройкой.",
+    "standardColumnHelp": "Стандартные инструменты вынесены на отдельную вкладку. Колонка назначается автоматически.",
+    "assignToColumn": "Разместить в колонке «{column}»",
+    "createColumnFirst": "Сначала создайте колонку",
+    "commonValue": "Общее значение",
+    "onlyColumn": "Только «{column}»",
+    "changesAllColumns": "Изменится во всех колонках, использующих общее значение.",
+    "changesSelectedColumn": "Изменится только в выбранной колонке.",
+    "chooseLinkPlacement": "Выберите размещение ссылки в колонке.",
+    "customTooltip": "индивидуальная подсказка",
+    "commonTooltip": "общая подсказка",
+    "linkPlacement": "Ссылка и её размещение",
+    "linkScopeHelp": "Поля доступны в обоих режимах. Выберите, где применить название и подсказку.",
+    "enterTooltip": "Введите подсказку",
+    "tooltipAllColumns": "Эту подсказку во все колонки",
+    "tooltipAllColumnsHelp": "Команда «во все колонки» заменит также индивидуальные подсказки этой ссылки. Названия останутся прежними.",
+    "resetPlacement": "Вернуть общие название и подсказку",
+    "assignedColumns": "Размещена в колонках",
+    "placementOrder": "Порядок в этой колонке",
+    "groupedOrderHelp": "При группировке стрелки перемещают ссылку внутри её типа.",
+    "deleteLinkAllColumns": "Удалить ссылку из всех колонок",
+    "nothingSelected": "Ничего не выбрано",
+    "chooseElementHelp": "Выберите страницу, колонку или ссылку в предпросмотре. Для добавления ссылки сначала выберите колонку.",
+    "additionalSettings": "Доп. настройки",
+    "additionalDescription": "Изменения попадут в панель после сохранения настроек.",
+    "additionalBack": "К редактору",
+    "additionalDisplay": "Отображение",
+    "additionalAppearance": "Оформление",
+    "additionalTransfer": "Перенос и сброс",
+    "additionalPersonal": "Настройки персональных панелей",
+    "additionalCategories": "Разрешённые категории",
+    "additionalSources": "Другие источники",
+    "additionalSelectAll": "Выбрать все категории",
+    "additionalClearAll": "Снять выбор категорий",
+    "additionalDefault": "По умолчанию",
+    "additionalStructure": "Структура панели",
+    "additionalTooltips": "Подсказки",
+    "additionalImportExportTitle": "Импорт и экспорт",
+    "additionalResetTitle": "Сброс настроек",
+    "additionalResetHint": "Удалите сохранённые настройки панели из текущей базы.",
+    "additionalColumnHeadings": "Заголовки колонок",
+    "additionalGroupHeadings": "Заголовки групп объектов",
+    "additionalFont": "Шрифт",
+    "additionalColor": "Цвет",
+    "additionalImport": "Импорт из файла…",
+    "additionalExport": "Экспорт в файл…",
+    "additionalReset": "Удалить сохранённые настройки…",
+    "additionalCopy": "Взять общую панель…",
+    "additionalTransferHint": "Сохраните настройки в XML или загрузите их из XML.",
+    "additionalRestricted": "Операции переноса недоступны по текущим правам.",
+    "additionalProfiles": "Сохранённые персональные панели",
+    "additionalProfileHint": "Удаление панели выполняется сразу после подтверждения.",
+    "additionalProfileFind": "Поиск пользователя",
+    "additionalUser": "Пользователь",
+    "additionalCreated": "Создана",
+    "additionalUpdated": "Изменена",
+    "additionalPages": "Страниц",
+    "additionalLinks": "Ссылок",
+    "additionalRefresh": "Обновить",
+    "additionalPreview": "Просмотреть",
+    "additionalClosePreview": "Закрыть просмотр",
+    "additionalDelete": "Удалить…",
+    "additionalPreviewName": "Название",
+    "additionalPreviewType": "Вид",
+    "additionalPreviewUrl": "Ссылка",
+    "additionalPreviewHint": "Подсказка",
+    "additionalNoProfiles": "Панели не найдены.",
+    "additionalRefreshProfilesHint": "Нажмите «Обновить», чтобы получить список панелей.",
+    "additionalLoad": "Загрузить настройки",
+    "additionalTooltipBottom": "Снизу",
+    "additionalTooltipPopup": "Всплывающая",
+    "additionalTooltipButton": "Кнопка",
+    "additionalTooltipNone": "Нет",
+    "newPage": "Новая страница",
+    "newColumn": "Новая колонка",
+    "createPageHelp": "Создайте страницу панели.",
+    "createColumnHelp": "Колонка будет добавлена на страницу «{page}».",
+    "enterName": "Введите название",
+    "systemPageColumnsHelp": "На системной странице колонки создаются автоматически",
+    "currentImage": "Текущая: ",
+    "imagesNotFound": "Доступные картинки не найдены.",
+    "pageCaption": "Страница панели",
+    "columnCaption": "Колонка панели",
+    "url": "URL",
+    "urlPlaceholder": "e1cib/… или https://…"
+}};
+function uiText(key, values) {
+    var language = DATA.Ui && DATA.Ui.Language ? DATA.Ui.Language : "ru";
+    var dictionary = Object.prototype.hasOwnProperty.call(UI_TEXT, language) ? UI_TEXT[language] : UI_TEXT.ru;
+    var text = Object.prototype.hasOwnProperty.call(dictionary, key) ? dictionary[key] :
+        Object.prototype.hasOwnProperty.call(UI_TEXT.ru, key) ? UI_TEXT.ru[key] : key;
+    return text.replace(/\{([A-Za-z0-9_]+)\}/g, function (placeholder, name) {
+        return values && Object.prototype.hasOwnProperty.call(values, name) ? String(values[name]) : placeholder;
+    });
+}
+function localizeStaticTexts() {
+    var language = DATA.Ui && DATA.Ui.Language ? DATA.Ui.Language : "ru";
+    if (document.documentElement) document.documentElement.lang = Object.prototype.hasOwnProperty.call(UI_TEXT, language) ? language : "ru";
+    var attributes = {"data-ui-text":"text", "data-ui-label":"aria-label", "data-ui-placeholder":"placeholder", "data-ui-title":"title"};
+    for (var source in attributes) if (attributes.hasOwnProperty(source)) {
+        var nodes = document.querySelectorAll('[' + source + ']');
+        for (var i=0;i<nodes.length;i++) {
+            if (!nodes[i].getAttribute) continue;
+            var key = nodes[i].getAttribute(source);
+            if (!key) continue;
+            if (attributes[source] === "text") nodes[i].innerHTML = escapeHtml(uiText(key));
+            else nodes[i].setAttribute(attributes[source], uiText(key));
+        }
+    }
+    if (String(document.title || "").indexOf("PANELKASETTINGS") !== 0) document.title = uiText("settingsTitle");
+}
+function fieldLabel(id, key) {
+    return '<label class="label" for="' + escapeHtml(id) + '">' + escapeHtml(uiText(key)) + '</label>';
+}
+
+function valueOr(value, fallback) {
+    return value === null || typeof value === "undefined" ? fallback : value;
+}
+
+function escapeHtml(value) {
+    var text = String(valueOr(value, ""));
+    return text.replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function encode64(value) {
+    var text = String(valueOr(value, ""));
+    try {
+        return window.btoa(unescape(encodeURIComponent(text)))
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_")
+            .replace(/=/g, ".");
+    } catch (e) {
+        return "";
+    }
+}
+
+// Build a command for the title mailbox. Only publishBridgeCommand sends it to 1C.
+function actionUrl(action, params) {
+    var result = "panelkasettings://" + action;
+    var pairs = [];
+    var key;
+    params = params || {};
+    var page = params.page ? findPageByName(params.page) : null;
+    var column = params.columnId ? findColumnByName(params.columnId) : (params.column ? findColumnByName(params.column, params.page) : null);
+    if (page) params.pageId = page.Id;
+    if (column) params.columnId = column.Id;
+    if (action === 'choose_icon' || action === 'set_icon') {
+        var object = params.kind === 'page' ? findPageByName(params.name) : findColumnByName(params.name);
+        if (object) params.objectId = object.Id;
+    }
+    if(typeof params.index !== 'undefined' && !params.id && DATA.LinkIds) params.id=DATA.LinkIds[Number(params.index)]||'';
+    for (key in params) {
+        if (params.hasOwnProperty(key)) {
+            pairs.push(key + "=" + encode64(params[key]));
+        }
+    }
+    if (pairs.length > 0) {
+        result += "?" + pairs.join("&");
+    }
+    return result;
+}
+
+// DOM-мост HTML -> 1С. Навигация по panelkasettings:// никогда не выполняется:
+// команда кодируется в document.title, а форма 1С считывает ее обработчиком ожидания.
+var bridgeSequence = 0;
+
+// Only metadata is cached, for the lifetime of this document. Dynamic sources stay live.
+var metadataSourceCache = {};
+var metadataSourceCachePolicy = "";
+var performanceSamples = [];
+var pendingPerformance = null;
+function clockMs() { return new Date().getTime(); }
+function recordPerformance(sample) {
+    performanceSamples.push(sample);
+    if (performanceSamples.length > 50) performanceSamples.shift();
+    var log = document.getElementById('panelkaPerformanceLog');
+    if (log) log.value = JSON.stringify(performanceSamples);
+}
+// Developer diagnostics: durations only, never names, addresses or editor contents.
+window.panelkaPerformance = function () { return performanceSamples.slice(0); };
+function rememberMetadataSources() {
+    refreshMetadataCachePolicy();
+    if (DATA.Ui.SourceMode === 'metadata' && DATA.Sources) {
+        metadataSourceCache['group:' + DATA.Ui.MetadataGroup] = DATA.Sources;
+    }
+}
+function tryLocalSource(url) {
+    if (bridgeBusy) return false;
+    var action = url.split('?')[0].replace('panelkasettings://', '');
+    var params = commandParameters(url);
+    if (action !== 'set_metadata_group' && !(action === 'set_source_mode' && params.mode === 'metadata')) return false;
+    updateEditorDraft();
+    if (document.getElementById('panelkaEditorDraft').value) return false;
+    var group = action === 'set_metadata_group' ? params.group : DATA.Ui.MetadataGroup;
+    refreshMetadataCachePolicy();
+    if (!metadataSourcesAllowed() || !metadataGroupAvailable(group)) return false;
+    var cached = metadataSourceCache['group:' + group];
+    if (!cached) return false;
+    var started = clockMs(), state = captureViewState();
+    DATA.Ui.SourceMode = 'metadata'; DATA.Ui.MetadataGroup = group; DATA.Sources = cached;
+    DATA.Ui.State = JSON.stringify(state);
+    renderSourceTabs(); renderMetadataGroups(); renderSourceList(); restoreViewState();
+    recordPerformance({action:action, local:true, renderMs:clockMs()-started});
+    return true;
+}
+
+var bridgeBusy = false;
+var bridgeDisabledFields = [];
+var activeBridgeAction = "";
+window.panelkaBridgeState = function () {
+    var title = String(document.title || "");
+    return {Busy:bridgeBusy, Pending:title.indexOf("PANELKASETTINGS|") === 0,
+        Processing:title === "PANELKASETTINGS_PROCESSING", Sequence:bridgeSequence};
+};
+function publishBridgeCommand(rawHref) {
+    if (bridgeBusy) { showToast(uiText("wait")); return false; }
+    var action = rawHref.split('?')[0].replace('panelkasettings://','');
+    if (action === "save_close" && hasWebLinkDraft()) {
+        showToast(uiText("finishWebDraft"));
+        return false;
+    }
+    updateEditorDraft();
+    var draft = document.getElementById('panelkaEditorDraft').value;
+    if (action === 'open_additional_settings') additionalOpeningDraft = !!draft;
+    if (draft && rawHref.split('?')[0] !== 'panelkasettings://apply_link_details') rawHref = appendCommandParameter(rawHref, 'draft', draft);
+    rawHref = appendCommandParameter(rawHref, '__ui', JSON.stringify(captureViewState()));
+    var page = findPageByName(DATA.Ui.ActivePage), column = findColumnByName(DATA.Ui.ActiveColumn);
+    rawHref = appendCommandParameter(rawHref, '__activePageId', page ? page.Id : '');
+    rawHref = appendCommandParameter(rawHref, '__activeColumnId', column ? column.Id : '');
+    rawHref = appendCommandParameter(rawHref, '__selectedKind', DATA.Selected.Kind || 'None');
+    rawHref = appendCommandParameter(rawHref, '__placementId', DATA.Selected.Placement ? DATA.Selected.Placement.Id : '');
+    rawHref = appendCommandParameter(rawHref, '__sourceMode', DATA.Ui.SourceMode || '');
+    rawHref = appendCommandParameter(rawHref, '__metadataGroup', DATA.Ui.MetadataGroup || '');
+    pendingPerformance = {action:rawHref.split('?')[0].replace('panelkasettings://',''), started:clockMs()};
+    bridgeBusy = true;
+    activeBridgeAction = action;
+    bridgeDisabledFields = [];
+    var fields = document.querySelectorAll('input,textarea,select');
+    for(var i=0;i<fields.length;i++) if(!fields[i].disabled && fields[i].id!=='panelkaEditorDraft' && fields[i].id!=='panelkaViewState') {
+        bridgeDisabledFields.push(fields[i]);fields[i].disabled=true;
+    }
+    document.body.setAttribute('data-quick-command', /^(add_web|add_source|apply_link_details|apply_editor)$/.test(action) ? 'true' : 'false');
+    document.body.setAttribute('aria-busy', 'true');
+    bridgeSequence += 1;
+    document.title = "PANELKASETTINGS|" + bridgeSequence + "|" + encode64(rawHref);
+    return true;
+}
+
+function findAnchor(node) {
+    while (node && node.tagName) {
+        if (String(node.tagName).toUpperCase() === "A" || String(node.tagName).toUpperCase() === "BUTTON") {
+            return node;
+        }
+        node = node.parentNode;
+    }
+    return null;
+}
+
+function getScrollTopById(id) {
+    var node = document.getElementById(id);
+    return node ? Math.max(0, parseInt(node.scrollTop || 0, 10) || 0) : 0;
+}
+
+function appendCommandParameter(url, name, value) {
+    var separator = url.indexOf("?") >= 0 ? "&" : "?";
+    return url + separator + name + "=" + encode64(String(value));
+}
+
+function appendScrollState(url) {
+    url = appendCommandParameter(url, "__scrollCenter", getScrollTopById("previewShell"));
+    url = appendCommandParameter(url, "__scrollSources", getScrollTopById("sourceList"));
+    url = appendCommandParameter(url, "__scrollProperties", getScrollTopById("rightPane"));
+    return url;
+}
+
+function handleBridgeClick(event) {
+    event = event || window.event;
+
+    // Если inline-обработчик уже отменил действие (например, пользователь
+    // нажал «Отмена» в confirm), команду в 1С не отправляем.
+    if (event && (event.defaultPrevented === true || event.returnValue === false)) {
+        return;
+    }
+
+    var anchor = findAnchor(event ? (event.target || event.srcElement) : null);
+    if (!anchor || !anchor.getAttribute) {
+        return;
+    }
+
+    // Важно читать именно атрибут href после выполнения inline onclick:
+    // функции prepare* динамически заменяют javascript:void(0) на panelkasettings://... .
+    var rawHref = anchor.getAttribute("data-href") || anchor.getAttribute("href") || "";
+    if (rawHref.indexOf("panelkasettings://") !== 0) {
+        return;
+    }
+
+    if (event.preventDefault) {
+        event.preventDefault();
+    }
+    event.returnValue = false;
+
+    if (rawHref === "panelkasettings://open_additional_settings" && additionalOpen) {
+        closeAdditionalSettings();
+        return;
+    }
+    if (tryLocalSource(rawHref) || tryLocalSelection(rawHref)) return;
+    rawHref = appendScrollState(rawHref);
+    publishBridgeCommand(rawHref);
+}
+
+if (document.addEventListener) {
+    document.addEventListener("click", handleBridgeClick, false);
+} else if (document.attachEvent) {
+    document.attachEvent("onclick", handleBridgeClick);
+}
+
+
+function openDeleteConfirm(action, params, title, text, objectName) {
+    var backdrop = document.getElementById("deleteConfirmBackdrop");
+    var titleNode = document.getElementById("deleteConfirmTitle");
+    var textNode = document.getElementById("deleteConfirmText");
+    var objectNode = document.getElementById("deleteConfirmObject");
+    var applyNode = document.getElementById("deleteConfirmApply");
+
+    pendingDeleteUrl = actionUrl(action, params || {});
+
+    if (titleNode) {
+        titleNode.innerHTML = escapeHtml(title || uiText("deleteConfirmation"));
+    }
+    if (textNode) {
+        textNode.innerHTML = escapeHtml(text || uiText("deleteSelectedQuestion"));
+    }
+    if (objectNode) {
+        objectNode.innerHTML = escapeHtml(objectName || "");
+        objectNode.style.display = objectName ? "block" : "none";
+    }
+    if (applyNode) {
+        applyNode.href = "javascript:void(0)";
+    }
+    if (backdrop) {
+        backdrop.style.display = "block";
+    }
+    return false;
+}
+
+function closeDeleteConfirm() {
+    var backdrop = document.getElementById("deleteConfirmBackdrop");
+    var applyNode = document.getElementById("deleteConfirmApply");
+    pendingDeleteUrl = "";
+    if (applyNode) {
+        applyNode.href = "javascript:void(0)";
+    }
+    if (backdrop) {
+        backdrop.style.display = "none";
+    }
+}
+
+function prepareDeleteConfirm(anchor) {
+    if (!pendingDeleteUrl) {
+        closeDeleteConfirm();
+        return false;
+    }
+
+    anchor.href = pendingDeleteUrl;
+
+    var backdrop = document.getElementById("deleteConfirmBackdrop");
+    if (backdrop) {
+        backdrop.style.display = "none";
+    }
+
+    pendingDeleteUrl = "";
+    return true;
+}
+
+function findPageByName(name) {
+    var i;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        if (DATA.Pages[i].Name === name) { return DATA.Pages[i]; }
+    }
+    return null;
+}
+
+function findColumnByName(name, pageName) {
+    var i, j, page, column;
+    // ID is authoritative; a name is resolved only within the displayed page.
+    for (i = 0; i < DATA.Pages.length; i++) {
+        page = DATA.Pages[i];
+        for (j = 0; j < page.Columns.length; j++) {
+            column = page.Columns[j];
+            if (column.Id === name) return column;
+        }
+    }
+    pageName = pageName || DATA.Ui.ActivePage;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        page = DATA.Pages[i];
+        if (page.Name !== pageName) continue;
+        for (j = 0; j < page.Columns.length; j++) {
+            if (page.Columns[j].Name === name) return page.Columns[j];
+        }
+    }
+    return null;
+}
+
+function requestLinkDelete(source, index) {
+    var item = findLinkData(source, index);
+    closeContextMenu();
+    return openDeleteConfirm(
+        "delete_link",
+        { source: source, index: index },
+        uiText("deleteLinkQuestion"),
+        uiText("deleteLinkHelp"),
+        item ? item.Name : "");
+}
+
+function requestColumnDelete(name) {
+    var column = findColumnByName(name);
+    if (!column || !column.Links || column.Links.length === 0) {
+        return openDeleteConfirm("delete_column_mode", { column: name, mode: "unassign" }, uiText("deleteColumnQuestion"), uiText("deleteColumnHelp"), name);
+    }
+    return openStructureChoice(
+        uiText("deleteColumnQuestion"),
+        uiText("deleteColumnChoice"),
+        name,
+        actionUrl("delete_column_mode", { column: name, mode: "unassign" }),
+        actionUrl("delete_column_mode", { column: name, mode: "delete_links" }));
+}
+
+function requestPageDelete(name) {
+    var page = findPageByName(name);
+    var count = 0, i;
+    if (page && page.Columns) {
+        for (i = 0; i < page.Columns.length; i++) { count += (page.Columns[i].Links || []).length; }
+    }
+    if (!page || count === 0) {
+        return openDeleteConfirm("delete_page_mode", { page: name, mode: "unassign" }, uiText("deletePageQuestion"), uiText("deletePageHelp"), name);
+    }
+    return openStructureChoice(
+        uiText("deletePageQuestion"),
+        uiText("deletePageChoice"),
+        name,
+        actionUrl("delete_page_mode", { page: name, mode: "unassign" }),
+        actionUrl("delete_page_mode", { page: name, mode: "delete_links" }));
+}
+
+function openStructureChoice(title, text, objectName, unassignUrl, deleteUrl) {
+    var backdrop = document.getElementById("structureChoiceBackdrop");
+    document.getElementById("structureChoiceTitle").innerHTML = escapeHtml(title || uiText("deletion"));
+    document.getElementById("structureChoiceText").innerHTML = escapeHtml(text || "");
+    document.getElementById("structureChoiceObject").innerHTML = escapeHtml(objectName || "");
+    document.getElementById("structureChoiceUnassign").href = unassignUrl;
+    document.getElementById("structureChoiceDelete").href = deleteUrl;
+    if (backdrop) { backdrop.style.display = "block"; }
+    closeContextMenu();
+    return false;
+}
+
+function closeStructureChoice() {
+    var backdrop = document.getElementById("structureChoiceBackdrop");
+    if (backdrop) { backdrop.style.display = "none"; }
+}
+
+function contextItem(label, url, cssClass) {
+    return '<a role="menuitem" class="context-item' + (cssClass ? ' ' + cssClass : '') + '" href="' + url + '">' + escapeHtml(label) + '</a>';
+}
+
+var contextMenuReturnFocus = null;
+function openContextMenu(event, kind, pageName, columnName, source, index, groupName) {
+    if (bridgeBusy) return false;
+    event = event || window.event;
+    if (event.preventDefault) { event.preventDefault(); }
+    event.returnValue = false;
+    if (event.stopPropagation) { event.stopPropagation(); }
+    event.cancelBubble = true;
+
+    var menu = document.getElementById("panelkaContextMenu");
+    var html = "";
+    var page, column, item;
+
+    if (kind === "page") {
+        page = findPageByName(pageName);
+        if (page && !boolValue(page.System)) {
+            html += contextItem(uiText("moveEarlier"), actionUrl("move_page", { page: pageName, direction: "prev" }));
+            html += contextItem(uiText("moveLater"), actionUrl("move_page", { page: pageName, direction: "next" }));
+            html += '<div class="context-separator"></div>';
+            html += '<a role="menuitem" class="context-item danger" href="javascript:void(0)" onclick="closeContextMenu(); return requestPageDelete(\'' + escapeJs(pageName) + ("');\">" + escapeHtml(uiText("deletePageMenu")) + "</a>");
+        }
+    } else if (kind === "column") {
+        column = findColumnByName(columnName);
+        if (column && !boolValue(column.System)) {
+            html += contextItem(uiText("moveHigher"), actionUrl("move_column", { column: columnName, direction: "prev" }));
+            html += contextItem(uiText("moveLower"), actionUrl("move_column", { column: columnName, direction: "next" }));
+            html += '<div class="context-separator"></div>';
+            html += '<a role="menuitem" class="context-item danger" href="javascript:void(0)" onclick="closeContextMenu(); return requestColumnDelete(\'' + escapeJs(columnName) + ("');\">" + escapeHtml(uiText("deleteColumnMenu")) + "</a>");
+        }
+    } else if (kind === "group") {
+        column = findColumnByName(columnName);
+        if (column && boolValue(DATA.General.GroupByType)) {
+            html += contextItem(uiText("moveGroupHigher"), actionUrl("move_group", {columnId:column.Id, group:groupName, direction:"prev"}));
+            html += contextItem(uiText("moveGroupLower"), actionUrl("move_group", {columnId:column.Id, group:groupName, direction:"next"}));
+        }
+    } else if (kind === "link") {
+        html += contextItem(uiText("moveHigher"), actionUrl("move_link", { source: source, index: index, column: columnName, direction: "prev" }));
+        html += contextItem(uiText("moveLower"), actionUrl("move_link", { source: source, index: index, column: columnName, direction: "next" }));
+        html += '<div class="context-separator"></div>';
+        if (columnName && columnName !== "Не распределено") {
+            html += contextItem(uiText("removeFromColumn"), actionUrl("remove_link_from_column", { source: source, index: index, column: columnName }));
+        }
+        html += contextItem(uiText("moveToUnassigned"), actionUrl("unassign_link", {source: source, index: index, column: columnName}));
+        item = findLinkData(source, index);
+        html += '<a role="menuitem" class="context-item danger" href="javascript:void(0)" onclick="return requestLinkDelete(\'' + escapeJs(source) + '\', ' + index + (");\">" + escapeHtml(uiText("deleteLinkMenu")) + "</a>");
+    }
+
+    if (!html) { return false; }
+    contextMenuReturnFocus = document.activeElement;
+    menu.innerHTML = html;
+    menu.style.display = "block";
+    var target = event.target || event.srcElement;
+    var anchorRect = event.keyboard && target && target.getBoundingClientRect ? target.getBoundingClientRect() : null;
+    var x = anchorRect ? anchorRect.left : (event.clientX || 0);
+    var y = anchorRect ? anchorRect.bottom : (event.clientY || 0);
+    var first = menu.querySelector ? menu.querySelector('a') : null;
+    if (first && first.focus) first.focus();
+    menu.style.left = x + "px";
+    menu.style.top = y + "px";
+    window.setTimeout(function () {
+        var rect = menu.getBoundingClientRect ? menu.getBoundingClientRect() : null;
+        if (rect) {
+            if (rect.right > document.documentElement.clientWidth) { menu.style.left = Math.max(4, x - rect.width) + "px"; }
+            if (rect.bottom > document.documentElement.clientHeight) { menu.style.top = Math.max(4, y - rect.height) + "px"; }
+        }
+    }, 0);
+    return false;
+}
+
+// Drag payloads stay inside this form; external text/URL drops never execute commands.
+var settingsDrag = null, settingsDropNode = null;
+function dragDescriptor(node, drop) {
+    while (node && node !== document.body) {
+        if (node.getAttribute) {
+            var kind = node.getAttribute(drop ? 'data-drop-kind' : 'data-drag-kind');
+            var id = node.getAttribute(drop ? 'data-drop-id' : 'data-drag-id');
+            if (!kind && drop) {kind=node.getAttribute('data-drag-kind');id=node.getAttribute('data-drag-id');}
+            if (kind) return {kind:kind,id:id,group:node.getAttribute('data-group-name')||'',node:node};
+        }
+        node = node.parentNode;
+    }
+    return null;
+}
+function clearSettingsDrop() {
+    if(settingsDropNode) settingsDropNode.className=settingsDropNode.className.replace(/ panelka-drop-(before|inside)/g,'');
+    settingsDropNode=null;
+}
+function validSettingsDrop(from,to) {
+    if(!from||!to)return false;
+    if(from.kind===to.kind && from.id===to.id && from.group===to.group)return false;
+    if(from.kind==='Group')return from.id===to.id && (to.kind==='Group'||to.kind==='Column');
+    if(from.kind==='Link')return (to.kind==='Link'||to.kind==='Column') && to.id!=='column-standard' && to.id!=='column-unassigned';
+    if(from.kind==='Column')return (to.kind==='Column'||to.kind==='Page') && to.id!=='page-standard' && to.id!=='page-unassigned' && to.id!=='column-standard' && to.id!=='column-unassigned';
+    return false;
+}
+function startSettingsDrag(event) {
+    event=event||window.event;
+    var from=dragDescriptor(event.target||event.srcElement,false);
+    if(bridgeBusy || !from || from.node.getAttribute('draggable')!=='true'){if(event.preventDefault)event.preventDefault();return;}
+    closeContextMenu();settingsDrag=from;document.body.className=(document.body.className||'')+' panelka-dragging';
+    if(event.dataTransfer){event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('Text','panelka-settings');}
+    if(event.stopPropagation)event.stopPropagation();
+}
+function overSettingsDrag(event) {
+    event=event||window.event;
+    var to=dragDescriptor(event.target||event.srcElement,true);
+    clearSettingsDrop();
+    if(!validSettingsDrop(settingsDrag,to))return;
+    if(event.preventDefault)event.preventDefault();event.returnValue=false;
+    if(event.dataTransfer)event.dataTransfer.dropEffect='move';
+    var shell=document.getElementById('previewShell');
+    if(shell && shell.getBoundingClientRect){
+        var rect=shell.getBoundingClientRect();
+        if(event.clientY<rect.top+35)shell.scrollTop-=18;
+        else if(event.clientY>rect.bottom-35)shell.scrollTop+=18;
+    }
+    settingsDropNode=to.node;
+    settingsDropNode.className+=(to.kind===settingsDrag.kind?' panelka-drop-before':' panelka-drop-inside');
+}
+function dropSettingsDrag(event) {
+    event=event||window.event;
+    var from=settingsDrag,to=dragDescriptor(event.target||event.srcElement,true);
+    clearSettingsDrop();settingsDrag=null;document.body.className=(document.body.className||'').replace(/ panelka-dragging/g,'');
+    if(!validSettingsDrop(from,to))return;
+    if(event.preventDefault)event.preventDefault();event.returnValue=false;
+    if(event.stopPropagation)event.stopPropagation();
+    publishBridgeCommand(appendScrollState(actionUrl('drag_structure',{
+        kind:from.kind,dragId:from.id,group:from.group,targetKind:to.kind,targetId:to.id,targetGroup:to.group
+    })));
+}
+if(document.addEventListener){
+    document.addEventListener('dragstart',startSettingsDrag,false);
+    document.addEventListener('dragover',overSettingsDrag,false);
+    document.addEventListener('drop',dropSettingsDrag,false);
+    document.addEventListener('dragend',function(){settingsDrag=null;clearSettingsDrop();document.body.className=(document.body.className||'').replace(/ panelka-dragging/g,'');},false);
+}
+
+function findLinkData(source, index) {
+    var i, j, k, links, item;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        for (j = 0; j < DATA.Pages[i].Columns.length; j++) {
+            links = DATA.Pages[i].Columns[j].Links || [];
+            for (k = 0; k < links.length; k++) {
+                item = links[k];
+                if (item.Source === source && parseInt(item.Index, 10) === parseInt(index, 10)) { return item; }
+            }
+        }
+    }
+    return null;
+}
+
+function closeContextMenu(restoreFocus) {
+    var menu = document.getElementById("panelkaContextMenu");
+    if (menu) { menu.style.display = "none"; }
+    if (restoreFocus && contextMenuReturnFocus && contextMenuReturnFocus.focus) contextMenuReturnFocus.focus();
+    contextMenuReturnFocus = null;
+}
+
+function findContextTarget(node) {
+    while (node && node !== document.body) {
+        if (node.getAttribute && node.getAttribute("data-context-kind")) { return node; }
+        node = node.parentNode;
+    }
+    return null;
+}
+
+function handleContextMenuEvent(event) {
+    event = event || window.event;
+    var target = findContextTarget(event.target || event.srcElement);
+    if (event.preventDefault) { event.preventDefault(); }
+    event.returnValue = false;
+    if (!target) {
+        closeContextMenu();
+        return false;
+    }
+    return openContextMenu(
+        event,
+        target.getAttribute("data-context-kind") || "",
+        target.getAttribute("data-page-name") || "",
+        target.getAttribute("data-column-name") || "",
+        target.getAttribute("data-source") || "",
+        parseInt(target.getAttribute("data-index") || "-1", 10), target.getAttribute("data-group-name") || "");
+}
+
+if (document.addEventListener) {
+    document.addEventListener("click", function () { closeContextMenu(); }, false);
+    document.addEventListener("contextmenu", handleContextMenuEvent, false);
+} else if (document.attachEvent) {
+    document.attachEvent("onclick", function () { closeContextMenu(); });
+    document.attachEvent("oncontextmenu", handleContextMenuEvent);
+}
+
+function boolValue(value) {
+    return value === true || value === "true" || value === "Истина";
+}
+
+function showToast(text) {
+    var node = document.getElementById("toast");
+    node.innerHTML = escapeHtml(text);
+    node.style.display = "block";
+    window.setTimeout(function () { node.style.display = "none"; }, 1800);
+}
+
+function normalizeData() {
+    DATA = DATA || {};
+    DATA.Ui = DATA.Ui || {};
+    var brandTitle = document.getElementById('settingsBrandTitle');
+    if (brandTitle) brandTitle.innerText = DATA.Ui.Personal ? uiText("personalSettingsTitle") : uiText("commonSettingsTitle");
+    DATA.General = DATA.General || {};
+    DATA.Pages = DATA.Pages || [];
+    DATA.Sources = DATA.Sources || [];
+    DATA.MetadataGroups = DATA.MetadataGroups || [];
+    DATA.AllColumns = DATA.AllColumns || [];
+    DATA.Selected = DATA.Selected || { Kind: "None" };
+    DATA.IconPicker = DATA.IconPicker || { Open: false, Kind: "", ObjectName: "", Current: "", Items: [] };
+    DATA.IconPicker.Items = DATA.IconPicker.Items || [];
+    DATA.Ui.ActivePage = valueOr(DATA.Ui.ActivePage, "Главная");
+    DATA.Ui.ActiveColumn = valueOr(DATA.Ui.ActiveColumn, "");
+    DATA.Ui.SourceMode = valueOr(DATA.Ui.SourceMode, "metadata");
+    DATA.Ui.MetadataGroup = valueOr(DATA.Ui.MetadataGroup, "Справочники");
+    DATA.Ui.FavoriteFilter = valueOr(DATA.Ui.FavoriteFilter, "all");
+    DATA.Ui.Theme = valueOr(DATA.Ui.Theme, "light");
+    DATA.Ui.ScrollCenter = parseInt(valueOr(DATA.Ui.ScrollCenter, 0), 10) || 0;
+    DATA.Ui.ScrollSources = parseInt(valueOr(DATA.Ui.ScrollSources, 0), 10) || 0;
+    DATA.Ui.ScrollProperties = parseInt(valueOr(DATA.Ui.ScrollProperties, 0), 10) || 0;
+}
+
+function applyTheme() {
+    var dark = String(DATA.Ui.Theme || "light").toLowerCase() === "dark";
+    document.body.className = dark ? "dark-mode" : "";
+    var button = document.getElementById("themeToggle");
+    if (button) {
+        button.innerHTML = escapeHtml(dark ? uiText("lightTheme") : uiText("darkTheme"));
+        button.title = dark ? uiText("switchLightTheme") : uiText("switchDarkTheme");
+    }
+}
+
+function toggleThemeLocally() {
+    if (bridgeBusy) return false;
+    DATA.Ui.Theme = DATA.Ui.Theme === "dark" ? "light" : "dark";
+    var field = document.getElementById('panelkaThemeDraft');
+    if (field) field.value = DATA.Ui.Theme;
+    applyTheme();
+    return false;
+}
+
+function restoreScrollState() {
+    window.setTimeout(function () {
+        var center = document.getElementById("previewShell");
+        var sources = document.getElementById("sourceList");
+        var properties = document.getElementById("rightPane");
+        if (center) { center.scrollTop = Math.max(0, DATA.Ui.ScrollCenter || 0); }
+        if (sources) { sources.scrollTop = Math.max(0, DATA.Ui.ScrollSources || 0); }
+        if (properties) { properties.scrollTop = Math.max(0, DATA.Ui.ScrollProperties || 0); }
+    }, 0);
+}
+
+function getSourceTabLabel(mode) {
+    if (mode === "metadata") { return uiText("metadata"); }
+    if (mode === "favorites") { return uiText("favorites"); }
+    if (mode === "opened") { return uiText("opened"); }
+    if (mode === "standard") { return uiText("standardTools"); }
+    if (mode === "catalog") { return uiText("panelCatalog"); }
+    if (mode === "extra") { return uiText("additionalTools"); }
+    return uiText("more");
+}
+
+// The server classifies links and filters metadata groups. The client only hides
+// unavailable entry points; every addition is checked again on the server.
+function personalSourceAllowed(key) {
+    if (!boolValue(DATA.Ui.Personal) && key !== "ЛокальныеФайлы" && key !== "СтандартныеИнструменты") return true;
+    var policy = DATA.Ui.AllowedSources;
+    return !policy || !policy.hasOwnProperty(key) || boolValue(policy[key]);
+}
+
+function hasPersonalSourceRestrictions() {
+    if (!boolValue(DATA.Ui.Personal)) return false;
+    var policy = DATA.Ui.AllowedSources || {}, key;
+    for (key in policy) if (policy.hasOwnProperty(key) && !boolValue(policy[key])) return true;
+    return false;
+}
+
+function metadataSourcesAllowed() {
+    // Older servers omit the policy and retain their existing behaviour.
+    return !boolValue(DATA.Ui.Personal) || !DATA.Ui.AllowedSources || DATA.MetadataGroups.length > 0;
+}
+
+function metadataGroupAvailable(group) {
+    if (!boolValue(DATA.Ui.Personal) || !DATA.Ui.AllowedSources) return true;
+    for (var i = 0; i < DATA.MetadataGroups.length; i++) if (DATA.MetadataGroups[i].Id === group) return true;
+    return false;
+}
+
+function extraSourcesAllowed() {
+    return personalSourceAllowed("ДополнительныеОбработки") && boolValue(DATA.Ui.HasExtraProcessing);
+}
+function manualLinkAllowed() {
+    return personalSourceAllowed("ВебСсылки") || metadataSourcesAllowed() || extraSourcesAllowed();
+}
+function moreSourcesAllowed() {
+    return metadataSourcesAllowed() || personalSourceAllowed("ВебСсылки") || personalSourceAllowed("ЛокальныеФайлы") ||
+        personalSourceAllowed("СтандартныеИнструменты") ||
+        (personalSourceAllowed("ДополнительныеОбработки") && boolValue(DATA.Ui.HasExtraProcessing));
+}
+
+function refreshMetadataCachePolicy() {
+    var groups = DATA.MetadataGroups || [], ids = [], i;
+    for (i = 0; i < groups.length; i++) ids.push(groups[i].Id);
+    var signature = JSON.stringify([boolValue(DATA.Ui.Personal), DATA.Ui.AllowedSources || null, ids]);
+    if (signature !== metadataSourceCachePolicy) {
+        metadataSourceCache = {};
+        metadataSourceCachePolicy = signature;
+    }
+}
+
+function renderSourceTabs() {
+    var modes = ["metadata", "standard", "favorites", "opened", "catalog", "extra", "more"];
+    var html = "";
+    var i;
+    for (i = 0; i < modes.length; i++) {
+        if (modes[i] === "metadata" && !metadataSourcesAllowed()) continue;
+        if (modes[i] === "standard" && !personalSourceAllowed("СтандартныеИнструменты")) continue;
+        if (modes[i] === "extra" && !extraSourcesAllowed()) continue;
+        if (modes[i] === "more" && !moreSourcesAllowed()) continue;
+        html += '<a class="source-tab' + (DATA.Ui.SourceMode === modes[i] ? ' active' : '') + '"' + (DATA.Ui.SourceMode === modes[i] ? ' aria-current="page"' : '') + ' href="' +
+            actionUrl("set_source_mode", { mode: modes[i] }) + '">' + escapeHtml(getSourceTabLabel(modes[i])) + '</a>';
+    }
+    document.getElementById("sourceTabs").innerHTML = html;
+    var hint = document.getElementById("personalSourcePolicyHint");
+    if (hint) hint.style.display = hasPersonalSourceRestrictions() ? "block" : "none";
+}
+
+function renderMetadataGroups() {
+    var host = document.getElementById("metadataGroups");
+    var html = "";
+    var i, item;
+
+    if (DATA.Ui.SourceMode === "metadata" && metadataSourcesAllowed()) {
+        host.style.display = "block";
+        for (i = 0; i < DATA.MetadataGroups.length; i++) {
+            item = DATA.MetadataGroups[i];
+            html += '<a class="metadata-group' + (DATA.Ui.MetadataGroup === item.Id ? ' active' : '') + '"' + (DATA.Ui.MetadataGroup === item.Id ? ' aria-current="page"' : '') + ' href="' +
+                actionUrl("set_metadata_group", { group: item.Id }) + '">' + escapeHtml(item.Name) + '</a>';
+        }
+        host.innerHTML = html;
+        return;
+    }
+
+    if (DATA.Ui.SourceMode === "favorites") {
+        host.style.display = "block";
+        html += '<a class="metadata-group' + (DATA.Ui.FavoriteFilter === "all" ? ' active' : '') + '" href="' + actionUrl("set_favorite_filter", { filter: "all" }) + ("\">" + escapeHtml(uiText("all")) + "</a>");
+        html += '<a class="metadata-group' + (DATA.Ui.FavoriteFilter === "lists" ? ' active' : '') + '" href="' + actionUrl("set_favorite_filter", { filter: "lists" }) + ("\">" + escapeHtml(uiText("listsAndReports")) + "</a>");
+        html += '<a class="metadata-group' + (DATA.Ui.FavoriteFilter === "objects" ? ' active' : '') + '" href="' + actionUrl("set_favorite_filter", { filter: "objects" }) + ("\">" + escapeHtml(uiText("specificObjects")) + "</a>");
+        host.innerHTML = html;
+        return;
+    }
+
+    host.style.display = "none";
+    host.innerHTML = "";
+}
+
+function sourceIcon(type) {
+    var text = String(valueOr(type, ""));
+    if (text.indexOf("Документ") >= 0) { return "▤"; }
+    if (text.indexOf("Справочник") >= 0) { return "▦"; }
+    if (text.indexOf("Отчет") >= 0) { return "▥"; }
+    if (text.indexOf("Обработ") >= 0) { return "⚙"; }
+    if (text.indexOf("Регистр") >= 0) { return "≡"; }
+    if (text.indexOf("Веб") >= 0) { return "↗"; }
+    if (text.indexOf("Файл") >= 0) { return "⌑"; }
+    return "•";
+}
+
+function renderMoreSources() {
+    var html = "";
+    if (manualLinkAllowed()) {
+        html += ("<div class=\"source-section-title\">" + escapeHtml(uiText("webAndBrowser")) + "</div>");
+        html += ("<div class=\"source-card\"><div class=\"source-card-title\">" + escapeHtml(uiText("webLink")) + "</div><div class=\"source-card-text\">" + escapeHtml(uiText("webLinkHelp")) + "</div>") +
+            ("<div class=\"source-card-actions\"><a class=\"btn btn-small\" href=\"javascript:void(0)\" onclick=\"openWebLinkDialog(); return false;\">" + escapeHtml(uiText("addUrl")) + "</a></div></div>");
+    }
+    if (personalSourceAllowed("ВебСсылки")) {
+        html += ("<div class=\"source-card\"><div class=\"source-card-title\">" + escapeHtml(uiText("browserBookmarks")) + "</div><div class=\"source-card-text\">" + escapeHtml(uiText("browserBookmarksHelp")) + "</div>") +
+            '<div class="source-card-actions"><a class="btn btn-small" href="' + actionUrl("choose_browser") + ("\">" + escapeHtml(uiText("openBookmarks")) + "</a></div></div>");
+
+    }
+    var filesAllowed = personalSourceAllowed("ЛокальныеФайлы");
+    var extraAllowed = extraSourcesAllowed();
+    if (filesAllowed || extraAllowed) html += ("<div class=\"source-section-title\">" + escapeHtml(uiText("filesAndTools")) + "</div>");
+    if (filesAllowed) {
+        html += ("<div class=\"source-card\"><div class=\"source-card-title\">" + escapeHtml(uiText("externalFiles")) + "</div><div class=\"source-card-text\">" + escapeHtml(uiText("externalFilesHelp")) + "</div>") +
+            '<div class="source-card-actions"><a class="btn btn-small" href="' + actionUrl("choose_files") + ("\">" + escapeHtml(uiText("chooseFiles")) + "</a>") +
+            '<a class="btn btn-small" href="' + actionUrl("choose_folder") + ("\">" + escapeHtml(uiText("chooseFolder")) + "</a></div></div>");
+    }
+    if (extraAllowed) {
+            html += ("<div class=\"source-card\"><div class=\"source-card-title\">" + escapeHtml(uiText("additionalTools")) + "</div><div class=\"source-card-text\">" + escapeHtml(uiText("additionalToolsHelp")) + "</div>") +
+                '<div class="source-card-actions"><a class="btn btn-small" href="' + actionUrl("choose_extra") + ("\">" + escapeHtml(uiText("choose")) + "</a></div></div>");
+    }
+
+    var standardAllowed = personalSourceAllowed("СтандартныеИнструменты");
+    if (standardAllowed || metadataSourcesAllowed()) {
+        html += ("<div class=\"source-section-title\">" + escapeHtml(uiText("advancedTools")) + "</div>");
+    }
+    if (standardAllowed) {
+        html += ("<div class=\"source-card\"><div class=\"source-card-title\">" + escapeHtml(uiText("standardTools")) + "</div><div class=\"source-card-text\">" + escapeHtml(uiText("standardToolsHelp")) + "</div>") +
+            '<div class="source-card-actions"><a class="btn btn-small" href="' + actionUrl("open_more_source", { type: "standard" }) + ("\">" + escapeHtml(uiText("chooseTools")) + "</a></div></div>");
+    }
+    if (metadataSourcesAllowed()) {
+        html += ("<div class=\"source-card\"><div class=\"source-card-title\">" + escapeHtml(uiText("advancedSelection")) + "</div><div class=\"source-card-text\">" + escapeHtml(uiText("advancedSelectionHelp")) + "</div>") +
+            '<div class="source-card-actions"><a class="btn btn-small" href="' + actionUrl("choose_metadata_native") + ("\">" + escapeHtml(uiText("openSelectionForm")) + "</a></div></div>");
+    }
+    return html || ("<div class=\"source-empty\">" + escapeHtml(uiText("addingSourcesRestricted")) + "</div>");
+}
+
+function renderSourceList() {
+    var host = document.getElementById("sourceList");
+    var html = "";
+    var i, item, href;
+    captureWebLinkDraft();
+    if (DATA.Ui.SourceMode === "more") {
+        loadWebLinkDraft();
+        host.innerHTML = webLinkDraft.open && manualLinkAllowed() ? renderWebLinkFields() : renderMoreSources();
+        return;
+    }
+    if (DATA.Ui.SourceMode === "metadata" && !metadataSourcesAllowed()) {
+        host.innerHTML = ("<div class=\"source-empty\">" + escapeHtml(uiText("metadataRestricted")) + "</div>");
+        return;
+    }
+
+    if (!DATA.Sources || DATA.Sources.length === 0) {
+        host.innerHTML = ("<div class=\"source-empty\">" + escapeHtml(uiText("emptySource")) + "<br>" + escapeHtml(uiText("emptySourceHelp")) + "</div>");
+        return;
+    }
+
+    for (i = 0; i < DATA.Sources.length; i++) {
+        item = DATA.Sources[i];
+        href = DATA.Ui.SourceMode === "catalog" ? actionUrl("add_source", {catalogId:item.Id}) :
+            actionUrl("add_source", {url:valueOr(item.Url, ""),name:valueOr(item.Name, ""),tip:valueOr(item.Tooltip, "")});
+        html += '<div class="source-item source-filter-item" data-search="' + escapeHtml(String(valueOr(item.Name, "")) + " " + String(valueOr(item.Type, ""))) + '">' +
+            '<div class="source-icon" aria-hidden="true">' + escapeHtml(sourceIcon(item.Type)) + '</div>' +
+            '<div class="source-text"><div class="source-name">' + escapeHtml(item.Name) + '</div><div class="source-type">' + escapeHtml(item.Type) + '</div></div>' +
+            '<a class="add-mini" aria-label="' + escapeHtml(uiText('addNamedToColumn',{name:item.Name})) + '" title="' + escapeHtml(uiText('addToColumn')) + '" href="' + href + '">+</a></div>';
+    }
+    host.innerHTML = html;
+}
+
+function filterSources() {
+    var query = document.getElementById("sourceSearch").value.toLowerCase();
+    var items = document.getElementsByClassName("source-filter-item");
+    var i, text;
+    for (i = 0; i < items.length; i++) {
+        text = String(items[i].getAttribute("data-search") || "").toLowerCase();
+        items[i].style.display = text.indexOf(query) >= 0 ? "flex" : "none";
+    }
+}
+
+function renderPageTabs() {
+    var host = document.getElementById("pageTabs");
+    var html = "";
+    var i, page;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        page = DATA.Pages[i];
+        var pageIcon = page.IconData ? '<img alt="" class="mini-icon" src="' + escapeHtml(page.IconData) + '">' : (page.Name === "Главная" ? "★ " : "");
+        html += '<a class="page-tab' + (page.Name === DATA.Ui.ActivePage ? ' active' : '') + '"' + (page.Name === DATA.Ui.ActivePage ? ' aria-current="page"' : '') + ' data-drop-kind="Page" data-drop-id="' + escapeHtml(page.Id) + '" data-context-kind="page" data-page-name="' + escapeHtml(page.Name) + '" href="' +
+            actionUrl("select_page", { page: page.Name }) + '">' + pageIcon + escapeHtml(page.Name) + '</a>';
+    }
+    html += '<a class="page-tab add" href="javascript:void(0)" onclick="openCreateModal(\'page\', \'' + escapeJs(DATA.Ui.ActivePage) + ("'); return false;\">" + escapeHtml(uiText("addPage")) + "</a>");
+    host.innerHTML = html;
+}
+
+function escapeJs(value) {
+    return escapeHtml(String(valueOr(value, "")).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\r/g, "").replace(/\n/g, "\\n"));
+}
+
+function getActivePage() {
+    var i;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        if (DATA.Pages[i].Name === DATA.Ui.ActivePage) { return DATA.Pages[i]; }
+    }
+    return DATA.Pages.length > 0 ? DATA.Pages[0] : null;
+}
+
+// Shared row content for initial rendering and a small properties-only response.
+function renderLinkContent(item) {
+    return '<span class="link-dot"></span><span class="link-text"><span class="link-name">' + escapeHtml(item.Name) +
+        (item.Custom ? (" <span title=\"" + escapeHtml(uiText("customLinkHint")) + "\">✎</span>") : '') + '</span>' +
+        (item.Tooltip ? '<span class="link-tip">' + escapeHtml(item.Tooltip) + '</span>' : '') + '</span>';
+}
+function setSelectedClass(node, selected) {
+    var name = (' ' + (node.className || '') + ' ').replace(/ selected /g, ' ').replace(/^\s+|\s+$/g, '');
+    node.className = name + (selected ? ' selected' : '');
+}
+function updateBoardSelection() {
+    var nodes = document.querySelectorAll('.column-card'), i;
+    for (i=0;i<nodes.length;i++) setSelectedClass(nodes[i], nodes[i].getAttribute('data-column-name') === DATA.Ui.ActiveColumn);
+    nodes = document.querySelectorAll('.link-row');
+    var selectedId = DATA.Selected.Placement ? DATA.Selected.Placement.Id : '';
+    for (i=0;i<nodes.length;i++) setSelectedClass(nodes[i], nodes[i].getAttribute('data-placement-id') === selectedId);
+}
+function applyLinkResponse(delta) {
+    var i,j,k,item,changed={},updated={},dirtyColumns={},catalog=DATA.Catalog||[],selected=DATA.Selected;
+    for(i=0;i<catalog.length;i++) if(catalog[i].Id===delta.Id) {
+        catalog[i].Name=delta.Name; catalog[i].Tooltip=delta.Tooltip;
+    }
+    for(i=0;i<delta.Placements.length;i++) changed['id:'+delta.Placements[i].PlacementId]=delta.Placements[i];
+    for(i=0;i<DATA.Pages.length;i++) for(j=0;j<DATA.Pages[i].Columns.length;j++) {
+        var column=DATA.Pages[i].Columns[j], links=column.Links;
+        for(k=0;k<links.length;k++) {
+            item=links[k]; var key='id:'+item.PlacementId, value=changed[key];
+            if(!value || (item.Name===value.Name && item.Tooltip===value.Tooltip && item.Custom===value.Custom &&
+                item.CustomName===value.CustomName && item.CustomTooltip===value.CustomTooltip))continue;
+            dirtyColumns['column:'+column.Id]=true;
+            updated[key]=value;
+            item.Name=value.Name;item.Tooltip=value.Tooltip;item.Custom=value.Custom;
+            item.CustomName=value.CustomName;item.CustomTooltip=value.CustomTooltip;
+        }
+    }
+    var rows=document.querySelectorAll('.link-row');
+    for(i=0;i<rows.length;i++) {
+        item=updated['id:'+rows[i].getAttribute('data-placement-id')];
+        if(item)rows[i].innerHTML=renderLinkContent(item);
+    }
+    if(selected.Kind==='Link' && selected.Id===delta.Id) {
+        selected.Name=delta.Name;selected.Tooltip=delta.Tooltip;
+        item=changed['id:'+selected.Placement.Id];
+        if(item) {
+            selected.Placement.Name=item.Name;selected.Placement.Tooltip=item.Tooltip;
+            selected.Placement.CustomName=item.CustomName;selected.Placement.CustomTooltip=item.CustomTooltip;
+        }
+        renderProperties();editorBaseline=JSON.stringify(currentEditorPayload());updateEditorDraft();
+    }
+    if (DATA.Ui.SourceMode === "catalog") {
+        for (i=0;i<DATA.Sources.length;i++) if (DATA.Sources[i].Id===delta.Id) {
+            DATA.Sources[i].Name=delta.Name;DATA.Sources[i].Tooltip=delta.Tooltip;
+        }
+        renderSourceList();
+    }
+    DATA.Ui.State=delta.State;restoreViewState();
+    refreshBoardMarkupCache(dirtyColumns);
+}
+
+function renderLinks(links, columnName, columnId) {
+    var html = "";
+    var i, j, item, lastType = null;
+    var ordered = (links || []).slice(0);
+
+    ordered.sort(function (a, b) {
+        var ao = parseInt(valueOr(a.Order, 1000000), 10);
+        var bo = parseInt(valueOr(b.Order, 1000000), 10);
+        return ao - bo;
+    });
+
+    // При включенной группировке каждый тип всегда отображается единым блоком.
+    // Порядок самих групп определяется первым появлением типа в ручном порядке,
+    // а порядок ссылок внутри группы сохраняет пользовательскую сортировку.
+    if (boolValue(DATA.General.GroupByType) && ordered.length > 1) {
+        var typeOrder = [];
+        var grouped = {};
+        var groupedOrdered = [];
+        var typeKey;
+
+        for (i = 0; i < ordered.length; i++) {
+            typeKey = String(valueOr(ordered[i].Type, ""));
+            if (!grouped.hasOwnProperty(typeKey)) {
+                grouped[typeKey] = [];
+                typeOrder.push(typeKey);
+            }
+            grouped[typeKey].push(ordered[i]);
+        }
+
+        for (i = 0; i < typeOrder.length; i++) {
+            typeKey = typeOrder[i];
+            for (j = 0; j < grouped[typeKey].length; j++) {
+                groupedOrdered.push(grouped[typeKey][j]);
+            }
+        }
+
+        ordered = groupedOrdered;
+    }
+
+    if (ordered.length === 0) {
+        return ("<div class=\"empty-column\">" + escapeHtml(uiText("emptyColumn")) + "</div>");
+    }
+
+    for (i = 0; i < ordered.length; i++) {
+        item = ordered[i];
+        if (boolValue(DATA.General.GroupByType) && item.Type !== lastType) {
+            lastType = item.Type;
+            html += '<div class="type-head" tabindex="0" role="button" aria-haspopup="menu" aria-label="' + escapeHtml(uiText('groupActions',{group:lastType})) + '" draggable="true" data-drag-kind="Group" data-drag-id="' + escapeHtml(columnId) + '" data-context-kind="group" data-column-name="' + escapeHtml(columnName) + '" data-group-name="' + escapeHtml(lastType) + ("\" title=\"" + escapeHtml(uiText("groupDragHint")) + "\">") + escapeHtml(lastType) + '</div>';
+        }
+        html += '<a class="link-row' + (item.Selected ? ' selected' : '') + '" href="' + actionUrl("select_link", { source: item.Source, index: item.Index, column: columnName, id:item.Id, placementId:item.PlacementId }) + '"' +
+            ' draggable="true" data-drag-kind="Link" data-drag-id="' + escapeHtml(item.PlacementId) + '" data-placement-id="' + escapeHtml(item.PlacementId) + '" data-context-kind="link" data-column-name="' + escapeHtml(columnName) + '" data-source="' + escapeHtml(item.Source) + '" data-index="' + item.Index + '">' +
+            renderLinkContent(item) + '</a>';
+    }
+    return html;
+}
+
+// Keep unchanged column DOM nodes when another column is edited or reordered.
+var boardColumnNodes = {};
+function columnMarkup(column, page) {
+    var columnSymbol = column.IconData ? '<img alt="" class="column-icon-img" src="' + escapeHtml(column.IconData) + '">' : escapeHtml(column.System ? "•" : "▦");
+    return '<div class="column-card' + (column.Name === DATA.Ui.ActiveColumn ? ' selected' : '') + '" data-drop-kind="Column" data-drop-id="' + escapeHtml(column.Id) + '" data-context-kind="column" data-column-name="' + escapeHtml(column.Name) + '">' +
+        '<a class="column-select" draggable="' + (!boolValue(column.System)) + '" data-drag-kind="Column" data-drag-id="' + escapeHtml(column.Id) + '" href="' + actionUrl("select_column", { column: column.Name, page: page.Name }) + '"><div class="column-head"><span class="column-symbol">' + columnSymbol + '</span>' +
+        '<span class="column-name">' + escapeHtml(column.Name) + '</span><span class="column-count">' + escapeHtml(uiText('linkCount',{count:column.Links.length})) + '</span></div></a>' +
+        renderLinks(column.Links, column.Name, column.Id) + ("<div class=\"drag-end-zone\">" + escapeHtml(uiText("moveToColumnEnd")) + "</div></div>");
+}
+
+// Small local patches already changed these nodes; remember their current model representation.
+function refreshBoardMarkupCache(dirtyColumns) {
+    var page = getActivePage(), i, key, cached;
+    if (!page) return;
+    for (i = 0; i < page.Columns.length; i++) {
+        key = 'column:' + page.Columns[i].Id;
+        cached = boardColumnNodes[key];
+        if (dirtyColumns[key] && cached) cached.markup = columnMarkup(page.Columns[i], page);
+    }
+}
+
+function renderBoard(columnsToUpdate) {
+    var host = document.getElementById("board"), page = getActivePage();
+    var next = {}, i, key, cached, markup, wrapper, node;
+    if (!page) {
+        document.getElementById("activePageCrumb").innerHTML = escapeHtml(uiText("noPages"));
+        document.getElementById("columnsCrumb").innerHTML = escapeHtml(uiText("zeroColumns"));
+        host.innerHTML = ("<div class=\"empty-board\">" + escapeHtml(uiText("firstPageHelp")) + "</div>");
+        boardColumnNodes = {};
+        return;
+    }
+    document.getElementById("activePageCrumb").innerHTML = escapeHtml(page.Name);
+    document.getElementById("columnsCrumb").innerHTML = escapeHtml(uiText('columnCount',{count:page.Columns.length}));
+    for (i = 0; i <= page.Columns.length; i++) {
+        if (i < page.Columns.length) {
+            key = 'column:' + page.Columns[i].Id;
+            cached = boardColumnNodes[key];
+            markup = columnsToUpdate && columnsToUpdate.indexOf(page.Columns[i].Id) < 0 && cached && cached.node.parentNode === host ?
+                cached.markup : columnMarkup(page.Columns[i], page);
+        } else {
+            key = 'footer';
+            markup = page.Name !== "Стандартные инструменты" && page.Name !== "Не распределено" ?
+                '<a class="new-column" href="' + actionUrl("add_column_default", { page: page.Name }) + '">' + escapeHtml(uiText('addColumnToPage',{page:page.Name})) + '</a>' :
+                ("<div class=\"system-column-note\">" + escapeHtml(uiText("systemColumnsHelp")) + "</div>");
+        }
+        cached = boardColumnNodes[key];
+        if (cached && cached.markup === markup && cached.node.parentNode === host) {
+            node = cached.node;
+        } else {
+            wrapper = document.createElement('div');
+            wrapper.innerHTML = markup;
+            node = wrapper.firstChild;
+            if (cached && cached.node.parentNode === host) host.removeChild(cached.node);
+        }
+        if (host.children[i] !== node) host.insertBefore(node, host.children[i] || null);
+        next[key] = {node:node, markup:markup};
+    }
+    while (host.children.length > page.Columns.length + 1) host.removeChild(host.lastChild);
+    boardColumnNodes = next;
+}
+
+function renderIconPreview(iconName, iconData) {
+    var visual = iconData ? '<img alt="" src="' + escapeHtml(iconData) + '">' : '<span class="icon-preview-placeholder">□</span>';
+    return '<div class="icon-preview-box">' + visual + '<div class="icon-preview-name">' + escapeHtml(iconName || uiText("noImage")) + '</div></div>';
+}
+
+function renderSelectionHeader(selected, icon) {
+    var visual = selected.IconData ? '<img alt="" src="' + escapeHtml(selected.IconData) + '" style="max-width:24px;max-height:24px;vertical-align:middle;">' : escapeHtml(icon);
+    return '<div class="selected-block"><div class="selected-icon">' + visual + '</div><div><div class="selected-title">' +
+        escapeHtml(selected.Name || "") + '</div><div class="selected-type">' + escapeHtml(selected.Caption || "") + '</div></div></div>';
+}
+
+function renderPageProperties(selected) {
+    var system = boolValue(selected.System);
+    var disabledName = system ? ' disabled="disabled"' : "";
+    var html = ("<div class=\"property\"><div class=\"prop-caption\">" + escapeHtml(uiText("selectedPage")) + "</div>") + renderSelectionHeader(selected, "▣") +
+        '<div class="field">' + fieldLabel("pageName", "name") + '<input id="pageName" type="text" value="' + escapeHtml(selected.Name) + '"' + disabledName + '></div>' +
+        ("<div class=\"field\"><div class=\"label\">" + escapeHtml(uiText("image")) + " " + "<span class=\"label-hint\">" + escapeHtml(uiText("platformImageHint")) + "</span></div>") + renderIconPreview(selected.Icon, selected.IconData) +
+        '<div class="field-actions"><a class="btn btn-small" href="' + actionUrl("choose_icon", { kind: "page", name: selected.Name }) + ("\">" + escapeHtml(uiText("chooseImageCommand")) + "</a></div></div>");
+    if (!DATA.Ui.Personal && selected.Name !== "Главная") {
+        html += '<div class="field">' + fieldLabel("pageRoles", "roles") + '<textarea id="pageRoles" readonly="readonly">' + escapeHtml(selected.Roles) + '</textarea>' +
+            '<div class="field-actions"><a class="btn btn-small" href="' + actionUrl("choose_roles", { page: selected.Name }) + ("\">" + escapeHtml(uiText("chooseRoles")) + "</a></div></div>");
+    } else if (!DATA.Ui.Personal) {
+        html += ("<div class=\"info\">" + escapeHtml(uiText("homeRolesHelp")) + "</div>");
+    }
+    if (!system) {
+        html += '<div class="property-actions"><a id="applyPage" class="btn btn-small btn-primary" href="javascript:void(0)" onclick="return preparePageUpdate(this, \'' + escapeJs(selected.Name) + ("');\">" + escapeHtml(uiText("apply")) + "</a></div>") +
+            ("<div class=\"property-section\"><div class=\"label\">" + escapeHtml(uiText("pageOrder")) + "</div><div class=\"order-actions\">") +
+            '<a class="btn btn-small" href="' + actionUrl("move_page", { page: selected.Name, direction: "prev" }) + ("\">" + escapeHtml(uiText("earlier")) + "</a>") +
+            '<a class="btn btn-small" href="' + actionUrl("move_page", { page: selected.Name, direction: "next" }) + ("\">" + escapeHtml(uiText("later")) + "</a></div></div>") +
+            '<div class="property-danger"><a class="danger-link" href="javascript:void(0)" onclick="return requestPageDelete(\'' + escapeJs(selected.Name) + ("');\">" + escapeHtml(uiText("deletePage")) + "</a></div>");
+    }
+    return html + '</div>';
+}
+
+function renderColumnProperties(selected) {
+    var html = ("<div class=\"property\"><div class=\"prop-caption\">" + escapeHtml(uiText("selectedColumn")) + "</div>") + renderSelectionHeader(selected, "▦") +
+        '<div class="field">' + fieldLabel("columnName", "name") + '<input id="columnName" type="text" value="' + escapeHtml(selected.Name) + '"' + (selected.System ? ' disabled="disabled"' : '') + '></div>' +
+        '<div class="field">' + fieldLabel("columnPage", "page") + '<select id="columnPage"' + (selected.System ? ' disabled="disabled"' : '') + '>' + buildPageOptions(selected.Page) + '</select></div>' +
+        ("<div class=\"field\"><div class=\"label\">" + escapeHtml(uiText("image")) + "</div>") + renderIconPreview(selected.Icon, selected.IconData) +
+        (!selected.System ? '<div class="field-actions"><a class="btn btn-small" href="' + actionUrl("choose_icon", { kind: "column", name: selected.Name }) + ("\">" + escapeHtml(uiText("chooseImageCommand")) + "</a></div>") : '') + '</div>';
+    if (!selected.System) {
+        html += '<div class="property-actions"><a class="btn btn-small btn-primary" href="javascript:void(0)" onclick="return prepareColumnUpdate(this, \'' + escapeJs(selected.Name) + ("');\">" + escapeHtml(uiText("apply")) + "</a></div>") +
+            ("<div class=\"property-section\"><div class=\"label\">" + escapeHtml(uiText("columnOrder")) + "</div><div class=\"order-actions\">") +
+            '<a class="btn btn-small" href="' + actionUrl("move_column", { column: selected.Name, direction: "prev" }) + ("\">" + escapeHtml(uiText("higher")) + "</a>") +
+            '<a class="btn btn-small" href="' + actionUrl("move_column", { column: selected.Name, direction: "next" }) + ("\">" + escapeHtml(uiText("lower")) + "</a></div></div>") +
+            '<div class="property-danger"><a class="danger-link" href="javascript:void(0)" onclick="return requestColumnDelete(\'' + escapeJs(selected.Name) + ("');\">" + escapeHtml(uiText("deleteColumn")) + "</a></div>");
+    } else {
+        html += ("<div class=\"info\">" + escapeHtml(uiText("systemColumnHelp")) + "</div>");
+    }
+    return html + '</div>';
+}
+
+function buildPageOptions(selectedPage) {
+    var html = "";
+    var i, page;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        page = DATA.Pages[i];
+        if (page.System && page.Name !== selectedPage && page.Name !== "Главная") { continue; }
+        html += '<option value="' + escapeHtml(page.Name) + '"' + (page.Name === selectedPage ? ' selected="selected"' : '') + '>' + escapeHtml(page.Name) + '</option>';
+    }
+    return html;
+}
+
+function renderColumnChips(selected) {
+    if (selected.LockedColumn) {
+        return ("<div class=\"info\">" + escapeHtml(uiText("standardColumnHelp")) + "</div>");
+    }
+    var html = '', i, j, page, column, assigned, chips;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        page = DATA.Pages[i]; chips = '';
+        for (j = 0; j < DATA.AllColumns.length; j++) {
+            column = DATA.AllColumns[j];
+            if (column.System || column.Page !== page.Name) continue;
+            assigned = containsValue(selected.Columns, column.Id);
+            chips += '<button type="button" role="checkbox" aria-checked="' + (assigned ? 'true' : 'false') + '" aria-label="' + escapeHtml(uiText('assignToColumn',{column:column.Name})) + '" class="chip' + (assigned ? ' active' : '') + '" data-href="' +
+                actionUrl('toggle_link_column', {source:selected.Source, index:selected.Index, column:column.Name, columnId:column.Id}) + '">' +
+                (assigned ? '✓ ' : '+ ') + escapeHtml(column.Name) + '</button>';
+        }
+        if (chips) html += '<div class="column-assignment-page"><div class="label">' + escapeHtml(page.Name) + '</div>' + chips + '</div>';
+    }
+    return html || ("<span class=\"chip disabled\">" + escapeHtml(uiText("createColumnFirst")) + "</span>");
+}
+
+function containsValue(values, value) {
+    var i;
+    values = values || [];
+    for (i = 0; i < values.length; i++) {
+        if (values[i] === value) { return true; }
+    }
+    return false;
+}
+
+function scopeOptions(custom, column) {
+    return '<option value="common"' + (!custom ? ' selected' : '') + (">" + escapeHtml(uiText("commonValue")) + "</option>") +
+        '<option value="own"' + (custom ? ' selected' : '') + '>' + escapeHtml(uiText('onlyColumn',{column:column})) + '</option>';
+}
+function changeLinkScope(kind) {
+    var selected=DATA.Selected, p=selected.Placement, input=document.getElementById(kind==='name'?'linkName':'linkTip');
+    var mode=document.getElementById(kind==='name'?'nameScope':'tipScope').value;
+    var common=kind==='name'?selected.Name:selected.Tooltip;
+    var custom=kind==='name'?p.CustomName:p.CustomTooltip;
+    var own=kind==='name'?p.Name:p.Tooltip;
+    // Switching to individual starts with the effective value; returning to
+    // common shows the catalog value without overwriting it with an override.
+    if(mode==='common') input.value=common||'';
+    else if(custom) input.value=own||'';
+    document.getElementById(kind==='name'?'nameScopeHint':'tipScopeHint').innerHTML=escapeHtml(mode==='common'
+        ? uiText("changesAllColumns")
+        : uiText("changesSelectedColumn"));
+}
+function renderLinkProperties(selected) {
+    var p=selected.Placement;
+    if(!p) return ("<div class=\"info\">" + escapeHtml(uiText("chooseLinkPlacement")) + "</div>");
+    var display={Name:p.Name,Caption:p.Column+' · '+(p.CustomTooltip?uiText("customTooltip"):uiText("commonTooltip"))};
+    return ("<div class=\"property\"><div class=\"prop-caption\">" + escapeHtml(uiText("linkPlacement")) + "</div>")+renderSelectionHeader(display,sourceIcon(selected.Type))+
+        ("<div class=\"info\">" + escapeHtml(uiText("linkScopeHelp")) + "</div>")+
+        '<div class="field">'+fieldLabel("linkName", "name")+'<select aria-label="'+escapeHtml(uiText("nameScope"))+'" id="nameScope" onchange="changeLinkScope(\'name\')">'+scopeOptions(p.CustomName,p.Column)+'</select>'+
+        '<input id="linkName" aria-describedby="nameScopeHint" type="text" value="'+escapeHtml(p.Name)+'"><div class="field-hint" id="nameScopeHint" style="'+(selected.Columns.length>1?'':'display:none')+'">'+(p.CustomName?uiText("changesSelectedColumn"):uiText("changesAllColumns"))+'</div></div>'+
+        '<div class="field">'+fieldLabel("linkTip", "tip")+'<select aria-label="'+escapeHtml(uiText("tipScope"))+'" id="tipScope" onchange="changeLinkScope(\'tip\')">'+scopeOptions(p.CustomTooltip,p.Column)+'</select>'+
+        ("<textarea id=\"linkTip\" aria-describedby=\"tipScopeHint\" placeholder=\"" + escapeHtml(uiText("enterTooltip")) + "\">")+escapeHtml(p.Tooltip)+'</textarea><div class="field-hint" id="tipScopeHint" style="'+(selected.Columns.length>1?'':'display:none')+'">'+(p.CustomTooltip?uiText("changesSelectedColumn"):uiText("changesAllColumns"))+'</div></div>'+
+        (boolValue(selected.HidePath) ? '' : '<div class="field">'+fieldLabel("linkUrl", "path")+'<input id="linkUrl" type="text" value="'+escapeHtml(selected.Url)+'"></div>')+
+        ("<div class=\"property-actions\"><a class=\"btn btn-small btn-primary\" href=\"javascript:void(0)\" onclick=\"return prepareLinkUpdate(this);\">" + escapeHtml(uiText("apply")) + "</a>")+
+        ("<a class=\"btn btn-small\" href=\"javascript:void(0)\" onclick=\"return prepareCommonTooltip(this);\">" + escapeHtml(uiText("tooltipAllColumns")) + "</a>")+
+        ("<div class=\"info\">" + escapeHtml(uiText("tooltipAllColumnsHelp")) + "</div>")+
+        '<a class="btn btn-small" href="'+actionUrl('reset_placement',{id:selected.Id,source:selected.Source,index:selected.Index,placementId:p.Id,column:p.Column})+("\">" + escapeHtml(uiText("resetPlacement")) + "</a></div>")+
+        ("<div class=\"property-section\"><div class=\"label\">" + escapeHtml(uiText("assignedColumns")) + "</div><div class=\"chips\">")+renderColumnChips(selected)+'</div></div>'+
+        ("<div class=\"property-section\"><div class=\"label\">" + escapeHtml(uiText("placementOrder")) + "</div><div class=\"order-actions\">")+
+        '<a class="btn btn-small" href="'+actionUrl('move_link',{id:selected.Id,index:selected.Index,placementId:p.Id,column:p.Column,direction:'prev'})+("\">" + escapeHtml(uiText("higher")) + "</a>")+
+        '<a class="btn btn-small" href="'+actionUrl('move_link',{id:selected.Id,index:selected.Index,placementId:p.Id,column:p.Column,direction:'next'})+("\">" + escapeHtml(uiText("lower")) + "</a></div>")+
+        (boolValue(DATA.General.GroupByType)?("<div class=\"info\">" + escapeHtml(uiText("groupedOrderHelp")) + "</div>"):'')+
+        '</div><div class="property-danger"><a class="danger-link" href="javascript:void(0)" onclick="return requestLinkDelete(\''+escapeJs(selected.Source)+'\', '+selected.Index+(");\">" + escapeHtml(uiText("deleteLinkAllColumns")) + "</a></div></div>");
+}
+function linkEditorPayload() {
+    var s=DATA.Selected,p=s&&s.Placement;
+    if(!s||s.Kind!=='Link'||!p||!document.getElementById('linkTip')) return null;
+    var payload={editorDraft:'1',id:s.Id,source:s.Source,index:s.Index,placementId:p.Id,column:p.Column,
+        name:document.getElementById('linkName').value,tip:document.getElementById('linkTip').value,
+        customName:document.getElementById('nameScope').value==='own'?'1':'0',
+        customTooltip:document.getElementById('tipScope').value==='own'?'1':'0'};
+    if(!boolValue(s.HidePath)) payload.url=document.getElementById('linkUrl').value;
+    return payload;
+}
+function prepareCommonTooltip(anchor) {
+    var s=DATA.Selected;
+    anchor.href=actionUrl('make_tooltip_common',{id:s.Id,source:s.Source,index:s.Index,tip:document.getElementById('linkTip').value});
+    return true;
+}
+
+function renderProperties() {
+    var selected = DATA.Selected || { Kind: "None" };
+    var host = document.getElementById("properties");
+    if (selected.Kind === "Page") {
+        host.innerHTML = renderPageProperties(selected);
+    } else if (selected.Kind === "Column") {
+        host.innerHTML = renderColumnProperties(selected);
+    } else if (selected.Kind === "Link") {
+        host.innerHTML = renderLinkProperties(selected);
+    } else {
+        host.innerHTML = ("<div class=\"property\"><div class=\"prop-caption\">" + escapeHtml(uiText("nothingSelected")) + "</div><div class=\"info\">" + escapeHtml(uiText("chooseElementHelp")) + "</div></div>");
+    }
+}
+
+function prepareLinkUpdate(anchor) {
+    anchor.href = actionUrl("apply_link_details", linkEditorPayload());
+    return true;
+}
+
+function preparePageUpdate(anchor) { anchor.href = 'panelkasettings://apply_editor'; return true; }
+function prepareColumnUpdate(anchor) { anchor.href = 'panelkasettings://apply_editor'; return true; }
+
+function openCreateColumnModal(element) {
+    var page = "";
+    if (element && element.getAttribute) {
+        page = element.getAttribute("data-page") || "";
+    }
+    openCreateModal("column", page);
+    return false;
+}
+
+function openCreateModal(mode, page) {
+    modalMode = mode;
+    modalPage = page || "";
+    document.getElementById("modalTitle").innerHTML = escapeHtml(mode === "page" ? uiText("newPage") : uiText("newColumn"));
+    document.getElementById("modalText").innerHTML = escapeHtml(mode === "page" ? uiText("createPageHelp") : uiText('createColumnHelp',{page:page}));
+    document.getElementById("modalName").value = mode === "page" ? uiText("newPage") : uiText("newColumn");
+    document.getElementById("modalBackdrop").style.display = "block";
+    window.setTimeout(function () { document.getElementById("modalName").focus(); document.getElementById("modalName").select(); }, 0);
+}
+
+function closeModal() {
+    document.getElementById("modalBackdrop").style.display = "none";
+    modalMode = "";
+    modalPage = "";
+}
+
+function prepareModalAction(anchor) {
+    var name = document.getElementById("modalName").value;
+    var commandUrl;
+
+    if (!name || !name.replace(/\s/g, "")) {
+        showToast(uiText("enterName"));
+        return false;
+    }
+
+    if (modalMode === "page") {
+        commandUrl = actionUrl("add_page", { name: name });
+    } else {
+        if (modalPage === "Стандартные инструменты" || modalPage === "Не распределено") {
+            showToast(uiText("systemPageColumnsHelp"));
+            closeModal();
+            return false;
+        }
+        commandUrl = actionUrl("add_column", { name: name, page: modalPage });
+    }
+
+    closeModal();
+    commandUrl = appendScrollState(commandUrl);
+    publishBridgeCommand(commandUrl);
+    return false;
+}
+
+// A new URL is a UI draft, never an implicit addition to the saved model.
+var webLinkDraft = null;
+function emptyWebLinkDraft() { return {open:false, name:"", url:"", tip:""}; }
+function loadWebLinkDraft() {
+    if (webLinkDraft !== null) return;
+    var state = {};
+    try { state = JSON.parse(DATA.Ui.State || "{}"); } catch (error) { state = {}; }
+    var saved = state.webDraft || {};
+    webLinkDraft = {open:saved.open === true, name:String(saved.name || ""),
+        url:String(saved.url || ""), tip:String(saved.tip || "")};
+}
+function captureWebLinkDraft() {
+    loadWebLinkDraft();
+    var name = document.getElementById("webName"), url = document.getElementById("webUrl"), tip = document.getElementById("webTip");
+    if (webLinkDraft.open && name && url && tip) {
+        webLinkDraft.name = name.value; webLinkDraft.url = url.value; webLinkDraft.tip = tip.value;
+    }
+    return {open:webLinkDraft.open, name:webLinkDraft.name, url:webLinkDraft.url, tip:webLinkDraft.tip};
+}
+function hasWebLinkDraft() {
+    var draft = captureWebLinkDraft();
+    return draft.open && !!(draft.name || draft.url || draft.tip);
+}
+function renderWebLinkFields() {
+    return '<div class="source-card"><div class="source-card-title">' + escapeHtml(uiText("webLink")) + '</div>' +
+        '<div class="field" style="margin-top:10px">' + fieldLabel("webUrl", "url") + '<input id="webUrl" type="text" value="' + escapeHtml(webLinkDraft.url) + '" placeholder="' + escapeHtml(uiText("urlPlaceholder")) + '"></div>' +
+        '<div class="field">' + fieldLabel("webName", "name") + '<input id="webName" type="text" value="' + escapeHtml(webLinkDraft.name) + '" placeholder="' + escapeHtml(uiText("webExample")) + '"></div>' +
+        '<div class="field">' + fieldLabel("webTip", "tip") + '<textarea id="webTip">' + escapeHtml(webLinkDraft.tip) + '</textarea></div>' +
+        '<div class="source-card-actions"><button type="button" class="btn btn-small" onclick="return cancelWebLinkDraft();">' + escapeHtml(uiText("cancel")) + '</button>' +
+        '<a class="btn btn-small btn-primary" href="javascript:void(0)" onclick="return prepareWebLink(this);">' + escapeHtml(uiText("add")) + '</a></div></div>';
+}
+function openWebLinkDialog() {
+    if (bridgeBusy) return false;
+    if (!manualLinkAllowed()) { showToast(uiText("addingSourcesRestricted")); return false; }
+    captureWebLinkDraft();
+    webLinkDraft.open = true;
+    document.getElementById("sourceList").innerHTML = renderWebLinkFields();
+    updateViewStateField();
+    var field = document.getElementById("webUrl");
+    if (field && field.focus) field.focus();
+    return false;
+}
+function cancelWebLinkDraft() {
+    if (bridgeBusy) return false;
+    webLinkDraft = emptyWebLinkDraft();
+    document.getElementById("sourceList").innerHTML = renderMoreSources();
+    updateViewStateField();
+    return false;
+}
+function completeWebLinkSubmission() {
+    if (activeBridgeAction !== "add_web" || !webLinkDraft.open) return false;
+    webLinkDraft = emptyWebLinkDraft();
+    return true;
+}
+function prepareWebLink(anchor) {
+    var draft = captureWebLinkDraft();
+    var is1C = /^\s*e1cib\//.test(draft.url);
+    if (!is1C && !personalSourceAllowed("ВебСсылки")) { showToast(uiText("webRestricted")); return false; }
+    if (!draft.url || !draft.url.replace(/\s/g, "")) {
+        showToast(uiText("enterUrl"));
+        return false;
+    }
+    anchor.href = actionUrl("add_web", {name:draft.name, url:draft.url, tip:draft.tip});
+    return true;
+}
+
+function renderIconPicker() {
+    var picker = DATA.IconPicker || {};
+    var backdrop = document.getElementById("iconModalBackdrop");
+    var grid = document.getElementById("iconGrid");
+    var current = document.getElementById("iconCurrent");
+    var html = "";
+    var items, i, item, imageHtml, active;
+
+    if (!boolValue(picker.Open)) {
+        backdrop.style.display = "none";
+        return;
+    }
+
+    items = picker.Items || [];
+    current.innerHTML = (escapeHtml(uiText("currentImage")) + "<b>") + escapeHtml(picker.Current || uiText("noImage")) + '</b>';
+
+    for (i = 0; i < items.length; i++) {
+        item = items[i];
+        active = String(item.Name || "") === String(picker.Current || "");
+        imageHtml = item.Image ? '<img alt="" src="' + escapeHtml(item.Image) + '">' : '<div class="icon-tile-empty">□</div>';
+        html += '<a class="icon-tile' + (active ? ' active' : '') + '" href="' + actionUrl("set_icon", {
+            kind: picker.Kind,
+            name: picker.ObjectName,
+            icon: item.Name || ""
+        }) + '" data-search="' + escapeHtml(String(item.Caption || "") + " " + String(item.Name || "")) + '">' +
+            '<div class="icon-tile-img">' + imageHtml + '</div>' +
+            '<div class="icon-tile-caption">' + escapeHtml(item.Caption || item.Name || uiText("noImage")) + '</div>' +
+            (item.Name ? '<div class="icon-tile-name">' + escapeHtml(item.Name) + '</div>' : '') + '</a>';
+    }
+
+    if (html === "") {
+        html = ("<div class=\"empty-source\">" + escapeHtml(uiText("imagesNotFound")) + "</div>");
+    }
+
+    grid.innerHTML = html;
+    backdrop.style.display = "block";
+
+    var search = document.getElementById("iconSearch");
+    if (search) { search.value = ""; }
+}
+
+function filterIcons() {
+    var input = document.getElementById("iconSearch");
+    var query = input ? String(input.value || "").toLowerCase() : "";
+    var grid = document.getElementById("iconGrid");
+    var items = grid ? grid.getElementsByTagName("a") : [];
+    var i, text;
+    for (i = 0; i < items.length; i++) {
+        text = String(items[i].getAttribute("data-search") || "").toLowerCase();
+        items[i].style.display = (!query || text.indexOf(query) >= 0) ? "block" : "none";
+    }
+}
+
+
+var editorBaseline = '';
+var lastDialog = null;
+var previousFocus = null;
+
+function commandParameters(url) {
+    var params={}, parts=(url.split('?')[1]||'').split('&');
+    for(var i=0;i<parts.length;i++) {
+        var at=parts[i].indexOf('=');if(at<0)continue;
+        var value=parts[i].slice(at+1).replace(/-/g,'+').replace(/_/g,'/').replace(/\./g,'=');
+        params[parts[i].slice(0,at)]=decodeURIComponent(escape(window.atob(value)));
+    }
+    return params;
+}
+function tryLocalSelection(url) {
+    if(bridgeBusy)return false;
+    var action=url.split('?')[0].replace('panelkasettings://','');
+    if(action!=='select_page' && action!=='select_column' && action!=='select_link')return false;
+    updateEditorDraft();
+    if(document.getElementById('panelkaEditorDraft').value)return false;
+    var previousPage=DATA.Ui.ActivePage, previousColumn=DATA.Ui.ActiveColumn, started=clockMs();
+    var params=commandParameters(url), selected=null, page, column, item, common, i,j;
+    if(action==='select_page') {
+        page=findPageByName(params.page);if(!page)return false;
+        DATA.Ui.ActivePage=page.Name;DATA.Ui.ActiveColumn='';
+        selected={Kind:'Page',Id:page.Id,Name:page.Name,Caption:uiText("pageCaption"),Icon:page.Icon,IconData:page.IconData,Roles:page.Roles,System:page.System};
+    } else if(action==='select_column') {
+        column=findColumnByName(params.columnId || params.column, params.page);if(!column)return false;
+        DATA.Ui.ActivePage=params.page||column.Page;DATA.Ui.ActiveColumn=column.Name;
+        selected={Kind:'Column',Id:column.Id,Name:column.Name,Caption:uiText("columnCaption"),Page:column.Page,Icon:column.Icon,IconData:column.IconData,System:column.System};
+    } else {
+        column=findColumnByName(params.columnId || params.column, params.page);if(!column)return false;
+        for(i=0;i<column.Links.length;i++)if(column.Links[i].PlacementId===params.placementId)item=column.Links[i];
+        for(i=0;i<(DATA.Catalog||[]).length;i++)if(DATA.Catalog[i].Id===params.id)common=DATA.Catalog[i];
+        if(!item||!common)return false;
+        DATA.Ui.ActiveColumn=column.Name;
+        selected={Kind:'Link',Id:item.Id,Index:item.Index,Source:item.Source,Name:common.Name,Tooltip:common.Tooltip,Url:item.Url,Type:item.Type,Columns:common.Columns,HidePath:item.HidePath,
+            LockedColumn:boolValue(DATA.General.StandardTab)&&item.Url.indexOf('sys_cmd:')===0,
+            Placement:{Id:item.PlacementId,Column:column.Name,Name:item.Name,Tooltip:item.Tooltip,CustomName:item.CustomName,CustomTooltip:item.CustomTooltip,Order:item.Order}};
+    }
+    var center=getScrollTopById('previewShell');
+    DATA.Selected=selected;
+    var dirtyColumns={};
+    for(i=0;i<DATA.Pages.length;i++)for(j=0;j<DATA.Pages[i].Columns.length;j++){
+        var candidate=DATA.Pages[i].Columns[j], links=candidate.Links||[], key='column:'+candidate.Id;
+        if ((candidate.Name===previousColumn)!==(candidate.Name===DATA.Ui.ActiveColumn)) dirtyColumns[key]=true;
+        for(var k=0;k<links.length;k++){
+            var isSelected=!!selected.Placement&&links[k].PlacementId===selected.Placement.Id;
+            if(!!links[k].Selected!==isSelected) dirtyColumns[key]=true;
+            links[k].Selected=isSelected;
+        }
+    }
+    if(previousPage!==DATA.Ui.ActivePage) { renderPageTabs();renderBoard(); }
+    else {
+        updateBoardSelection();
+        refreshBoardMarkupCache(dirtyColumns);
+    }
+    renderProperties();
+    editorBaseline=JSON.stringify(currentEditorPayload());updateEditorDraft();
+    document.getElementById('previewShell').scrollTop=center;
+    recordPerformance({action:action,local:true,renderMs:clockMs()-started});
+    return true;
+}
+
+var additionalOpen = false, additionalTab = 'display', additionalProfile = '', additionalQuery = '';
+var additionalOpeningDraft = false, additionalNeedsRefresh = false;
+var additionalTabs = [
+    {id:'display', title:'additionalDisplay', icon:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABUElEQVR4nO3QsUrDUBQG4P+cm5gmRaqofQHtoIWA9AEEfQadOndwEEsURx+gk9DBSrs42lk3cZWigqMidNPBoViUtPEmx8XaphChzv7j4dzLfz5CLEIACQCsHV4Z7y+PhITcnpT0YBfYPFNu0UsnLf8WKpRqjnD/go2pHLS/fnNcfnCLlbRyrDIZnEKkAfBISRG2LOIoaLSqO22jg445I/aysuzsp+7PAoDpkB0x9pg4I6QAjF4iICiEgVwCaBMArG5Xlyjoz9/VvetBM9c7dbTfTTTIv2b9ZnMrjE9FEh8kxQCAQqlmvn08209E3Uk/+EbsnZNh5Uj7Gz+I6dQuKbIhocSaCQmbFnEvaLTqQ8QVYxyRZJ9JZUQEoDFEVgj5HzGOCCdvWM7CKKJADpjVtERjiCIgpRCyGiIWSkeLmvTcfc1rDZq5XsXRvj0h4h/yBTG1uYnwrhGRAAAAAElFTkSuQmCC'},
+    {id:'appearance', title:'additionalAppearance', icon:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACzElEQVR4nKVTQWhTWRQ997738/9Pk6atjjjiwoERRcXSBMRhmBFBBLdlFMSFoDVVQaPtyo3BjTIMaTVdtHUsIogIZRRcOIIoFCyoGKubrmbhQlDaWm3TJD8//73rolZx6EY863vuPZxzLvBdENIAgHyeM8HmpDs9b6OmCi03auoeKTcQAEBbG/xX/4Vj1yig7acLfljVd1i7v1lTJxHi/5MJYCEJATgQCDOLgF6zNPboSuB7mho7rQnPEuGZWGEG7Bc2CyBVsrIGoBmjSIk1SbC+JcIbdcwoKxQFBIyVhnLjy8nvOFbs1F5zn61Wrr8YPHEGIpQ+OlABVIMy2eGUpfobKOn8efrH++XVb/S9gVwdADLZYccxnIx8885E4SXluLkoDHe/WD3zIP22rUZCnXrpCgvs6Og+A8CkuwrbRat1paHum5v25hdcvWJQe/Ejpl4bVxKb2LqQ8AWwBODzAkuKkc/zltexH8hx78USLal0V9/U8ys9DwEcz5z8+3bQCEuTIydm23P9LQAJACw6TkJMYnDunHXdlrvCXAsrH56qePKf9oMX1gFAqXjk/uRI7ywAJEP3c9S8yBcy1nzoOFo8H0u0pk0Q/PGuMr1DrFFOc9vo1t6/mgCgvbvv13T3pX2PBo+/B4EAQNfMgvIcZ56FTjvx5v3B3FTPy5GecQBoOVzY5beuemIXwkIm238VyhnTXkJ1HBtYC2srFmAGAAEiN7Vyf6M2d3li+FT/kryXI71P6/NTh7QX71ZNqccQuRhVywd0zC+wclqZJNAq5gts1BSWZ/9V1SCfyQ6nAEC5gdQiR5V140YyKP9OUJps7GzpcraWzhZXKS/eZ6xh2nDoz2Tc8SdZ6VYxkRYSDVl0eKnGgMwJkQCSIiEipjKIUmLNLwQA27qKPyERXx/Wq4sVtvarh2JSn8w21jCLw54SU5t6NpSbWK6534SPMEA8k1sTOWAAAAAASUVORK5CYII='},
+    {id:'transfer', title:'additionalTransfer', icon:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACHElEQVR4nLWRv2tTURTHv+fe915eQmhDBTE6FMRUcNDNpUN06yYEXhdt35QoggjFH0MJl5il0EkcolEcEnTwgVCn+heIQwcXIVS0k8ElLW2an+/e45D2KTYVHDxw4N7DOZ97vvcL/M+YVr47rfwUADquR4wrZpWyAMC19L2YZbYurt5IAAD4KGgs4DAYlCApJ8N2/x82UErEp1oSAEDQrA0f9zoAWEcqpZJZB/rwPAlmAhEN4AgQ+G8SyHvjSQA4X/avzJT9BQSBBkiAgC941T770JtE4EX9BxkBOJgP9Oioz9gnkrXMo4Uca7MNxiAjrs/aU8mvmYZ7NfqeUY4ovq/cnRRcZ/bzXjAf6Ex58aa0xVMTmk9szIx07DhrXd8duLeaSPfmWq2ks+/yu5erewIAdu3OktXtfYt9vOyCmTaLtWd6qAsy7lyyJxJx1uGLxnJtsYl0D6WSSfTia1LQ20iCABIkZarfbROI+ILynM1i/bnu9G7rdrfSWK7noZTIRpIpNcrIBdJsDA9dWFmlrHbzNM/dORVbLz6pAEChULA3mk2cTKcpq5SF711NxOEvgDFgQVh7XNoZ53W1Wh0CwMbBPZe/PzxcxgIAliLmxFzK5R+sEHPITETE/CeIiYgBI6R1TofhVgQwgj4YbX6AsWQACWIcmQYAZgCkpSXbbIbvIxsB4Jp/N9WfSBlnvzN29vdIxqT1urKyDQA/Afmx1bzadz3KAAAAAElFTkSuQmCC'},
+    {id:'personal', title:'additionalPersonal', icon:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACUElEQVR4nJ1TPWhTURT+zr3vJS8mWDsoKDi0BMEO1TQKWoSK1lFw8DroYrGkpTS19RdBeImbSNFYEdOmiIvUxOIsipqxQyFV7OAggghW0Bb695K8d49DmpKa0sGzncP3nfud75wLbBHheMofjaUbtsJQXYWZQIRo36PbDBoksAWSk6vOyuDs+JX5NRpX4aKWq1RWgogjPSlbmNYdsL7led55EvKEZZqvAGLYiQ2P1iRMAHE0lt7GovibNMenRy9nAKC1+16Tzx/8ymV9ZHq0f0qprMzlznl1CgBA+h0DgMVaf6/WTLE0p7XWIN6+pQfVzpHehy+k6Tvmuaud5RL9CQQCY9ortYV2hcL5xMVihVXxwahtkMspDdsW3lwxLrU5QeT76POxp8E/mEtn88kuB/gmgKSuMx8AYNsbRjrc9+RktD99plapUlm5+Qi2LZBMaiglIzs7BgSoi1k3A9AgWiDQ5Ory8t3ZZzd+rmPXG6wVDvYMHzDM4LhhBaOlpYUZhvcGTC4IUdMKndJued51FmOFzPWXVQ4BTLAT1L6yN1haKc9AiN2uUzxdGBt4Wyu1tXtkn+k3JgyfFXEWFyIzmaGCUllpdNgJmU8mXacnNWQEQk3u0vyhQubatFJZ+avlc0XhByCfiX8JX7CP72jc80lKegygHchVfAjHU/623hEnEnvwHgCisbT5r78ttu0DgIOx4atHbz7nyKX7+4HKIXFD0ZJEmBJSPIVti+bOxro1KcAFmLSQr3W5/E5IDmy+yv8NpZQEc/3vrA9auwUCgL8CB+zTvXAhgAAAAABJRU5ErkJggg=='}
+];
+
+// Иконки команд совпадают с кнопками штатной формы.
+var additionalButtonIcons = {
+    import:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACHElEQVR4nLWRv2tTURTHv+fe915eQmhDBTE6FMRUcNDNpUN06yYEXhdt35QoggjFH0MJl5il0EkcolEcEnTwgVCn+heIQwcXIVS0k8ElLW2an+/e45D2KTYVHDxw4N7DOZ97vvcL/M+YVr47rfwUADquR4wrZpWyAMC19L2YZbYurt5IAAD4KGgs4DAYlCApJ8N2/x82UErEp1oSAEDQrA0f9zoAWEcqpZJZB/rwPAlmAhEN4AgQ+G8SyHvjSQA4X/avzJT9BQSBBkiAgC941T770JtE4EX9BxkBOJgP9Oioz9gnkrXMo4Uca7MNxiAjrs/aU8mvmYZ7NfqeUY4ovq/cnRRcZ/bzXjAf6Ex58aa0xVMTmk9szIx07DhrXd8duLeaSPfmWq2ks+/yu5erewIAdu3OktXtfYt9vOyCmTaLtWd6qAsy7lyyJxJx1uGLxnJtsYl0D6WSSfTia1LQ20iCABIkZarfbROI+ILynM1i/bnu9G7rdrfSWK7noZTIRpIpNcrIBdJsDA9dWFmlrHbzNM/dORVbLz6pAEChULA3mk2cTKcpq5SF711NxOEvgDFgQVh7XNoZ53W1Wh0CwMbBPZe/PzxcxgIAliLmxFzK5R+sEHPITETE/CeIiYgBI6R1TofhVgQwgj4YbX6AsWQACWIcmQYAZgCkpSXbbIbvIxsB4Jp/N9WfSBlnvzN29vdIxqT1urKyDQA/Afmx1bzadz3KAAAAAElFTkSuQmCC',
+    export:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACGUlEQVR4nI1Tv2tTURT+zr0vP2xTSbFLXNUlW/MGCw75A4QKhZQOQkpJm1SogUjE7XG3ggq2IjG6OAn6QNDNzSyK0uii2QSnVMGihNgY8u49DnkvedgU/eBwf53vO/ecey5wHBxHTJz/D7KOYwFApnB7Yb50ZyW8929y1idv7tiZK/c65yuP2C7dLRwnQkeurZTJFG7ZFD3xmoii2njfrUh8Tg96xfe18oPAJ6CIMZcFlGK7uHtBTif3wOa+9gZvifmjN/i9Ek3M1eeLu0UoZXK5p/KIQKvlEgBm4JzxvIfN2lYZBAIj+aF29Um/c1CSpPcBwE1/4r9TCMbRARxHZL6eegdiPnOQWnDdZT0hdRYhIgdEe6MegVIGxAwArrus7Y16JPScI38BAPm8E7+4eWMWAEEp00y1g2jGNzRTbR0Ub3GtOrO4Vp0ZCXQih5W4xufL125OAUD21ag2074h12pRLpeTAGBJeiEFPRsJCGCKpJjt97oEAI3GMCobscpGrA7TcE06nfZrRMmhAX5jkGZjeBCHlXUcq7t/mhIpRzTU1h4wbqAWILKOY9DuaSL2xgLGgAXh+Y76iQloKOWF10vr1UHQARYAsBSxaCxOS+vXt4nZYyYi/wXCYCJiwAhpndWe92UkYAS9Mdp8A6NiAAliHGEDwzYDaWnJLpvBSyD0Fy7ly8n+yaSJ/jqcyA0jEZPW49r2DwD4A3a94Xe/czJ2AAAAAElFTkSuQmCC',
+    additional_reset:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC7UlEQVR4nHWTT2gjdRTHv+/3myTN2G7Tros9CosUetBDrYIKU9CNJZ2ZpIeo6OKfS0EUpafFPzBG6F72soun3YPoQQR7kE6TmtS0aUQUir0sXlTc4i6rUFezNWY7M7+Z3/PSYFjt9/h43w+8976PcIyq8/NjE6apgzDUT/h+FwAYIAAggPt94m7jZ+WyBIAU0XIYx78FzDe2isWtLx3nJQKYAO6DjmAgHqAyQATwF8Xi/eNSTh4oNSqInk0LsUDA2nWlXv6xVjt47wh23AT/0WapdPqrUmmv6bpfAwB7ngAA+qZczoZRlJldXT24m/jd4mLqWqejh7tdo1Cvh5dt23xAiE6s9fl8tVppWZYhukHwjtL65+1y+Z7BRdXz+fGHr1xRp6amqFCvh+tzczOnmceU1u8S0VLLsozt2VlNDce5KIjeNDKZEezvByOTk/TH3t5Y2jS/V8zLed+/tG7bM2OZzM5fQXAuTfQhGcbvgVKPztVqO4YADrNSJr04Np9ut/9Guw0A+03XXTalvNi07VEiWgri+JN8rXZh48wZkwFFRCcBwNDMQ0NSyjtheKHhODeGpKRQqY+e8v1LddsenRofr/zQ6bSeXF09y54n9NWrJ9JJIjTRIQAIItrpRpGSRC8COJcW4m3NfGrdcR40U6k3rt2+3RBEjzQd53WqVLSI4wKAuMe8C4BEfm3t0zBJXksLkRwq9dDEyEjWIPolK8S3cZJszvr+nGJ+62Q2+0GjUDhLzEtKa7/k+92WZUlcnp5OAUCrWKy2S6WfPresHABsOc7jgyddn59/btN17zRs+6Zv2/d6nicYIOPX3d2EAVrp9V6YGB72c7nczS3XPR9E0cetYjEXJ8kJEqKQkfIVSXT9IIqed6vVWzw9LY6i/W98AaDpuu+nhFhk5vsirWNBZAigB6B2KwhefWZj40/2PEGViu7/AgYD1AdtLyzMyCQZVVqroWx257GVlcN+hPvm/1XLsozj6oNf2Nc/Aw1VaBvVQ1YAAAAASUVORK5CYII=',
+    additional_profiles:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACeElEQVR4nI1TS0iUURT+zr13Xur4gBicghZhGE32mBGTKNwUtJJajIseCGYzGZkVSUHFzw8tKmtwyoWO4a5FCkGLokUbIQqKSaGSCBOLKAtGIdRxZv7/nhaDOKTUnOU533l95ztAMcZMTYahAKai8P80wxDFIgUA1HfENgU77n2oP913vbat2/t3EQEwgZkAUGHAMAAAxEoSkZghp/uKt6Tm/a62m/UwTb2MLXqnUCQWFO6yB1prH5xUm4xFU4BBKhi9exKgFoZ+RQQfaXdn0v/dhmnqfCpTKJJQyUT0bV37jQPu0nWT1sJCHMDRpiZIQZLnpNuzX7k818C0N+2votCP9XJlOuJkIprbahjOd/cvf7PSv/ukchwJRQYqRkdNS6Qtfm1nFmdJKibSDyfMlmwyEc0B4MIVAhMBG8wkpOuJdHrYlksBABDZr/STGV9IKNYQHIrE/MFo7+HG83c8q4gggiXtLEiwtOECADH5rCsjCNNEJKD1KRaOaeFwP7IstSV/DRYAMFU1JwCwyNq7tZURgP1x+QoUisabyeHuEUptzmUWr6qK8n7Hr5ms4/Ni2ucL8FTVnEgmormag52uypptn+zs0sxYoqsxHA4LBTCSA/R4R6sxqrzV41I5D+nZ1NDLoUupguHt7cd6Sh0V5f3C6dxo5TLNeY7CeabD4WE5MtJi17XfDrk83udgXWnnMr0CeArInIbdIJTjrHKWbMjOp06MDV4cMgxDmKapV4RkGAKmqbe2GtWeMt8tMI5LVwmICDqXBbP9wsrMXxgf7H6z3HC13Aqk3NAZL9/ZEd/TcCaxL3RuwL8C+d8zMVM4PCzX8q/1iX8AxMr+1KcjfXEAAAAASUVORK5CYII=',
+    additional_preview:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABUElEQVR4nO3QsUrDUBQG4P+cm5gmRaqofQHtoIWA9AEEfQadOndwEEsURx+gk9DBSrs42lk3cZWigqMidNPBoViUtPEmx8XaphChzv7j4dzLfz5CLEIACQCsHV4Z7y+PhITcnpT0YBfYPFNu0UsnLf8WKpRqjnD/go2pHLS/fnNcfnCLlbRyrDIZnEKkAfBISRG2LOIoaLSqO22jg445I/aysuzsp+7PAoDpkB0x9pg4I6QAjF4iICiEgVwCaBMArG5Xlyjoz9/VvetBM9c7dbTfTTTIv2b9ZnMrjE9FEh8kxQCAQqlmvn08209E3Uk/+EbsnZNh5Uj7Gz+I6dQuKbIhocSaCQmbFnEvaLTqQ8QVYxyRZJ9JZUQEoDFEVgj5HzGOCCdvWM7CKKJADpjVtERjiCIgpRCyGiIWSkeLmvTcfc1rDZq5XsXRvj0h4h/yBTG1uYnwrhGRAAAAAElFTkSuQmCC',
+    additional_export_profile:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACGUlEQVR4nI1Tv2tTURT+zr0vP2xTSbFLXNUlW/MGCw75A4QKhZQOQkpJm1SogUjE7XG3ggq2IjG6OAn6QNDNzSyK0uii2QSnVMGihNgY8u49DnkvedgU/eBwf53vO/ecey5wHBxHTJz/D7KOYwFApnB7Yb50ZyW8929y1idv7tiZK/c65yuP2C7dLRwnQkeurZTJFG7ZFD3xmoii2njfrUh8Tg96xfe18oPAJ6CIMZcFlGK7uHtBTif3wOa+9gZvifmjN/i9Ek3M1eeLu0UoZXK5p/KIQKvlEgBm4JzxvIfN2lYZBAIj+aF29Um/c1CSpPcBwE1/4r9TCMbRARxHZL6eegdiPnOQWnDdZT0hdRYhIgdEe6MegVIGxAwArrus7Y16JPScI38BAPm8E7+4eWMWAEEp00y1g2jGNzRTbR0Ub3GtOrO4Vp0ZCXQih5W4xufL125OAUD21ag2074h12pRLpeTAGBJeiEFPRsJCGCKpJjt97oEAI3GMCobscpGrA7TcE06nfZrRMmhAX5jkGZjeBCHlXUcq7t/mhIpRzTU1h4wbqAWILKOY9DuaSL2xgLGgAXh+Y76iQloKOWF10vr1UHQARYAsBSxaCxOS+vXt4nZYyYi/wXCYCJiwAhpndWe92UkYAS9Mdp8A6NiAAliHGEDwzYDaWnJLpvBSyD0Fy7ly8n+yaSJ/jqcyA0jEZPW49r2DwD4A3a94Xe/czJ2AAAAAElFTkSuQmCC',
+    additional_delete_profile:'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC/ElEQVR4nF2TS2hdVRSG/7X3Pueee27uIw9TbqQ6kE7ioB0IVnBgocYWI0IhnYoPnLbViqiD452pETrsTJEqiAcKMRko6SCBgohOc6E1xEfA3qbh3jxuz3PvtRxoJck/Xqz18a//JwCIokj9sYNGkmYCAAMAt9qnCS0AOwACj7B1J8O1d1McEc3NXam6lnfTaPO8K0tPiJTHDieTfuHDiQiJIaBbG+/95elXLvDuxq3BgOM4dgBgvIlKYEt+yTr70d2guWy1lqeSvfC5/a3rhjBSikjAjn5rtU/80nhs9MfP5svDBG+/37Qimy2bXLh0r/tk6YfN0jmzp8zjDKWJRByU3w1bb0zlw2+Oc/nnDvONVxcX16MoUibMM9r1KzCkJgY6+LRRrY2nWQZiFgOGCKDh6NRwW0JjXqt6HrI8XwWw/nS3SyqpBKJFgp8ak+ue8LV+mlrP9yeRZXVpNuvIsvqKaUxdb0/3/w7qbpgmq7tBsCpRpC7GsVMAIIBUbKkabG/XPc8Ms6w902plqtcz4/1+YcMxTSIyJlYz4deLcexWVlYUAKhHZihhHZTFXtV4cMy8nKZXuFpdG7SPffxiem8tFFcz7OAYyUET/11A4ICZTtiHm4m1CIEnFImGYMxnVJTWjZorFDkLVup3AHgwOSkAoIo8IwFUrbDjN46/kObWYld7z6QwGkBRKGUKZheyhccOFtg4SGBE+44EvZqvFxaJyzf3gDvh6AesVfBsMkC3Ur80XQxRhdKOuVRiDqVRff/F/D6cPlMz3rmhptkScnc6GWySs+dLdufg7OzDkmdO7W99nQuIRkfWAGAujhkADADc/PKTDfyH9s7s7H0RCT789qsfDl5afvn8aVGGjh3twqMyjf3c927Xe/atPP98xJjL+2U5TyJMShGYndH69dK5BzNLSycRRUSdDv//hU6nw+16z8Zx7IR5VUTuK+AyAe+B+SqIrvpKVUmpJQIk7nbpEMFRfXf2bHMqDHkbwASAbQBNIn1mYWHn6Ow/MSOClgntrB4AAAAASUVORK5CYII='
+};
+
+function additionalButtonIcon(action) {
+    var icon = additionalButtonIcons[action];
+    return icon ? '<img class="additional-icon" alt="" src="data:image/png;base64,' + icon + '">' : '';
+}
+
+function additionalButton(label, action) {
+    return '<a class="btn" href="' + actionUrl(action) + '">' + additionalButtonIcon(action) +
+        escapeHtml(uiText(label)) + '</a>';
+}
+
+function renderAdditionalTabs() {
+    var host = document.getElementById('additionalTabs');
+    if (!host) return;
+    var html = '', admin = DATA.Additional && DATA.Additional.CanAdmin;
+    for (var i = 0; i < additionalTabs.length; i++) {
+        var tab = additionalTabs[i];
+        if (tab.id === 'personal' && !admin) continue;
+        var active = additionalTab === tab.id;
+        html += '<button type="button" class="additional-tab" id="additional-tab-' + tab.id + '" role="tab" aria-controls="additionalBody" ' +
+            'aria-selected="' + active + '" tabindex="' + (active ? '0' : '-1') + '" onclick="selectAdditionalTab(\'' + tab.id + '\', true)" ' +
+            'onkeydown="return additionalTabKey(event, \'' + tab.id + '\')"><img class="additional-icon" alt="" src="data:image/png;base64,' +
+            tab.icon + '">' + escapeHtml(uiText(tab.title)) + '</button>';
+    }
+    host.innerHTML = html;
+}
+
+function additionalTabKey(event, id) {
+    var key = event.keyCode;
+    if (key !== 37 && key !== 39 && key !== 36 && key !== 35) return true;
+    var ids = ['display','appearance','transfer'];
+    if (DATA.Additional && DATA.Additional.CanAdmin) ids.push('personal');
+    var index = ids.indexOf(id);
+    index = key === 36 ? 0 : key === 35 ? ids.length - 1 : (index + ids.length + (key === 39 ? 1 : -1)) % ids.length;
+    if (event.preventDefault) event.preventDefault();
+    selectAdditionalTab(ids[index], true);
+    return false;
+}
+
+function selectAdditionalTab(id, focus) {
+    if (bridgeBusy) return;
+    additionalTab = id;
+    renderAdditionalTabs();
+    renderAdditionalBody();
+    updateViewStateField();
+    var tab = focus && document.getElementById('additional-tab-' + id);
+    if (tab && tab.focus) tab.focus();
+    if (id === 'personal' && DATA.Additional.CanManageProfiles && !DATA.Additional.hasOwnProperty('Profiles')) {
+        publishBridgeCommand('panelkasettings://additional_profiles');
+    }
+}
+
+function additionalField(index, field) {
+    var id = 'additional-field-' + index, label = escapeHtml(field.Label);
+    if (field.Kind === 'bool') {
+        return '<label class="additional-check"><input type="checkbox" id="' + id + '"' + (field.Value ? ' checked' : '') +
+            ' onchange="changeAdditionalField(' + index + ',this.checked)">' + label + '</label>';
+    }
+    if (field.Kind === 'tooltip') {
+        var values = ['Снизу','Всплывающая','Кнопка','Нет'];
+        var titles = ['additionalTooltipBottom','additionalTooltipPopup','additionalTooltipButton','additionalTooltipNone'];
+        var html = '<label for="' + id + '">' + label + '</label> <select id="' + id + '" onchange="changeAdditionalField(' + index + ',this.value)">';
+        for (var i = 0; i < values.length; i++) {
+            html += '<option value="' + values[i] + '"' + (values[i] === field.Value ? ' selected' : '') + '>' + escapeHtml(uiText(titles[i])) + '</option>';
+        }
+        return html + '</select>';
+    }
+    return '';
+}
+
+function additionalFieldGroup(group, columnCount) {
+    var fields = DATA.Additional.Fields || [], columns = [], html = '';
+    for (var i = 0; i < columnCount; i++) columns.push([]);
+    for (var j = 0; j < fields.length; j++) {
+        var field = fields[j];
+        if (field.Group !== group) continue;
+        var column = Math.min(columnCount, Math.max(1, Number(field.Column) || 1));
+        columns[column - 1].push(j);
+    }
+    for (var k = 0; k < columns.length; k++) {
+        var indexes = columns[k];
+        indexes.sort(function(a,b) { return (fields[a].Order || 0) - (fields[b].Order || 0) || a - b; });
+        html += '<div class="additional-field-column">';
+        for (var n = 0; n < indexes.length; n++) html += additionalField(indexes[n], fields[indexes[n]]);
+        html += '</div>';
+    }
+    return html;
+}
+
+function renderAdditionalDisplayGroup(section, title) {
+    var fields = DATA.Additional.Fields || [], indexes = [];
+    for (var i = 0; i < fields.length; i++) {
+        if (fields[i].Group === 'display' && fields[i].Section === section) indexes.push(i);
+    }
+    indexes.sort(function(a,b) { return (fields[a].Order || 0) - (fields[b].Order || 0); });
+    var html = '<section class="additional-card additional-stack"><h3>' + escapeHtml(uiText(title)) + '</h3>';
+    for (var j = 0; j < indexes.length; j++) html += additionalField(indexes[j],fields[indexes[j]]);
+    return html + '</section>';
+}
+
+function renderAdditionalAppearanceField(field) {
+    var isColor = field.Kind === 'color';
+    var label = uiText(isColor ? 'additionalColor' : 'additionalFont');
+    var value = field.Presentation || uiText('additionalDefault');
+    var color = isColor && /^#[0-9a-f]{6}$/i.test(field.Value || '') ? field.Value : '';
+    return '<div class="additional-appearance-field"><span>' + escapeHtml(label) + '</span>' +
+        '<a class="btn additional-value" href="' + actionUrl('additional_choose_appearance',{key:field.Key}) +
+        '" aria-label="' + escapeHtml(field.Label + ': ' + value) + '" title="' + escapeHtml(value) + '">' +
+        (color ? '<span class="additional-color-swatch" aria-hidden="true" style="background-color:' + color + '"></span>' : '') +
+        '<span class="additional-value-text">' + escapeHtml(value) + '</span><span class="additional-ellipsis" aria-hidden="true">…</span></a></div>';
+}
+
+function renderAdditionalAppearance() {
+    var fields = DATA.Additional.Fields || [], sections = ['column','group'], html = '';
+    for (var i = 0; i < sections.length; i++) {
+        var section = sections[i], font = null, color = null;
+        for (var j = 0; j < fields.length; j++) {
+            var field = fields[j];
+            if (field.Group !== 'appearance' || field.Section !== section) continue;
+            if (field.Kind === 'font') font = field;
+            else if (field.Kind === 'color') color = field;
+        }
+        var title = section === 'column' ? 'additionalColumnHeadings' : 'additionalGroupHeadings';
+        html += '<section class="additional-card"><h3>' + escapeHtml(uiText(title)) + '</h3><div class="additional-appearance-fields">' +
+            (font ? renderAdditionalAppearanceField(font) : '') + (color ? renderAdditionalAppearanceField(color) : '') + '</div></section>';
+    }
+    return html;
+}
+
+// Keep checkbox edits in the current document until a real 1C action needs them.
+function readAdditionalDraft() {
+    var field = document.getElementById('panelkaAdditionalDraft');
+    return field && field.value ? JSON.parse(field.value) : {};
+}
+
+function changeAdditionalField(index, value) {
+    var field = DATA.Additional.Fields[index];
+    var draftField = document.getElementById('panelkaAdditionalDraft');
+    if (!field || !draftField || bridgeBusy || field.Value === value) return;
+    var draft = readAdditionalDraft();
+    draft[field.Key] = value;
+    draftField.value = JSON.stringify(draft);
+    field.Value = value;
+    additionalNeedsRefresh = true;
+}
+
+function setAdditionalCategories(value) {
+    if (bridgeBusy) return;
+    var fields = DATA.Additional.Fields || [];
+    for (var i = 0; i < fields.length; i++) {
+        if (fields[i].Group !== 'categories' || fields[i].Kind !== 'bool') continue;
+        changeAdditionalField(i, value);
+        var input = document.getElementById('additional-field-' + i);
+        if (input) input.checked = value;
+    }
+}
+
+function additionalProfileCommands() {
+    var profiles = DATA.Additional.Profiles || [], selected;
+    for (var i = 0; i < profiles.length; i++) if (profiles[i].User === additionalProfile) selected = profiles[i];
+    var host = document.getElementById('additionalProfileActions');
+    if (!host) return;
+    var disabled = selected ? '' : ' disabled';
+    host.innerHTML = additionalButton('additionalRefresh','additional_profiles') +
+        '<button class="btn" type="button" onclick="runAdditionalProfile(\'additional_preview\')"' + disabled + '>' +
+        additionalButtonIcon('additional_preview') + escapeHtml(uiText('additionalPreview')) + '</button>' +
+        '<button class="btn" type="button" onclick="runAdditionalProfile(\'additional_export_profile\')"' + disabled + '>' +
+        additionalButtonIcon('additional_export_profile') + escapeHtml(uiText('additionalExport')) + '</button>' + (DATA.Additional.CanDeleteProfiles ?
+        '<button class="btn btn-danger" type="button" onclick="runAdditionalProfile(\'additional_delete_profile\')"' + disabled + '>' +
+        additionalButtonIcon('additional_delete_profile') + escapeHtml(uiText('additionalDelete')) + '</button>' : '');
+}
+
+function runAdditionalProfile(action) {
+    var profiles = DATA.Additional.Profiles || [];
+    for (var i = 0; i < profiles.length; i++) {
+        var row = profiles[i];
+        if (row.User === additionalProfile) {
+            publishBridgeCommand(actionUrl(action,{user:row.User,revision:row.Revision}));
+            return;
+        }
+    }
+}
+
+function filterAdditionalProfiles(value) {
+    additionalQuery = value;
+    var table = document.getElementById('additionalProfilesTable');
+    if (!table) return;
+    var rows = table.querySelectorAll('tbody tr');
+    var query = value.toLowerCase();
+    for (var i = 0; i < rows.length; i++) {
+        var visible = (rows[i].getAttribute('data-profile-name') || '').toLowerCase().indexOf(query) >= 0;
+        rows[i].style.display = visible ? '' : 'none';
+        var radio = rows[i].querySelector('input');
+        if (!visible && radio && radio.checked) {
+            radio.checked = false;
+            additionalProfile = '';
+            additionalProfileCommands();
+        }
+    }
+}
+
+function renderAdditionalProfiles() {
+    var settings = DATA.Additional, profiles = settings.Profiles || [];
+    if (!settings.CanManageProfiles) return '';
+    var html = '<section class="additional-card"><h3>' + escapeHtml(uiText('additionalProfiles')) + '</h3>' +
+        '<p>' + escapeHtml(uiText('additionalProfileHint')) + '</p><p role="status">' + escapeHtml(settings.Message || '') + '</p>' +
+        '<div id="additionalProfileActions" class="additional-actions"></div>' +
+        '<label>' + escapeHtml(uiText('additionalProfileFind')) + ' <input type="text" value="' + escapeHtml(additionalQuery) +
+        '" oninput="filterAdditionalProfiles(this.value)"></label>';
+    var headers = ['additionalUser','additionalCreated','additionalUpdated','additionalPages','additionalLinks'];
+    if (!profiles.length) html += '<p>' + escapeHtml(uiText(settings.hasOwnProperty('Profiles') ? 'additionalNoProfiles' : 'additionalRefreshProfilesHint')) + '</p>';
+    else {
+        html += '<div class="additional-table-wrap"><table id="additionalProfilesTable" class="additional-table"><thead><tr>';
+        for (var i = 0; i < headers.length; i++) html += '<th scope="col">' + escapeHtml(uiText(headers[i])) + '</th>';
+        html += '</tr></thead><tbody>';
+        for (var j = 0; j < profiles.length; j++) {
+            var row = profiles[j], name = row.Name || row.User;
+            html += '<tr data-profile-name="' + escapeHtml(name) + '"><td><label><input type="radio" name="additional-profile"' +
+                (additionalProfile === row.User ? ' checked' : '') + ' onchange="additionalProfile=DATA.Additional.Profiles[' + j + '].User;additionalProfileCommands()">' +
+                escapeHtml(name) + '</label></td><td>' + escapeHtml(row.Created || '') + '</td><td>' +
+                escapeHtml(row.Updated || '') + '</td><td>' + escapeHtml(row.Pages) + '</td><td>' + escapeHtml(row.Links) + '</td></tr>';
+        }
+        html += '</tbody></table></div>';
+    }
+    return html + '</section>' + renderAdditionalPreview();
+}
+
+function closeAdditionalPreview() {
+    DATA.Additional.Preview = null;
+    renderAdditionalBody();
+}
+
+function renderAdditionalPreview() {
+    var preview = DATA.Additional.Preview;
+    if (!preview) return '';
+    var labels = ['additionalPreviewName','additionalPreviewType','additionalPreviewUrl','additionalPreviewHint'];
+    var html = '<section class="additional-card"><h3>' + escapeHtml(DATA.Additional.PreviewTitle || uiText('additionalPreview')) +
+        '</h3><button class="btn" type="button" onclick="closeAdditionalPreview()">' + escapeHtml(uiText('additionalClosePreview')) +
+        '</button><div class="additional-table-wrap"><table class="additional-table"><thead><tr>';
+    for (var i = 0; i < labels.length; i++) html += '<th scope="col">' + escapeHtml(uiText(labels[i])) + '</th>';
+    html += '</tr></thead><tbody>';
+    for (var j = 0; j < preview.length; j++) {
+        var row = preview[j], depth = Math.min(6, Math.max(0, Number(row.Depth) || 0));
+        html += '<tr><td style="padding-left:' + (8 + 14 * depth) + 'px">' + escapeHtml(row.Name) + '</td><td>' + escapeHtml(row.Kind) +
+            '</td><td>' + escapeHtml(row.Url) + '</td><td>' + escapeHtml(row.Hint) + '</td></tr>';
+    }
+    return html + '</tbody></table></div></section>';
+}
+
+function renderAdditionalBody() {
+    var host = document.getElementById('additionalBody'), settings = DATA.Additional;
+    if (!host) return;
+    host.setAttribute('aria-labelledby', 'additional-tab-' + additionalTab);
+    if (!settings) {
+        host.innerHTML = additionalButton('additionalLoad','open_additional_settings');
+        return;
+    }
+    if (additionalTab === 'appearance') {
+        host.innerHTML = renderAdditionalAppearance();
+    } else if (additionalTab === 'transfer') {
+        host.innerHTML = '<section class="additional-card"><h3>' + escapeHtml(uiText('additionalImportExportTitle')) +
+            '</h3><p>' + escapeHtml(uiText('additionalTransferHint')) + '</p>' +
+            (settings.CanImport ? additionalButton('additionalImport','import') : '') +
+            (settings.CanExport ? additionalButton('additionalExport','export') : '') +
+            (!settings.CanImport && !settings.CanExport ? '<p>' + escapeHtml(uiText('additionalRestricted')) + '</p>' : '') +
+            (settings.Personal ? additionalButton('additionalCopy','additional_copy_common') : '') + '</section>' +
+            (settings.CanReset !== false ? '<section class="additional-card"><h3>' + escapeHtml(uiText('additionalResetTitle')) +
+            '</h3><p>' + escapeHtml(uiText('additionalResetHint')) + '</p>' + additionalButton('additionalReset','additional_reset') + '</section>' : '');
+    } else if (additionalTab === 'personal' && settings.CanAdmin) {
+        host.innerHTML = '<section class="additional-card"><div class="additional-fields">' + additionalFieldGroup('personal',2) +
+            '</div></section><section class="additional-card"><h3>' + escapeHtml(uiText('additionalCategories')) +
+            '</h3><button class="btn btn-small" type="button" onclick="setAdditionalCategories(true)">' +
+            escapeHtml(uiText('additionalSelectAll')) + '</button><button class="btn btn-small" type="button" onclick="setAdditionalCategories(false)">' +
+            escapeHtml(uiText('additionalClearAll')) + '</button><div class="additional-fields">' + additionalFieldGroup('categories',3) +
+            '</div><h3>' + escapeHtml(uiText('additionalSources')) + '</h3><div class="additional-fields">' + additionalFieldGroup('sources',2) +
+            '</div></section>' + renderAdditionalProfiles();
+        additionalProfileCommands();
+        filterAdditionalProfiles(additionalQuery);
+    } else {
+        host.innerHTML = renderAdditionalDisplayGroup('structure','additionalStructure') +
+            renderAdditionalDisplayGroup('tooltips','additionalTooltips');
+    }
+}
+
+function showAdditionalSettings(focus) {
+    var pane = document.getElementById('additionalSettingsPane'), workspace = document.getElementById('editorWorkspace');
+    var toggle = document.getElementById('additionalToggle');
+    if (!pane || !workspace || !toggle) return;
+    additionalOpen = true;
+    if (additionalTab === 'personal' && (!DATA.Additional || !DATA.Additional.CanAdmin)) additionalTab = 'display';
+    pane.style.display = '';
+    workspace.style.display = 'none';
+    toggle.setAttribute('aria-expanded','true');
+    toggle.innerHTML = escapeHtml(uiText('additionalBack'));
+    renderAdditionalTabs();
+    renderAdditionalBody();
+    if (focus) {
+        var selected = document.getElementById('additional-tab-' + additionalTab);
+        if (selected && selected.focus) selected.focus();
+    }
+    updateViewStateField();
+}
+
+function closeAdditionalSettings() {
+    var pane = document.getElementById('additionalSettingsPane'), workspace = document.getElementById('editorWorkspace');
+    var toggle = document.getElementById('additionalToggle');
+    if (!pane || !workspace || !toggle) return;
+    additionalOpen = false;
+    if (additionalNeedsRefresh) {
+        if (!publishBridgeCommand(appendScrollState('panelkasettings://additional_close'))) additionalOpen = true;
+        return;
+    }
+    pane.style.display = 'none';
+    workspace.style.display = '';
+    toggle.setAttribute('aria-expanded','false');
+    toggle.innerHTML = '<span aria-hidden="true">⚙</span> ' + escapeHtml(uiText('additionalSettings'));
+    if (toggle.focus) toggle.focus();
+    updateViewStateField();
+}
+
+function restoreAdditionalView() {
+    if (additionalOpen) return;
+    var state;
+    try { state = JSON.parse(DATA.Ui.State || '{}'); } catch (e) { return; }
+    if (!state || !state.additionalOpen) return;
+    if (state.additionalTab === 'display' || state.additionalTab === 'appearance' || state.additionalTab === 'transfer' || state.additionalTab === 'personal') {
+        additionalTab = state.additionalTab;
+    }
+    // Imports and other full refreshes recreate the HTML document. Reload the settings snapshot once.
+    if (DATA.Additional) showAdditionalSettings(false);
+    else window.setTimeout(function () { publishBridgeCommand('panelkasettings://open_additional_settings'); }, 0);
+}
+
+function receiveAdditionalResponse() {
+    var mailbox = document.getElementById('panelkaAdditionalResponse');
+    if (!mailbox || !mailbox.value) return false;
+    var raw = mailbox.value, snapshot;
+    mailbox.value = '';
+    try { snapshot = JSON.parse(raw); } catch (e) { showToast(uiText('updateFailed')); return false; }
+    if (!snapshot || typeof snapshot !== 'object') return false;
+    DATA.Additional = DATA.Additional || {};
+    for (var name in snapshot) {
+        if (Object.prototype.hasOwnProperty.call(snapshot,name)) DATA.Additional[name] = snapshot[name];
+    }
+    if (snapshot.Fields) {
+        var draft = readAdditionalDraft();
+        for (var i = 0; i < snapshot.Fields.length; i++) {
+            var field = snapshot.Fields[i];
+            if (Object.prototype.hasOwnProperty.call(draft,field.Key)) field.Value = draft[field.Key];
+        }
+    }
+    if (snapshot.General && JSON.stringify(DATA.General) !== JSON.stringify(snapshot.General)) {
+        DATA.General = snapshot.General;
+        additionalNeedsRefresh = true;
+    }
+    if (activeBridgeAction === 'open_additional_settings' && additionalOpeningDraft) {
+        // The server has already applied the workspace draft while opening the tabs.
+        editorBaseline = JSON.stringify(currentEditorPayload());
+        updateEditorDraft();
+        additionalNeedsRefresh = true;
+        additionalOpeningDraft = false;
+    }
+    if (!additionalOpen && activeBridgeAction === 'open_additional_settings') showAdditionalSettings(true);
+    else if (additionalOpen) {
+        renderAdditionalTabs();
+        renderAdditionalBody();
+    }
+    return true;
+}
+
+function currentEditorPayload() {
+    var selected = DATA.Selected || {}, payload;
+    if (selected.Kind === 'Link') {
+        payload = linkEditorPayload();
+        if (payload) payload.kind = 'Link';
+        return payload;
+    }
+    if (selected.System) return null;
+    if (selected.Kind === 'Page' && document.getElementById('pageName')) {
+        return {kind:'Page', id:selected.Id, name:document.getElementById('pageName').value};
+    }
+    if (selected.Kind === 'Column' && document.getElementById('columnName')) {
+        return {kind:'Column', id:selected.Id, name:document.getElementById('columnName').value, page:document.getElementById('columnPage').value};
+    }
+    return null;
+}
+function updateEditorDraft() {
+    var payload = currentEditorPayload(), field = document.getElementById('panelkaEditorDraft');
+    field.value = payload && JSON.stringify(payload) !== editorBaseline ? actionUrl('draft', payload) : '';
+    updateViewStateField();
+}
+function updateViewStateField() {
+    var field = document.getElementById('panelkaViewState');
+    if (field) field.value = JSON.stringify(captureViewState());
+}
+function captureViewState() {
+    var search = document.getElementById('sourceSearch');
+    var focus = document.activeElement;
+    return {search: search ? search.value : '', focus: focus ? focus.id : '', webDraft:captureWebLinkDraft(),
+        center:getScrollTopById('previewShell'), sources:getScrollTopById('sourceList'), properties:getScrollTopById('rightPane'),
+        additionalOpen:additionalOpen, additionalTab:additionalTab};
+}
+function restoreViewState() {
+    var state = {};
+    try { state = JSON.parse(DATA.Ui.State || '{}'); } catch (e) { state = {}; }
+    var search = document.getElementById('sourceSearch');
+    if (search && typeof state.search === 'string') { search.value = state.search; filterSources(); }
+    window.setTimeout(function () {
+        var ids = ['previewShell','sourceList','rightPane'], keys = ['center','sources','properties'];
+        for (var i=0;i<ids.length;i++) { var node=document.getElementById(ids[i]); if(node && typeof state[keys[i]]==='number') node.scrollTop=Math.max(0,state[keys[i]]); }
+        var focus = state.focus && document.getElementById(state.focus);
+        if (focus && focus.offsetHeight && focus.focus) focus.focus();
+    }, 0);
+}
+function visibleDialog() {
+    var ids=['modalBackdrop','iconModalBackdrop','deleteConfirmBackdrop','structureChoiceBackdrop'];
+    for(var i=0;i<ids.length;i++) { var node=document.getElementById(ids[i]); if(node && node.style.display==='flex') return node; if(node && node.style.display==='block') return node; }
+    return null;
+}
+function observeDialog() {
+    var dialog=visibleDialog();
+    if(dialog !== lastDialog) {
+        if(dialog) {
+            previousFocus=document.activeElement;
+            dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');
+            var first=dialog.querySelector('input,select,textarea,a,button');if(first) first.focus();
+        } else if(previousFocus && previousFocus.focus) previousFocus.focus();
+        lastDialog=dialog;
+    }
+}
+if(document.addEventListener) {
+    document.addEventListener('input',updateEditorDraft,false);
+    document.addEventListener('change',updateEditorDraft,false);
+    document.addEventListener('keydown',function(event){
+        var menu = document.getElementById('panelkaContextMenu');
+        if (menu && menu.style.display === 'block') {
+            if (event.keyCode === 27) { event.preventDefault(); closeContextMenu(true); return; }
+            if (event.keyCode === 9) { closeContextMenu(false); }
+            if (event.keyCode === 38 || event.keyCode === 40 || event.keyCode === 36 || event.keyCode === 35) {
+                var actions = menu.querySelectorAll('a'), current = -1;
+                for (var m=0;m<actions.length;m++) if (actions[m] === document.activeElement) current=m;
+                var next = event.keyCode === 36 ? 0 : event.keyCode === 35 ? actions.length-1 :
+                    (current + (event.keyCode === 38 ? -1 : 1) + actions.length) % actions.length;
+                if (actions.length) {event.preventDefault();actions[next].focus();}
+                return;
+            }
+        }
+        var target = findContextTarget(event.target || event.srcElement);
+        if (target && (event.keyCode === 93 || (event.shiftKey && event.keyCode === 121) ||
+            (target.getAttribute('data-context-kind') === 'group' && (event.keyCode === 13 || event.keyCode === 32)))) {
+            event.keyboard = true;
+            handleContextMenuEvent(event);
+            return;
+        }
+        var dialog=visibleDialog();if(!dialog)return;
+        if(event.keyCode===27 && !bridgeBusy){
+            event.preventDefault();event.stopPropagation();
+            if(dialog.id==='iconModalBackdrop') publishBridgeCommand('panelkasettings://cancel_icon');
+            else { dialog.style.display='none';observeDialog(); }
+        }
+        if(event.keyCode===9){
+            var nodes=dialog.querySelectorAll('input,select,textarea,a,button'), active=[];
+            for(var i=0;i<nodes.length;i++)if(!nodes[i].disabled && nodes[i].offsetHeight)active.push(nodes[i]);
+            if(!active.length)return;
+            var first=active[0],last=active[active.length-1];
+            if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+            else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+        }
+    },true);
+    document.addEventListener('click',function(event){
+        if(bridgeBusy){event.preventDefault();event.stopPropagation();}
+    },true);
+}
+window.setInterval(function(){
+    if(pendingPerformance && !pendingPerformance.processing && document.title==='PANELKASETTINGS_PROCESSING') pendingPerformance.processing=clockMs();
+    receiveServerResponse();
+    receiveAdditionalResponse();
+    if(bridgeBusy && (document.title==='PANELKASETTINGS_READY' || document.title==='PANELKASETTINGS_ERROR')) {
+        if (document.title==='PANELKASETTINGS_READY' && completeWebLinkSubmission()) renderSourceList();
+        var completedAction = activeBridgeAction;
+        if (completedAction === 'additional_close' && document.title === 'PANELKASETTINGS_ERROR') additionalOpen = true;
+        bridgeBusy=false;activeBridgeAction='';document.body.setAttribute('aria-busy','false');
+        for(var i=0;i<bridgeDisabledFields.length;i++) bridgeDisabledFields[i].disabled=false;
+        bridgeDisabledFields=[];
+        updateViewStateField();
+    }
+    observeDialog();
+},100);
+
+// The server writes JSON into a hidden input; no eval or document navigation is used.
+function receiveServerResponse() {
+    var mailbox = document.getElementById('panelkaServerResponse');
+    if (!mailbox || !mailbox.value) return false;
+    var response;
+    try {
+        response = JSON.parse(mailbox.value);
+        if (!response || !response.Data || (response.Kind !== 'sources' && response.Kind !== 'model' && response.Kind !== 'layout' && response.Kind !== 'patch' && response.Kind !== 'link')) {
+            throw new Error('Unknown response');
+        }
+    } catch (error) {
+        mailbox.value = '';
+        showToast(uiText("updateFailed"));
+        return false;
+    }
+    mailbox.value = '';
+    // The bridge has one command in flight. Revision additionally rejects an older model reply.
+    if (typeof response.Revision === 'number' && response.Revision < lastModelRevision) return true;
+    if (typeof response.Revision === 'number') lastModelRevision = response.Revision;
+    var webLinkSubmitted = completeWebLinkSubmission();
+    var renderingStarted=clockMs();
+    if (response.Kind === 'link') {
+        applyLinkResponse(response.Data);
+        if (webLinkSubmitted) renderSourceList();
+    } else if (response.Kind === 'sources') {
+        DATA.Sources = response.Data.Sources;
+        if (response.Data.hasOwnProperty('AllowedSources')) DATA.Ui.AllowedSources = response.Data.AllowedSources;
+        if (response.Data.hasOwnProperty('MetadataGroups')) DATA.MetadataGroups = response.Data.MetadataGroups;
+        DATA.Ui.SourceMode = response.Data.SourceMode;
+        DATA.Ui.MetadataGroup = response.Data.MetadataGroup;
+        DATA.Ui.FavoriteFilter = response.Data.FavoriteFilter;
+        DATA.Ui.State = response.Data.State;
+        rememberMetadataSources();
+        renderSourceTabs();
+        renderMetadataGroups();
+        renderSourceList();
+        restoreViewState();
+    } else {
+        var previousUi = {page:DATA.Ui.ActivePage,column:DATA.Ui.ActiveColumn,source:DATA.Ui.SourceMode};
+        if (response.Kind === 'patch') {
+            applyStructurePatch(response.Data);
+        } else if (response.Kind === 'layout') {
+            for (var name in response.Data) if (response.Data.hasOwnProperty(name)) DATA[name] = response.Data[name];
+        } else {
+            DATA = response.Data;
+        }
+        renderServerChanges(response.Changes, previousUi, webLinkSubmitted);
+    }
+    if(pendingPerformance) {
+        recordPerformance({action:pendingPerformance.action,local:false,kind:response.Kind,
+            totalMs:clockMs()-pendingPerformance.started,renderMs:clockMs()-renderingStarted,
+            observedQueueMs:pendingPerformance.processing ? pendingPerformance.processing-pendingPerformance.started : null,
+            serverMs:typeof response.ServerMs==='number' ? response.ServerMs : null});
+        pendingPerformance=null;
+    }
+    return true;
+}
+
+// Updated columns carry Links; unchanged column headers deliberately omit this property.
+// Catalog deletions use the complete layout response to keep legacy numeric indexes consistent.
+function applyStructurePatch(data) {
+    var oldPages = {}, oldColumns = {}, catalog = {}, i, j, page, column, old, key;
+    for (i = 0; i < DATA.Pages.length; i++) {
+        page = DATA.Pages[i];
+        oldPages['id:' + page.Id] = page;
+        for (j = 0; j < page.Columns.length; j++) {
+            column = page.Columns[j];
+            oldColumns['id:' + column.Id] = column;
+        }
+    }
+    for (i = 0; i < data.Pages.length; i++) {
+        page = data.Pages[i];
+        old = oldPages['id:' + page.Id];
+        if (!page.hasOwnProperty('IconData') && old && old.Icon === page.Icon) page.IconData = old.IconData;
+        for (j = 0; j < page.Columns.length; j++) {
+            column = page.Columns[j];
+            old = oldColumns['id:' + column.Id];
+            if (!column.hasOwnProperty('IconData') && old && old.Icon === column.Icon) column.IconData = old.IconData;
+            if (!column.hasOwnProperty('Links')) {
+                if (!old) throw new Error('Missing column in structure patch');
+                column.Links = old.Links;
+            }
+        }
+    }
+    var mergedCatalog = (DATA.Catalog || []).slice(0);
+    for (i = 0; i < mergedCatalog.length; i++) catalog['id:' + mergedCatalog[i].Id] = i;
+    for (i = 0; i < (data.Catalog || []).length; i++) {
+        key = 'id:' + data.Catalog[i].Id;
+        if (typeof catalog[key] === 'number') mergedCatalog[catalog[key]] = data.Catalog[i];
+        else {catalog[key] = mergedCatalog.length;mergedCatalog.push(data.Catalog[i]);}
+    }
+    for (key in data) if (data.hasOwnProperty(key) && key !== 'Catalog') DATA[key] = data[key];
+    DATA.Catalog = mergedCatalog;
+}
+
+// Explicit server contract replaces serialization/comparison of entire visible regions.
+function renderServerChanges(changes, previousUi, webLinkSubmitted) {
+    if (!changes) {renderAll();return;} // Compatibility with responses created before the contract.
+    normalizeData();
+    if (changes.Sources) {
+        metadataSourceCache = {};
+        rememberMetadataSources();
+        renderSourceTabs();renderMetadataGroups();renderSourceList();
+    } else if (webLinkSubmitted || previousUi.column !== DATA.Ui.ActiveColumn || previousUi.source !== DATA.Ui.SourceMode) {
+        renderSourceList();
+    }
+    if (changes.Structure) {
+        if (changes.Headers || previousUi.page !== DATA.Ui.ActivePage) renderPageTabs();
+        var columns = !changes.Full && previousUi.page === DATA.Ui.ActivePage && previousUi.column === DATA.Ui.ActiveColumn ? changes.Columns : null;
+        renderBoard(columns);
+    }
+    if (changes.Properties) renderProperties();
+    restoreScrollState();
+    editorBaseline = JSON.stringify(currentEditorPayload());
+    updateEditorDraft();restoreViewState();
+}
+
+var lastModelRevision = 0;
+function renderAll() {
+    normalizeData();
+    localizeStaticTexts();
+    rememberMetadataSources();
+    applyTheme();
+    renderSourceTabs();
+    renderMetadataGroups();
+    renderSourceList();
+    renderPageTabs();
+    renderBoard();
+    renderProperties();
+    renderIconPicker();
+    restoreScrollState();
+    editorBaseline = JSON.stringify(currentEditorPayload());
+    updateEditorDraft();
+    restoreViewState();
+    restoreAdditionalView();
+}
+
+renderAll();
+</script>
+</body>
+</html>

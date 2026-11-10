@@ -1,0 +1,49 @@
+{
+  "source": "Записи/Импорт веб версия.mp4",
+  "sourceSha256": "fa7be00eeedceaf16c2bfd122ffb430f5f0875c3d26144fb5d3d62d279144791",
+  "holdEndSeconds": 0.8,
+  "steps": [
+    {
+      "name": "01-transfer",
+      "start": 0,
+      "end": 5.32,
+      "posterTime": 5.25,
+      "title": "Откройте импорт",
+      "description": "В редакторе нужной панели откройте «Доп. настройки» → «Перенос и сброс». Для загрузки сохранённой раскладки используйте «Импорт из файла…».",
+      "files": {
+        "mp4": "01-transfer.mp4",
+        "webm": "01-transfer.webm",
+        "poster": "01-transfer.jpg"
+      },
+      "duration": 6.12
+    },
+    {
+      "name": "02-load-file",
+      "start": 5.15,
+      "end": 9.55,
+      "posterTime": 7.55,
+      "title": "Выберите XML и дождитесь загрузки",
+      "description": "Нажмите «Импорт из файла…», выберите подготовленный XML и нажмите «Открыть». После загрузки в предпросмотре появляется структура панели.",
+      "files": {
+        "mp4": "02-load-file.mp4",
+        "webm": "02-load-file.webm",
+        "poster": "02-load-file.jpg"
+      },
+      "duration": 5.2
+    },
+    {
+      "name": "03-save-panel",
+      "start": 9.2,
+      "end": 15.84,
+      "posterTime": 15.6,
+      "title": "Сохраните и проверьте панель",
+      "description": "После проверки нажмите «Сохранить и закрыть». Дождитесь обновления рабочей панели и проверьте страницы, колонки и ссылки. В записи показан результат загрузки примера для УТ 11.",
+      "files": {
+        "mp4": "03-save-panel.mp4",
+        "webm": "03-save-panel.webm",
+        "poster": "03-save-panel.jpg"
+      },
+      "duration": 7.44
+    }
+  ]
+}
