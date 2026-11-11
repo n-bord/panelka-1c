@@ -12,7 +12,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/release-v1.0-6650DC?style=flat-square" alt="Выпуск 1.0">
+  <a href="https://github.com/n-bord/panelka-1c/releases/latest"><img src="https://img.shields.io/github/v/release/n-bord/panelka-1c?style=flat-square&amp;color=6650DC" alt="Последний релиз"></a>
+  <a href="https://github.com/n-bord/panelka-1c/releases"><img src="https://img.shields.io/github/downloads/n-bord/panelka-1c/Panelka.epf?displayAssetName=false&amp;style=flat-square&amp;color=2EA44F" alt="Скачивания Panelka.epf"></a>
+  <a href="https://github.com/n-bord/panelka-1c/stargazers"><img src="https://img.shields.io/github/stars/n-bord/panelka-1c?style=flat-square&amp;color=E3B341" alt="Звёзды на GitHub"></a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/1C-EPF-FFCC00?style=flat-square" alt="Внешняя обработка 1С">
   <img src="https://img.shields.io/badge/UI-1C%20%2F%20Web-007967?style=flat-square" alt="Обычный и Web-интерфейсы">
 </p>
@@ -41,7 +46,7 @@
 
 ## Быстрый старт
 
-1. Скачайте `Панелька.epf` из [релизов проекта](https://github.com/n-bord/panelka-1c/releases). Перед первым запуском проверьте [совместимость и требования](https://n-bord.github.io/panelka-1c/docs/compatibility/).
+1. Скачайте `Panelka.epf` из [релизов проекта](https://github.com/n-bord/panelka-1c/releases). Перед первым запуском проверьте [совместимость и требования](https://n-bord.github.io/panelka-1c/docs/compatibility/).
 2. Откройте файл через **«Файл → Открыть»** в тонком клиенте 1С. Для этого нужно право на интерактивное открытие внешних обработок. Для команды администратор может зарегистрировать Панельку через **«Дополнительные отчёты и обработки»**.
 3. Откройте **«Настройки»** общей панели под администратором. Создайте колонки на **«Главной»** или добавьте страницы под отдельные задачи. Выберите названия и группы, удобные вашей команде.
 4. В редакторе добавьте ссылки в нужную колонку: в обычном интерфейсе перетащите объект, в Web-интерфейсе выберите колонку и нажмите **«+»** у объекта. При необходимости измените название и подсказку; в Web-редакторе нажмите **«Применить»**.
@@ -109,7 +114,7 @@ Web-интерфейс работает **внутри обработки в т�
 
 ## Лицензия
 
-Текст лицензии встроен в обработку и доступен по **F1**. При скачивании [EPF](<Релиз/v1/Панелька.epf>) к нему прилагаются `LICENSE.txt` и `NOTICE.txt`.
+Текст лицензии встроен в обработку и доступен по **F1**. При скачивании [EPF](<Релиз/v1/Panelka.epf>) к нему прилагаются `LICENSE.txt` и `NOTICE.txt`.
 
 Панелька распространяется по [собственной лицензии](LICENSE):
 
